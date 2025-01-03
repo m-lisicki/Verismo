@@ -1,0 +1,240 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Are you sure you want to go back?" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czy na pewno chcesz powrócić do poprzedniego ekranu?"
+          }
+        }
+      }
+    },
+    "Are you sure you want to go home?" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czy na pewno chcesz powrócić do ekranu głównego?"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        }
+      }
+    },
+    "Choose Your Edition from our catalouge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz wydanie z naszego katalogu"
+          }
+        }
+      }
+    },
+    "Choose Your Edition from our catalouge:" : {
+
+    },
+    "Conductor: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dyrygent: %@"
+          }
+        }
+      }
+    },
+    "Enjoy the opera in your preferred language." : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ciesz się operą w swoim preferowanym języku."
+          }
+        }
+      }
+    },
+    "Font Size: %lld" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozmiar Czcionki: %lld"
+          }
+        }
+      }
+    },
+    "Go Back" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Powróć"
+          }
+        }
+      }
+    },
+    "Home" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ekran Główny"
+          }
+        }
+      }
+    },
+    "Listen" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Słuchaj"
+          }
+        }
+      }
+    },
+    "Load Audio from Disk" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wgraj plik z dysku"
+          }
+        }
+      }
+    },
+    "Now Playing:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teraz odtwarzane:"
+          }
+        }
+      }
+    },
+    "Orchestra: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orkiestra: %@"
+          }
+        }
+      }
+    },
+    "Playback Preferences" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preferencje Odtwarzania"
+          }
+        }
+      }
+    },
+    "Read" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czytaj"
+          }
+        }
+      }
+    },
+    "Select an Opera:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz operę:"
+          }
+        }
+      }
+    },
+    "Select composer:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz kompozytora:"
+          }
+        }
+      }
+    },
+    "Select Subtitles Language:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz język napisów:"
+          }
+        }
+      }
+    },
+    "Select Your Subtitle Language" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz język napisów"
+          }
+        }
+      }
+    },
+    "Translation: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tłumaczenie: %@"
+          }
+        }
+      }
+    },
+    "Volume: %lld%%" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Głośność: %lld%%"
+          }
+        }
+      }
+    },
+    "Welcome to Verismo." : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Witaj w Verismo."
+          }
+        }
+      }
+    },
+    "Year: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rok: %@"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,0 +1,2711 @@
+{
+    "operas": [
+        {
+            "id": 0,
+            "composer": "Puccini",
+            "operaTitle": "Turandot (ATTO PRIMO)",
+            "translationLanguage": "English",
+            "conductor": "Birgit Nilsson",
+            "year": "1966",
+            "orchestra": "Orchestra Del Teatro Dell'Opera Di Roma",
+            "thumbnailImageName": "Pang",
+            "lyrics": [
+                {
+                    "startTime": 33.92,
+                    "endTime": 37.48,
+                    "text": "Popolo di Pekino!",
+                    "singer": "MANDARINO",
+                    "translation": "People of Peking!"
+                },
+                {
+                    "startTime": 46.0,
+                    "endTime": 48.72,
+                    "text": "La legge è questa:",
+                    "singer": "MANDARINO",
+                    "translation": "This is the law:"
+                },
+                {
+                    "startTime": 54.78,
+                    "endTime": 60.96,
+                    "text": "Turandot, la pura, sposa sarà",
+                    "singer": "MANDARINO",
+                    "translation": "Turandot, the Pure, will be the bride"
+                },
+                {
+                    "startTime": 60.96,
+                    "endTime": 63.96,
+                    "text": "di chi, di sangue regio",
+                    "singer": "MANDARINO",
+                    "translation": "of the man, of royal blood,"
+                },
+                {
+                    "startTime": 63.96,
+                    "endTime": 67.24,
+                    "text": "spieghi i tre enigmi",
+                    "singer": "MANDARINO",
+                    "translation": "who solves the three enigmas"
+                },
+                {
+                    "startTime": 67.24,
+                    "endTime": 70.24,
+                    "text": "ch’ella proporrà.",
+                    "singer": "MANDARINO",
+                    "translation": "that she will ask him."
+                },
+                {
+                    "startTime": 71.04,
+                    "endTime": 73.9,
+                    "text": "Ma chi affronta il cimento",
+                    "singer": "MANDARINO",
+                    "translation": "But whoever faces the trial"
+                },
+                {
+                    "startTime": 73.9,
+                    "endTime": 76.14,
+                    "text": "e vinto resta",
+                    "singer": "MANDARINO",
+                    "translation": "and is defeated,"
+                },
+                {
+                    "startTime": 76.14,
+                    "endTime": 80.26,
+                    "text": "porga alla scure",
+                    "singer": "MANDARINO",
+                    "translation": "must bow to the axe"
+                },
+                {
+                    "startTime": 81.46000000000001,
+                    "endTime": 84.9,
+                    "text": "la superba testa!",
+                    "singer": "MANDARINO",
+                    "translation": "his haughty head!"
+                },
+                {
+                    "startTime": 84.9,
+                    "endTime": 86.92,
+                    "text": "Ah! Ah!",
+                    "singer": "LA FOLLA",
+                    "translation": "Ah! Ah!"
+                },
+                {
+                    "startTime": 91.9,
+                    "endTime": 97.72,
+                    "text": "Il principe di Persia",
+                    "singer": "MANDARINO",
+                    "translation": "The Prince of Persia"
+                },
+                {
+                    "startTime": 97.72,
+                    "endTime": 103.62,
+                    "text": "avversa ebbe fortuna:",
+                    "singer": "MANDARINO",
+                    "translation": "had Fate against him:"
+                },
+                {
+                    "startTime": 103.62,
+                    "endTime": 109.44,
+                    "text": "al sorger della luna",
+                    "singer": "MANDARINO",
+                    "translation": "when the moon rises,"
+                },
+                {
+                    "startTime": 109.44,
+                    "endTime": 114.47999999999999,
+                    "text": "per man del boia",
+                    "singer": "MANDARINO",
+                    "translation": "at the executioner’s hand"
+                },
+                {
+                    "startTime": 114.47999999999999,
+                    "endTime": 115.16,
+                    "text": "muoia!",
+                    "singer": "MANDARINO",
+                    "translation": "he must die!"
+                },
+                {
+                    "startTime": 115.72,
+                    "endTime": 117.22,
+                    "text": "Muoia! sì, muoia!",
+                    "singer": "LA FOLLA",
+                    "translation": "He must die! Yes, die!"
+                },
+                {
+                    "startTime": 117.52000000000001,
+                    "endTime": 118.97999999999999,
+                    "text": "Noi vogliamo il carnefice!",
+                    "singer": "LA FOLLA",
+                    "translation": "We want the executioner!"
+                },
+                {
+                    "startTime": 118.97999999999999,
+                    "endTime": 119.86,
+                    "text": "Presto, presto!",
+                    "singer": "LA FOLLA",
+                    "translation": "Quickly, quickly!"
+                },
+                {
+                    "startTime": 119.86,
+                    "endTime": 120.84,
+                    "text": "Muoia! Muoia!",
+                    "singer": "LA FOLLA",
+                    "translation": "Death! Death!"
+                },
+                {
+                    "startTime": 120.84,
+                    "endTime": 121.74,
+                    "text": "Al supplizio!",
+                    "singer": "LA FOLLA",
+                    "translation": "The punishment!"
+                },
+                {
+                    "startTime": 123.48,
+                    "endTime": 124.52,
+                    "text": "Se non appari",
+                    "singer": "LA FOLLA",
+                    "translation": "If you don’t appear,"
+                },
+                {
+                    "startTime": 124.52,
+                    "endTime": 125.46,
+                    "text": "noi ti sveglierem!",
+                    "singer": "LA FOLLA",
+                    "translation": "we’ll waken you,"
+                },
+                {
+                    "startTime": 125.46,
+                    "endTime": 127.0,
+                    "text": "Pu-Tin-Pao! Pu-Tin Pao!",
+                    "singer": "LA FOLLA",
+                    "translation": "Pu-Tin-Pao! Pu-Tin-Pao!"
+                },
+                {
+                    "startTime": 127.0,
+                    "endTime": 130.0,
+                    "text": "Alla reggia! Alla reggia!",
+                    "singer": "LA FOLLA",
+                    "translation": "To the palace! To the palace!"
+                },
+                {
+                    "startTime": 133.4,
+                    "endTime": 135.1,
+                    "text": "Indietro, cani!",
+                    "singer": "GUARDIE",
+                    "translation": "Stand back, dog!"
+                },
+                {
+                    "startTime": 135.78,
+                    "endTime": 138.32,
+                    "text": "Oh, crudeli!",
+                    "singer": "LA FOLLA",
+                    "translation": "Ah, cruel ones!"
+                },
+                {
+                    "startTime": 138.32,
+                    "endTime": 141.32,
+                    "text": "Pel cielo, fermi!",
+                    "singer": "LA FOLLA",
+                    "translation": "Stop, by Heaven!"
+                },
+                {
+                    "startTime": 139.86,
+                    "endTime": 141.32,
+                    "text": "Indietro, cani!",
+                    "singer": "LE GUARDIE",
+                    "translation": "Stand back, dogs!"
+                },
+                {
+                    "startTime": 141.32,
+                    "endTime": 143.1,
+                    "text": "O madre mia!",
+                    "singer": "LA FOLLA",
+                    "translation": "Oh, my mother!"
+                },
+                {
+                    "startTime": 142.57999999999998,
+                    "endTime": 144.96,
+                    "text": "Ahi, i miei bimbi!",
+                    "singer": "LA FOLLA",
+                    "translation": "Ah, my babies!"
+                },
+                {
+                    "startTime": 148.66,
+                    "endTime": 151.14,
+                    "text": "Crudeli, fermi!",
+                    "singer": "LA FOLLA",
+                    "translation": "Stop, cruel ones!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Siate umani! Non fateci male!",
+                    "singer": "LA FOLLA",
+                    "translation": "Be human! Don’t hurt us!"
+                },
+                {
+                    "startTime": 151.14,
+                    "endTime": 155.2,
+                    "text": "Il mio vecchio è caduto!",
+                    "singer": "LIÙ",
+                    "translation": "This old man has fallen!"
+                },
+                {
+                    "startTime": 155.2,
+                    "endTime": 161.24,
+                    "text": "Chi mi aiuta a sorreggerlo?",
+                    "singer": "LIÙ",
+                    "translation": "Who can help me lift him up?"
+                },
+                {
+                    "startTime": 161.24,
+                    "endTime": 164.24,
+                    "text": "Il mio vecchio è caduto!",
+                    "singer": "LIÙ",
+                    "translation": "This old man has fallen!"
+                },
+                {
+                    "startTime": 164.94,
+                    "endTime": 170.62,
+                    "text": "Pietà, pietà.",
+                    "singer": "LIÙ",
+                    "translation": "Have pity! pity!"
+                },
+                {
+                    "startTime": 172.44,
+                    "endTime": 174.9,
+                    "text": "Padre! Mio padre!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Father! My father!"
+                },
+                {
+                    "startTime": 174.9,
+                    "endTime": 178.98,
+                    "text": "O padre, sì, ti ritrovo!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Oh, father, yes, I’ve found you!"
+                },
+                {
+                    "startTime": 178.98,
+                    "endTime": 181.98,
+                    "text": "Guardami! Non è sogno!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Look at me! It’s not a dream!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Indietro!",
+                    "singer": "GUARDIE",
+                    "translation": "Stand back!"
+                },
+                {
+                    "startTime": 182.4,
+                    "endTime": 184.6,
+                    "text": "Mio signore!",
+                    "singer": "LIÙ",
+                    "translation": "My lord!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Perché ci battete? ahimè!",
+                    "singer": "LA FOLLA",
+                    "translation": "Why are you striking us? Alas!"
+                },
+                {
+                    "startTime": 184.6,
+                    "endTime": 187.64,
+                    "text": "Padre! Ascoltami!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Father! Listen to me!"
+                },
+                {
+                    "startTime": 187.64,
+                    "endTime": 193.1,
+                    "text": "Padre! Son io!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Father! It’s I!"
+                },
+                {
+                    "startTime": 193.58,
+                    "endTime": 199.88,
+                    "text": "E benedetto sia il dolor",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "And may my grief itself be blessed,"
+                },
+                {
+                    "startTime": 199.88,
+                    "endTime": 203.52,
+                    "text": "per questa gioia che ci dona",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "for this joy given us"
+                },
+                {
+                    "startTime": 203.52,
+                    "endTime": 206.52,
+                    "text": "un Dio pietoso.",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "by a pitying God."
+                },
+                {
+                    "startTime": 206.96,
+                    "endTime": 210.72,
+                    "text": "O mio figlio! tu! vivo?",
+                    "singer": "TIMUR",
+                    "translation": "Oh my son! You! Alive?"
+                },
+                {
+                    "startTime": 211.12,
+                    "endTime": 212.5,
+                    "text": "Taci!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Silence!"
+                },
+                {
+                    "startTime": 212.5,
+                    "endTime": 215.5,
+                    "text": "Chi usurpò la tua corona",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "The usurper of your crown"
+                },
+                {
+                    "startTime": 215.5,
+                    "endTime": 218.5,
+                    "text": "me cerca e te persegue!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "seeks me and pursues you!"
+                },
+                {
+                    "startTime": 218.5,
+                    "endTime": 219.78,
+                    "text": "Non c’è asilo per noi",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "There’s no hiding-place for us"
+                },
+                {
+                    "startTime": 219.78,
+                    "endTime": 221.04,
+                    "text": "padre, nel mondo!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "in the world, father!"
+                },
+                {
+                    "startTime": 221.04,
+                    "endTime": 224.04,
+                    "text": "T’ho cercato, mio figlio",
+                    "singer": "TIMUR",
+                    "translation": "I sought you, my son,"
+                },
+                {
+                    "startTime": 224.04,
+                    "endTime": 227.32,
+                    "text": "e t’ho creduto morto!",
+                    "singer": "TIMUR",
+                    "translation": "and I thought you were dead!"
+                },
+                {
+                    "startTime": 229.54,
+                    "endTime": 231.74,
+                    "text": "T’ho pianto, padre",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I wept for you, father;"
+                },
+                {
+                    "startTime": 231.74,
+                    "endTime": 235.44,
+                    "text": "e bacio queste mani sante!...",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "now I kiss these sainted hands!..."
+                },
+                {
+                    "startTime": 235.44,
+                    "endTime": 239.78,
+                    "text": "O figlio ritrovato!",
+                    "singer": "TIMUR",
+                    "translation": "Oh, my son, found again!"
+                },
+                {
+                    "startTime": 239.78,
+                    "endTime": 242.78,
+                    "text": "Ecco i servi del boia!",
+                    "singer": "LA FOLLA",
+                    "translation": "Here are the executioner’s men!"
+                },
+                {
+                    "startTime": 242.78,
+                    "endTime": 245.78,
+                    "text": "Muoia! Muoia!",
+                    "singer": "LA FOLLA",
+                    "translation": "To the death!"
+                },
+                {
+                    "startTime": 250.24,
+                    "endTime": 253.36,
+                    "text": "Perduta la battaglia",
+                    "singer": "TIMUR",
+                    "translation": "When the battle was lost,"
+                },
+                {
+                    "startTime": 253.36,
+                    "endTime": 257.7,
+                    "text": "vecchio Re senza regno e fuggente",
+                    "singer": "TIMUR",
+                    "translation": "an old King without realm, fleeing,"
+                },
+                {
+                    "startTime": 258.54,
+                    "endTime": 261.7,
+                    "text": "una voce sentii",
+                    "singer": "TIMUR",
+                    "translation": "I heard a voice"
+                },
+                {
+                    "startTime": 261.7,
+                    "endTime": 264.7,
+                    "text": "che mi diceva:",
+                    "singer": "TIMUR",
+                    "translation": "saying to me:"
+                },
+                {
+                    "startTime": 264.7,
+                    "endTime": 269.76,
+                    "text": "“Vien con me, sarò tua guida...”",
+                    "singer": "TIMUR",
+                    "translation": "“Come with me, I’ll be your guide...”"
+                },
+                {
+                    "startTime": 269.76,
+                    "endTime": 272.46,
+                    "text": "Era Liù!",
+                    "singer": "TIMUR",
+                    "translation": "It was Liù!"
+                },
+                {
+                    "startTime": 272.46,
+                    "endTime": 276.06,
+                    "text": "Sia benedetta!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Bless her!"
+                },
+                {
+                    "startTime": 276.06,
+                    "endTime": 279.76,
+                    "text": "Ed io cadeva affranto",
+                    "singer": "TIMUR",
+                    "translation": "When I fell exhausted,"
+                },
+                {
+                    "startTime": 279.76,
+                    "endTime": 283.42,
+                    "text": "e m’asciugava il pianto",
+                    "singer": "TIMUR",
+                    "translation": "she would dry my tears,"
+                },
+                {
+                    "startTime": 283.42,
+                    "endTime": 289.46,
+                    "text": "mendicava per me!",
+                    "singer": "TIMUR",
+                    "translation": "and she begged for me!"
+                },
+                {
+                    "startTime": 290.1,
+                    "endTime": 293.92,
+                    "text": "Liù, chi sei?",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Liù, who are you?"
+                },
+                {
+                    "startTime": 293.92,
+                    "endTime": 295.26,
+                    "text": "Nulla sono...",
+                    "singer": "LIÙ",
+                    "translation": "I’m nothing..."
+                },
+                {
+                    "startTime": 295.92,
+                    "endTime": 297.78,
+                    "text": "Una schiava, mio signore...",
+                    "singer": "LIÙ",
+                    "translation": "A slave, my lord."
+                },
+                {
+                    "startTime": 297.78,
+                    "endTime": 299.6,
+                    "text": "Gira la cote!",
+                    "singer": "LA FOLLA (interno)",
+                    "translation": "Hone the blade!"
+                },
+                {
+                    "startTime": 299.6,
+                    "endTime": 301.12,
+                    "text": "Gira la cote!",
+                    "singer": "LA FOLLA (interno)",
+                    "translation": "Hone the blade!"
+                },
+                {
+                    "startTime": 301.12,
+                    "endTime": 305.64,
+                    "text": "E perché tanta angoscia hai diviso?",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Why did you share such anguish?"
+                },
+                {
+                    "startTime": 306.1,
+                    "endTime": 313.5,
+                    "text": "Perché un dì...nella reggia",
+                    "singer": "LIÙ",
+                    "translation": "Because, one day...in the palace,"
+                },
+                {
+                    "startTime": 313.84,
+                    "endTime": 325.88,
+                    "text": "mi hai sorriso.",
+                    "singer": "LIÙ",
+                    "translation": "you smiled at me."
+                },
+                {
+                    "startTime": 326.66,
+                    "endTime": 334.2,
+                    "text": "Gira la cote! Gira! ecc.",
+                    "singer": "LA FOLLA",
+                    "translation": "Grind the whetstone! Grind it! etc."
+                },
+                {
+                    "startTime": 334.2,
+                    "endTime": 335.44,
+                    "text": "Ungi, arrota",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "Oil it, sharpen it,"
+                },
+                {
+                    "startTime": 335.44,
+                    "endTime": 337.86,
+                    "text": "che la lama guizzi, sprizzi",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "let the blade gleam, spatter"
+                },
+                {
+                    "startTime": 337.86,
+                    "endTime": 339.72,
+                    "text": "fuoco e sangue!",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "fire and blood!"
+                },
+                {
+                    "startTime": 339.72,
+                    "endTime": 342.72,
+                    "text": "II lavoro mai non langue",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "Work is never dull for us"
+                },
+                {
+                    "startTime": 344.82,
+                    "endTime": 346.32,
+                    "text": "dove regna Turandot!",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "where Turandot reigns!"
+                },
+                {
+                    "startTime": 348.22,
+                    "endTime": 350.08,
+                    "text": "dove regna Turandot!",
+                    "singer": "LA FOLLA",
+                    "translation": "Where Turandot reigns!"
+                },
+                {
+                    "startTime": 353.04,
+                    "endTime": 357.2,
+                    "text": "Dolci amanti, avanti, avanti!",
+                    "singer": "LA FOLLA",
+                    "translation": "Sweet lovers, come forward! Come!"
+                },
+                {
+                    "startTime": 357.2,
+                    "endTime": 363.24,
+                    "text": "Con gli uncini e coi coltelli",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "With our hooks and our knives,"
+                },
+                {
+                    "startTime": 367.16,
+                    "endTime": 370.86,
+                    "text": "noi siam pronti a ricamar",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "we’re ready to embroider"
+                },
+                {
+                    "startTime": 370.86,
+                    "endTime": 373.86,
+                    "text": "le vostre pelli!",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "your skins!"
+                },
+                {
+                    "startTime": 376.56,
+                    "endTime": 380.08,
+                    "text": "Chi quel gong percuoterà",
+                    "singer": "LA FOLLA",
+                    "translation": "Whoever strikes that gong"
+                },
+                {
+                    "startTime": 380.08,
+                    "endTime": 381.8,
+                    "text": "apparire la vedrà!",
+                    "singer": "LA FOLLA",
+                    "translation": "will see her appear!"
+                },
+                {
+                    "startTime": 383.37,
+                    "endTime": 386.92,
+                    "text": "Bianca al pari della giada",
+                    "singer": "LA FOLLA",
+                    "translation": "White as jade,"
+                },
+                {
+                    "startTime": 386.92,
+                    "endTime": 390.54,
+                    "text": "fredda come quella spada",
+                    "singer": "LA FOLLA",
+                    "translation": "cold as that sword"
+                },
+                {
+                    "startTime": 390.54,
+                    "endTime": 393.56,
+                    "text": "è la bella Turandot!",
+                    "singer": "LA FOLLA",
+                    "translation": "is the beautiful Turandot!"
+                },
+                {
+                    "startTime": 398.61,
+                    "endTime": 401.45,
+                    "text": "Quando rangola il gong",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "When the gong clangs,"
+                },
+                {
+                    "startTime": 401.45,
+                    "endTime": 402.85,
+                    "text": "gongola il boia!",
+                    "singer": "I SERVI DEL BOIA",
+                    "translation": "the executioner is happy!"
+                },
+                {
+                    "startTime": 402.85,
+                    "endTime": 408.88,
+                    "text": "Vano è l’amore",
+                    "singer": "LA FOLLA",
+                    "translation": "Love is in vain"
+                },
+                {
+                    "startTime": 413.21,
+                    "endTime": 419.47,
+                    "text": "se non c’è fortuna!",
+                    "singer": "LA FOLLA",
+                    "translation": "if Luck isn’t there!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Gli enigmi sono tre",
+                    "singer": "FOLLA e SERVI",
+                    "translation": "The enigmas are three;"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "la morte è una.",
+                    "singer": "FOLLA e SERVI",
+                    "translation": "death is one!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Quando rangola, ecc.",
+                    "singer": "FOLLA e SERVI",
+                    "translation": "When the gong clang’s, etc."
+                },
+                {
+                    "startTime": 477.17,
+                    "endTime": 480.65,
+                    "text": "Perché tarda la luna?",
+                    "singer": "LA FOLLA",
+                    "translation": "Why does the moon delay?"
+                },
+                {
+                    "startTime": 481.02,
+                    "endTime": 483.04,
+                    "text": "Faccia pallida!",
+                    "singer": "LA FOLLA",
+                    "translation": "Wan face!"
+                },
+                {
+                    "startTime": 483.04,
+                    "endTime": 486.04,
+                    "text": "Mostrati in cielo!...",
+                    "singer": "LA FOLLA",
+                    "translation": "Show yourself in the sky!"
+                },
+                {
+                    "startTime": 486.04,
+                    "endTime": 489.88,
+                    "text": "Presto! Vieni! Spunta!",
+                    "singer": "LA FOLLA",
+                    "translation": "Quickly! Come! Rise!"
+                },
+                {
+                    "startTime": 491.62,
+                    "endTime": 495.2,
+                    "text": "O testa mozza!",
+                    "singer": "LA FOLLA",
+                    "translation": "Oh, lopped-off head!"
+                },
+                {
+                    "startTime": 495.2,
+                    "endTime": 500.36,
+                    "text": "O squallida! Vieni!",
+                    "singer": "LA FOLLA",
+                    "translation": "Oh, mean one! Come!"
+                },
+                {
+                    "startTime": 500.36,
+                    "endTime": 509.48,
+                    "text": "O esangue, o taciturna!",
+                    "singer": "LA FOLLA",
+                    "translation": "Bloodless, taciturn!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "O amante smunta di morti!",
+                    "singer": "LA FOLLA",
+                    "translation": "Pale lover of the dead!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Come aspettano",
+                    "singer": "LA FOLLA",
+                    "translation": "How the cemeteries await"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "il tuo funereo lume i cimiteri!",
+                    "singer": "LA FOLLA",
+                    "translation": "your funeral light!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Ecco laggiù un barlume!...",
+                    "singer": "LA FOLLA",
+                    "translation": "There’s a gleam over there!..."
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Vieni presto, ecc.",
+                    "singer": "LA FOLLA",
+                    "translation": "Come quickly, etc."
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Ecco laggiù un barlume",
+                    "singer": "LA FOLLA",
+                    "translation": "Over there a glimmer"
+                },
+                {
+                    "startTime": 626.53,
+                    "endTime": 631.03,
+                    "text": "dilaga in cielo",
+                    "singer": "LA FOLLA",
+                    "translation": "is spreading out in the sky"
+                },
+                {
+                    "startTime": 636.3,
+                    "endTime": 642.37,
+                    "text": "la sua luce smorta!",
+                    "singer": "LA FOLLA",
+                    "translation": "its deathly light!"
+                },
+                {
+                    "startTime": 654.05,
+                    "endTime": 665.95,
+                    "text": "Pu-Tin-Pao!",
+                    "singer": "LA FOLLA",
+                    "translation": "Pu-Tin-Pao!"
+                },
+                {
+                    "startTime": 665.95,
+                    "endTime": 668.74,
+                    "text": "La luna è sorta! ecc.",
+                    "singer": "LA FOLLA",
+                    "translation": "The moon has risen! etc."
+                },
+                {
+                    "startTime": 668.74,
+                    "endTime": 674.88,
+                    "text": "Là, sui monti dell’est",
+                    "singer": "RAGAZZI",
+                    "translation": "There, on the Eastern mountains,"
+                },
+                {
+                    "startTime": 675.16,
+                    "endTime": 681.48,
+                    "text": "la cicogna cantò.",
+                    "singer": "RAGAZZI",
+                    "translation": "the stork sang."
+                },
+                {
+                    "startTime": 682.35,
+                    "endTime": 689.25,
+                    "text": "Ma l’april non rifiorì",
+                    "singer": "RAGAZZI",
+                    "translation": "But April blossomed no more,"
+                },
+                {
+                    "startTime": 689.25,
+                    "endTime": 695.0,
+                    "text": "ma la neve non sgelò.",
+                    "singer": "RAGAZZI",
+                    "translation": "and the snow didn’t thaw."
+                },
+                {
+                    "startTime": 696.55,
+                    "endTime": 699.1,
+                    "text": "Dal deserto al mar",
+                    "singer": "RAGAZZI",
+                    "translation": "From the desert to the sea,"
+                },
+                {
+                    "startTime": 699.1,
+                    "endTime": 705.75,
+                    "text": "non odi tu mille voci",
+                    "singer": "RAGAZZI",
+                    "translation": "can’t you hear a thousand voices"
+                },
+                {
+                    "startTime": 705.75,
+                    "endTime": 711.35,
+                    "text": "sospirar: “Principessa",
+                    "singer": "RAGAZZI",
+                    "translation": "sighing: “Princess,"
+                },
+                {
+                    "startTime": 711.35,
+                    "endTime": 714.35,
+                    "text": "scendi a me!",
+                    "singer": "RAGAZZI",
+                    "translation": "come down to me!"
+                },
+                {
+                    "startTime": 715.02,
+                    "endTime": 717.35,
+                    "text": "Tutto fiorirà",
+                    "singer": "RAGAZZI",
+                    "translation": "All will blossom again,"
+                },
+                {
+                    "startTime": 718.3,
+                    "endTime": 729.88,
+                    "text": "tutto splenderà! Ah!...”",
+                    "singer": "RAGAZZI",
+                    "translation": "all will be resplendent! Ah!...”"
+                },
+                {
+                    "startTime": 751.85,
+                    "endTime": 757.15,
+                    "text": "O giovinetto!",
+                    "singer": "LA FOLLA",
+                    "translation": "O the youth!"
+                },
+                {
+                    "startTime": 757.15,
+                    "endTime": 763.4,
+                    "text": "Grazia! Grazia!",
+                    "singer": "LA FOLLA",
+                    "translation": "Mercy! Mercy!"
+                },
+                {
+                    "startTime": 765.35,
+                    "endTime": 774.95,
+                    "text": "Com’è fermo il suo passo!",
+                    "singer": "LA FOLLA",
+                    "translation": "How steady is his step!"
+                },
+                {
+                    "startTime": 774.95,
+                    "endTime": 788.05,
+                    "text": "Com’è dolce il suo volto!",
+                    "singer": "LA FOLLA",
+                    "translation": "How sweet is his face!"
+                },
+                {
+                    "startTime": 788.05,
+                    "endTime": 793.85,
+                    "text": "Ha negli occhi l’ebbrezza!",
+                    "singer": "LA FOLLA",
+                    "translation": "Ecstasy is in his eyes!"
+                },
+                {
+                    "startTime": 793.85,
+                    "endTime": 801.3,
+                    "text": "Ha negli occhi la gioia!",
+                    "singer": "LA FOLLA",
+                    "translation": "Joy is in his eyes!"
+                },
+                {
+                    "startTime": 801.3,
+                    "endTime": 806.35,
+                    "text": "Ah, la grazia!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Ah, mercy on him!"
+                },
+                {
+                    "startTime": 806.35,
+                    "endTime": 824.25,
+                    "text": "Pietà di lui! Pietà!",
+                    "singer": "LA FOLLA",
+                    "translation": "Have pity on him! Pity!"
+                },
+                {
+                    "startTime": 824.25,
+                    "endTime": 829.0,
+                    "text": "Principessa!",
+                    "singer": "LA FOLLA",
+                    "translation": "Princess!"
+                },
+                {
+                    "startTime": 829.0,
+                    "endTime": 841.1,
+                    "text": "Grazia! Pietà! ecc.",
+                    "singer": "LA FOLLA",
+                    "translation": "Mercy! Pity! etc."
+                },
+                {
+                    "startTime": 841.1,
+                    "endTime": 851.9,
+                    "text": "Ch’io ti veda e ch’io ti maledica!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Let me see you, and curse you!"
+                },
+                {
+                    "startTime": 851.9,
+                    "endTime": 857.05,
+                    "text": "Crudele!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Cruel one!"
+                },
+                {
+                    "startTime": 862.68,
+                    "endTime": 887.78,
+                    "text": "Principessa! Pietà di lui! ecc.",
+                    "singer": "LA FOLLA",
+                    "translation": "Princess, have pity on him! etc."
+                },
+                {
+                    "startTime": 887.78,
+                    "endTime": 908.73,
+                    "text": "Principessa! Pietà di lui! La grazia! ecc.",
+                    "singer": "LA FOLLA",
+                    "translation": "Princess! Have pity on him! Have mercy! etc."
+                },
+                {
+                    "startTime": 943.62,
+                    "endTime": 954.82,
+                    "text": "O divina bellezza, o meraviglia",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "O divine beauty, o marvel,"
+                },
+                {
+                    "startTime": 956.22,
+                    "endTime": 959.72,
+                    "text": "o sogno!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "o dream!"
+                },
+                {
+                    "startTime": 994.6,
+                    "endTime": 999.94,
+                    "text": "O gran Kouang-tze!",
+                    "singer": "SACERDOTI BIANCHI",
+                    "translation": "O great Kouang-tze!"
+                },
+                {
+                    "startTime": 999.94,
+                    "endTime": 1005.26,
+                    "text": "Che lo spirto del morente",
+                    "singer": "SACERDOTI BIANCHI",
+                    "translation": "May the dying man’s spirit"
+                },
+                {
+                    "startTime": 1005.26,
+                    "endTime": 1018.16,
+                    "text": "giunga fino a te!",
+                    "singer": "SACERDOTI BIANCHI",
+                    "translation": "come to you!"
+                },
+                {
+                    "startTime": 1030.88,
+                    "endTime": 1034.6,
+                    "text": "Figlio, che fai?",
+                    "singer": "TIMUR",
+                    "translation": "My son, what are you doing?"
+                },
+                {
+                    "startTime": 1036.98,
+                    "endTime": 1039.98,
+                    "text": "Non senti?",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Can’t you feel it?"
+                },
+                {
+                    "startTime": 1039.98,
+                    "endTime": 1044.22,
+                    "text": "Il suo profumo è nell’aria!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Her perfume is in the air!"
+                },
+                {
+                    "startTime": 1044.22,
+                    "endTime": 1046.1,
+                    "text": "È nell’anima!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "It’s in my spirit!"
+                },
+                {
+                    "startTime": 1046.1,
+                    "endTime": 1047.26,
+                    "text": "Ti perdi!",
+                    "singer": "TIMUR",
+                    "translation": "You’re lost!"
+                },
+                {
+                    "startTime": 1047.26,
+                    "endTime": 1053.82,
+                    "text": "O divina bellezza, o meraviglia!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "O divine beauty, o marvel!"
+                },
+                {
+                    "startTime": 1053.82,
+                    "endTime": 1056.82,
+                    "text": "Io soffro, padre, soffro!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I’m suffering, father, suffering!"
+                },
+                {
+                    "startTime": 1056.82,
+                    "endTime": 1059.82,
+                    "text": "No! No! Stringiti a me!",
+                    "singer": "TIMUR",
+                    "translation": "No! No! Let me clasp you!"
+                },
+                {
+                    "startTime": 1059.82,
+                    "endTime": 1062.22,
+                    "text": "Liù, parlagli tu!",
+                    "singer": "TIMUR",
+                    "translation": "Liù, you speak to him!"
+                },
+                {
+                    "startTime": 1062.22,
+                    "endTime": 1064.74,
+                    "text": "Qui salvezza non c’è!",
+                    "singer": "TIMUR",
+                    "translation": "There’s no safety here!"
+                },
+                {
+                    "startTime": 1064.74,
+                    "endTime": 1067.8,
+                    "text": "Prendi nella tua mano",
+                    "singer": "TIMUR",
+                    "translation": "Take his hand in your"
+                },
+                {
+                    "startTime": 1067.8,
+                    "endTime": 1070.8,
+                    "text": "la sua mano!",
+                    "singer": "TIMUR",
+                    "translation": "hand!"
+                },
+                {
+                    "startTime": 1071.66,
+                    "endTime": 1074.5,
+                    "text": "Signore! Andiam...lontano!",
+                    "singer": "LIÙ",
+                    "translation": "My lord, let’s go...far away!"
+                },
+                {
+                    "startTime": 1075.52,
+                    "endTime": 1079.52,
+                    "text": "La vita c’è laggiù!",
+                    "singer": "TIMUR",
+                    "translation": "Life is awaiting us there!"
+                },
+                {
+                    "startTime": 1080.18,
+                    "endTime": 1083.68,
+                    "text": "Quest’è la vita, padre!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "This is Life, father!"
+                },
+                {
+                    "startTime": 1083.68,
+                    "endTime": 1086.06,
+                    "text": "La vita c’è laggiù!",
+                    "singer": "TIMUR",
+                    "translation": "Life is awaiting us there!"
+                },
+                {
+                    "startTime": 1086.06,
+                    "endTime": 1088.02,
+                    "text": "Io soffro, padre, soffro!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I’m suffering, father, suffering!"
+                },
+                {
+                    "startTime": 1088.02,
+                    "endTime": 1089.84,
+                    "text": "Qui salvezza non c’è!",
+                    "singer": "TIMUR",
+                    "translation": "There’s no safety here!"
+                },
+                {
+                    "startTime": 1089.42,
+                    "endTime": 1091.88,
+                    "text": "La vita, padre è qui!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Life is here, father!"
+                },
+                {
+                    "startTime": 1091.88,
+                    "endTime": 1104.8,
+                    "text": "Turandot! Turandot! Turandot!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Turandot! Turandot! Turandot!"
+                },
+                {
+                    "startTime": 1105.18,
+                    "endTime": 1107.96,
+                    "text": "Turandot!",
+                    "singer": "IL PRINCIPE DI PERSIA (interno)",
+                    "translation": "Turandot!"
+                },
+                {
+                    "startTime": 1107.96,
+                    "endTime": 1110.96,
+                    "text": "Ah!",
+                    "singer": "LA FOLLA",
+                    "translation": "Ah!"
+                },
+                {
+                    "startTime": 1113.62,
+                    "endTime": 1117.68,
+                    "text": "Vuoi morire così?",
+                    "singer": "TIMUR",
+                    "translation": "Do you want to die thus?"
+                },
+                {
+                    "startTime": 1117.68,
+                    "endTime": 1120.04,
+                    "text": "Vincere, padre",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "To conquer, father,"
+                },
+                {
+                    "startTime": 1120.04,
+                    "endTime": 1122.14,
+                    "text": "nella sua bellezza!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "in her beauty!"
+                },
+                {
+                    "startTime": 1122.14,
+                    "endTime": 1123.98,
+                    "text": "Vuoi finire così?",
+                    "singer": "TIMUR",
+                    "translation": "Do you want to end thus?"
+                },
+                {
+                    "startTime": 1123.98,
+                    "endTime": 1126.22,
+                    "text": "Vincere gloriosamente",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "To conquer, gloriously,"
+                },
+                {
+                    "startTime": 1126.22,
+                    "endTime": 1128.42,
+                    "text": "nella sua bellezza!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "in her beauty!"
+                },
+                {
+                    "startTime": 1130.4,
+                    "endTime": 1132.98,
+                    "text": "Fermo! che fai? T’arresta!",
+                    "singer": "I MINISTRI",
+                    "translation": "Wait! What are you doing? Stop!"
+                },
+                {
+                    "startTime": 1132.98,
+                    "endTime": 1134.24,
+                    "text": "Chi sei? Che fai? Che vuoi?",
+                    "singer": "I MINISTRI",
+                    "translation": "Who are you? What are you doing? What do you want?"
+                },
+                {
+                    "startTime": 1134.24,
+                    "endTime": 1137.14,
+                    "text": "Va’ via! Va’, la porta è questa",
+                    "singer": "I MINISTRI",
+                    "translation": "Go away! Go! This is the door"
+                },
+                {
+                    "startTime": 1137.14,
+                    "endTime": 1140.0,
+                    "text": "della gran beccheria!",
+                    "singer": "I MINISTRI",
+                    "translation": "to the great butcher’s shop!"
+                },
+                {
+                    "startTime": 1140.0,
+                    "endTime": 1142.28,
+                    "text": "Pazzo, va’ via!",
+                    "singer": "I MINISTRI",
+                    "translation": "Madman, go away!"
+                },
+                {
+                    "startTime": 1142.28,
+                    "endTime": 1143.54,
+                    "text": "Qui si strozza!",
+                    "singer": "I MINISTRI",
+                    "translation": "They garrotte you here!"
+                },
+                {
+                    "startTime": 1143.54,
+                    "endTime": 1144.48,
+                    "text": "Si trivella!",
+                    "singer": "I MINISTRI",
+                    "translation": "They impale you!"
+                },
+                {
+                    "startTime": 1144.48,
+                    "endTime": 1145.16,
+                    "text": "Si sgozza!",
+                    "singer": "I MINISTRI",
+                    "translation": "Cut your throat!"
+                },
+                {
+                    "startTime": 1145.16,
+                    "endTime": 1146.0,
+                    "text": "Si spella!",
+                    "singer": "I MINISTRI",
+                    "translation": "Skin you alive!"
+                },
+                {
+                    "startTime": 1146.0,
+                    "endTime": 1148.58,
+                    "text": "Si uncina e scapitozza!",
+                    "singer": "I MINISTRI",
+                    "translation": "They knife you and pollard you!"
+                },
+                {
+                    "startTime": 1148.58,
+                    "endTime": 1150.68,
+                    "text": "Si sega e si sbudella!",
+                    "singer": "I MINISTRI",
+                    "translation": "Saw you up and disembowel you!"
+                },
+                {
+                    "startTime": 1150.68,
+                    "endTime": 1152.06,
+                    "text": "Sollecito, precipite",
+                    "singer": "I MINISTRI",
+                    "translation": "Quickly, hastily,"
+                },
+                {
+                    "startTime": 1152.06,
+                    "endTime": 1154.44,
+                    "text": "al tuo paese torna",
+                    "singer": "I MINISTRI",
+                    "translation": "go back to your country"
+                },
+                {
+                    "startTime": 1154.44,
+                    "endTime": 1155.9,
+                    "text": "in cerca d’uno stipite",
+                    "singer": "I MINISTRI",
+                    "translation": "and look for a door-post"
+                },
+                {
+                    "startTime": 1155.9,
+                    "endTime": 1157.92,
+                    "text": "per romperti le corna!",
+                    "singer": "I MINISTRI",
+                    "translation": "to break your head on!"
+                },
+                {
+                    "startTime": 1157.92,
+                    "endTime": 1159.96,
+                    "text": "Ma qui no, ma qui no!",
+                    "singer": "I MINISTRI",
+                    "translation": "But here, no! Not here!"
+                },
+                {
+                    "startTime": 1159.96,
+                    "endTime": 1161.56,
+                    "text": "Pazzo, va’ via!",
+                    "singer": "I MINISTRI",
+                    "translation": "Madman, go away!"
+                },
+                {
+                    "startTime": 1161.56,
+                    "endTime": 1163.34,
+                    "text": "Lasciatemi passare!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Let me by!"
+                },
+                {
+                    "startTime": 1163.34,
+                    "endTime": 1165.28,
+                    "text": "Qui tutti i cimiteri sono occupati!",
+                    "singer": "PONG",
+                    "translation": "Here the graveyards are full!"
+                },
+                {
+                    "startTime": 1165.28,
+                    "endTime": 1166.5,
+                    "text": "Qui bastano i pazzi indigeni!",
+                    "singer": "PANG",
+                    "translation": "Our local madmen are quite enough!"
+                },
+                {
+                    "startTime": 1166.5,
+                    "endTime": 1169.04,
+                    "text": "Non vogliam più pazzi forestieri!",
+                    "singer": "PING",
+                    "translation": "We don’t want any more foreign madmen!"
+                },
+                {
+                    "startTime": 1169.04,
+                    "endTime": 1173.84,
+                    "text": "O scappi, o il funeral per te s’appressa!",
+                    "singer": "PONG e PANG",
+                    "translation": "Run off, or else your funeral will be prepared for you!"
+                },
+                {
+                    "startTime": 1173.84,
+                    "endTime": 1175.62,
+                    "text": "Lasciatemi passar!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Let me by!"
+                },
+                {
+                    "startTime": 1175.62,
+                    "endTime": 1178.62,
+                    "text": "Per una Principessa! Peuh!",
+                    "singer": "PONG e PANG",
+                    "translation": "For a Princess! Pooh!"
+                },
+                {
+                    "startTime": 1179.82,
+                    "endTime": 1180.92,
+                    "text": "Che cos’è?",
+                    "singer": "PONG",
+                    "translation": "What’s that?"
+                },
+                {
+                    "startTime": 1180.92,
+                    "endTime": 1183.46,
+                    "text": "Una femmina colla corona in testa!",
+                    "singer": "PANG",
+                    "translation": "A female with a crown on her head!"
+                },
+                {
+                    "startTime": 1183.46,
+                    "endTime": 1185.22,
+                    "text": "E il manto colla frangia!",
+                    "singer": "PONG",
+                    "translation": "And a cloak with some fringe!"
+                },
+                {
+                    "startTime": 1185.22,
+                    "endTime": 1187.16,
+                    "text": "Ma se la spogli nuda –",
+                    "singer": "PING",
+                    "translation": "But if you strip her naked –"
+                },
+                {
+                    "startTime": 1187.16,
+                    "endTime": 1188.06,
+                    "text": "È carne!",
+                    "singer": "PONG",
+                    "translation": "She’s flesh!"
+                },
+                {
+                    "startTime": 1188.06,
+                    "endTime": 1190.28,
+                    "text": "È carne cruda!",
+                    "singer": "PANG",
+                    "translation": "She’s raw flesh!"
+                },
+                {
+                    "startTime": 1190.28,
+                    "endTime": 1193.2,
+                    "text": "È roba che non si mangia!",
+                    "singer": "I MINISTRI",
+                    "translation": "It’s inedible stuff!"
+                },
+                {
+                    "startTime": 1193.2,
+                    "endTime": 1193.88,
+                    "text": "Ah, ah, ah!",
+                    "singer": "I MINISTRI",
+                    "translation": "Ha! ha! ha!"
+                },
+                {
+                    "startTime": 1193.88,
+                    "endTime": 1196.88,
+                    "text": "Lasciatemi passare!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Let me by!"
+                },
+                {
+                    "startTime": 1197.32,
+                    "endTime": 1199.5,
+                    "text": "Lascia le donne!",
+                    "singer": "PING",
+                    "translation": "Give up woman!"
+                },
+                {
+                    "startTime": 1199.5,
+                    "endTime": 1202.46,
+                    "text": "O prendi cento spose, ché, in fondo",
+                    "singer": "PING",
+                    "translation": "Or else take a hundred wives, after all"
+                },
+                {
+                    "startTime": 1202.46,
+                    "endTime": 1204.78,
+                    "text": "la più sublime Turandot",
+                    "singer": "PING",
+                    "translation": "the most sublime Turandot"
+                },
+                {
+                    "startTime": 1204.78,
+                    "endTime": 1207.78,
+                    "text": "del mondo ha una faccia",
+                    "singer": "PING",
+                    "translation": "in the world has a face,"
+                },
+                {
+                    "startTime": 1207.5,
+                    "endTime": 1209.78,
+                    "text": "due braccia, e due gambe, sì",
+                    "singer": "PING",
+                    "translation": "two arms and two legs, yes,"
+                },
+                {
+                    "startTime": 1209.78,
+                    "endTime": 1212.2,
+                    "text": "belle, imperiali, sì, sì",
+                    "singer": "PING",
+                    "translation": "lovely, imperial, yes, yes,"
+                },
+                {
+                    "startTime": 1212.2,
+                    "endTime": 1215.04,
+                    "text": "belle, sì, ma sempre quelle!",
+                    "singer": "PING",
+                    "translation": "lovely, but still only legs!"
+                },
+                {
+                    "startTime": 1215.04,
+                    "endTime": 1216.8,
+                    "text": "Con cento mogli, o sciocco",
+                    "singer": "PING",
+                    "translation": "With a hundred wives, you fool,"
+                },
+                {
+                    "startTime": 1216.8,
+                    "endTime": 1218.68,
+                    "text": "avrai gambe a ribocco!",
+                    "singer": "PING",
+                    "translation": "you’ll have a surplus of legs!"
+                },
+                {
+                    "startTime": 1218.68,
+                    "endTime": 1220.58,
+                    "text": "Duecento braccia",
+                    "singer": "PING",
+                    "translation": "Two hundred arms,"
+                },
+                {
+                    "startTime": 1220.58,
+                    "endTime": 1223.58,
+                    "text": "e cento dolci petti",
+                    "singer": "PING",
+                    "translation": "and a hundred soft bosoms"
+                },
+                {
+                    "startTime": 1224.06,
+                    "endTime": 1225.94,
+                    "text": "sparsi per cento letti!",
+                    "singer": "PING",
+                    "translation": "scattered in a hundred beds!"
+                },
+                {
+                    "startTime": 1225.94,
+                    "endTime": 1230.86,
+                    "text": "Per cento letti! Ah, ah!",
+                    "singer": "I MINISTRI",
+                    "translation": "In a hundred beds! Ha! ha!"
+                },
+                {
+                    "startTime": 1230.86,
+                    "endTime": 1232.6,
+                    "text": "Lasciatemi passar!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Let me by!"
+                },
+                {
+                    "startTime": 1232.6,
+                    "endTime": 1241.88,
+                    "text": "Pazzo, va’ via! va’ via! ecc.",
+                    "singer": "I MINISTRI",
+                    "translation": "Madman, go away! Go! etc."
+                },
+                {
+                    "startTime": 1244.57,
+                    "endTime": 1245.97,
+                    "text": "Silenzio, olà!",
+                    "singer": "LE ANCELLE",
+                    "translation": "Hola, silence!"
+                },
+                {
+                    "startTime": 1248.47,
+                    "endTime": 1251.53,
+                    "text": "Laggiù chi parla?",
+                    "singer": "LE ANCELLE",
+                    "translation": "Who’s talking down there?"
+                },
+                {
+                    "startTime": 1258.4,
+                    "endTime": 1272.1,
+                    "text": "Silenzio! È l’ora dolcissima",
+                    "singer": "LE ANCELLE",
+                    "translation": "Silence! This is the sweet hour"
+                },
+                {
+                    "startTime": 1272.1,
+                    "endTime": 1275.0,
+                    "text": "del sonno!",
+                    "singer": "LE ANCELLE",
+                    "translation": "for sleeping!"
+                },
+                {
+                    "startTime": 1276.9,
+                    "endTime": 1284.12,
+                    "text": "Il sonno sfiora gli occhi!",
+                    "singer": "LE ANCELLE",
+                    "translation": "Sleep is grazing her eyes!"
+                },
+                {
+                    "startTime": 1284.12,
+                    "endTime": 1292.9,
+                    "text": "Si profuma di lei l’oscurità!",
+                    "singer": "LE ANCELLE",
+                    "translation": "The darkness breathes forth her fragrance!"
+                },
+                {
+                    "startTime": 1292.9,
+                    "endTime": 1299.44,
+                    "text": "Via di là, femmine ciarliere!",
+                    "singer": "I MINISTRI",
+                    "translation": "Go away, chattering females!"
+                },
+                {
+                    "startTime": 1300.2,
+                    "endTime": 1304.1,
+                    "text": "Attenti al gong!",
+                    "singer": "I MINISTRI",
+                    "translation": "Watch out for the gong!"
+                },
+                {
+                    "startTime": 1304.1,
+                    "endTime": 1313.38,
+                    "text": "Si profuma di lei l’oscurità!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "The darkness breathes forth her fragrance!"
+                },
+                {
+                    "startTime": 1313.92,
+                    "endTime": 1315.12,
+                    "text": "Guardalo, Pong!",
+                    "singer": "I MINISTRI",
+                    "translation": "Look at him, Pong!"
+                },
+                {
+                    "startTime": 1315.12,
+                    "endTime": 1316.46,
+                    "text": "Guardalo, Ping!",
+                    "singer": "I MINISTRI",
+                    "translation": "Look at him, Ping!"
+                },
+                {
+                    "startTime": 1316.46,
+                    "endTime": 1317.8,
+                    "text": "Guardalo, Pang!",
+                    "singer": "I MINISTRI",
+                    "translation": "Look at him, Pang!"
+                },
+                {
+                    "startTime": 1318.5,
+                    "endTime": 1321.1,
+                    "text": "È insordito! intontito!",
+                    "singer": "I MINISTRI",
+                    "translation": "He’s gone deaf! He’s dazed!"
+                },
+                {
+                    "startTime": 1321.1,
+                    "endTime": 1323.06,
+                    "text": "Allucinato!",
+                    "singer": "I MINISTRI",
+                    "translation": "He’s bedazzled!"
+                },
+                {
+                    "startTime": 1323.06,
+                    "endTime": 1326.04,
+                    "text": "Più non li ascolta, ahimè!",
+                    "singer": "TIMUR",
+                    "translation": "He’s not listening to them, alas!"
+                },
+                {
+                    "startTime": 1328.04,
+                    "endTime": 1331.14,
+                    "text": "Su! Parliamogli in tre!",
+                    "singer": "I MINISTRI",
+                    "translation": "Come! Let’s all three speak to him!"
+                },
+                {
+                    "startTime": 1339.98,
+                    "endTime": 1342.08,
+                    "text": "Notte senza lumicino...",
+                    "singer": "I MINISTRI",
+                    "translation": "A night without a bit of light..."
+                },
+                {
+                    "startTime": 1342.08,
+                    "endTime": 1343.58,
+                    "text": "...gola nera d’un camino...",
+                    "singer": "I MINISTRI",
+                    "translation": "...a chimney’s blackened throat..."
+                },
+                {
+                    "startTime": 1343.58,
+                    "endTime": 1344.52,
+                    "text": "son più chiare",
+                    "singer": "I MINISTRI",
+                    "translation": "are still clearer"
+                },
+                {
+                    "startTime": 1344.52,
+                    "endTime": 1346.76,
+                    "text": "degli enigmi di Turandot!",
+                    "singer": "I MINISTRI",
+                    "translation": "than Turandot’s enigmas!"
+                },
+                {
+                    "startTime": 1347.48,
+                    "endTime": 1349.36,
+                    "text": "Ferro, bronzo, muro, roccia...",
+                    "singer": "I MINISTRI",
+                    "translation": "Iron bronze, walls, rock..."
+                },
+                {
+                    "startTime": 1349.36,
+                    "endTime": 1350.66,
+                    "text": "...l’ostinata tua capoccia...",
+                    "singer": "I MINISTRI",
+                    "translation": "...your obstinate hard head..."
+                },
+                {
+                    "startTime": 1350.66,
+                    "endTime": 1351.64,
+                    "text": "son men duri",
+                    "singer": "I MINISTRI",
+                    "translation": "are less hard"
+                },
+                {
+                    "startTime": 1351.64,
+                    "endTime": 1354.41,
+                    "text": "degli enigmi di Turandot!",
+                    "singer": "I MINISTRI",
+                    "translation": "than Turandot’s enigmas!"
+                },
+                {
+                    "startTime": 1354.65,
+                    "endTime": 1355.28,
+                    "text": "Dunque va’!",
+                    "singer": "I MINISTRI",
+                    "translation": "So then, go!"
+                },
+                {
+                    "startTime": 1355.28,
+                    "endTime": 1356.28,
+                    "text": "Saluta tutti!",
+                    "singer": "I MINISTRI",
+                    "translation": "Bid us all goodbye!"
+                },
+                {
+                    "startTime": 1356.28,
+                    "endTime": 1357.85,
+                    "text": "Varca i monti, taglia i flutti!",
+                    "singer": "I MINISTRI",
+                    "translation": "Scale the mountains, ford the streams!"
+                },
+                {
+                    "startTime": 1357.85,
+                    "endTime": 1358.53,
+                    "text": "Sta alla larga",
+                    "singer": "I MINISTRI",
+                    "translation": "And stay well away"
+                },
+                {
+                    "startTime": 1358.53,
+                    "endTime": 1361.53,
+                    "text": "dagli enigmi di Turandot!",
+                    "singer": "I MINISTRI",
+                    "translation": "from Turandot’s enigmas!"
+                },
+                {
+                    "startTime": 1372.85,
+                    "endTime": 1376.17,
+                    "text": "Non indugiare!",
+                    "singer": "I FANTASMI",
+                    "translation": "Don’t hesitate!"
+                },
+                {
+                    "startTime": 1376.17,
+                    "endTime": 1381.34,
+                    "text": "Se chiami, appare quella che",
+                    "singer": "I FANTASMI",
+                    "translation": "If you call, she’ll appear – she"
+                },
+                {
+                    "startTime": 1381.34,
+                    "endTime": 1386.96,
+                    "text": "estinti, ci fa sognare!",
+                    "singer": "I FANTASMI",
+                    "translation": "who makes us dream, though we are dead!"
+                },
+                {
+                    "startTime": 1387.33,
+                    "endTime": 1390.88,
+                    "text": "Fa ch’ella parli!",
+                    "singer": "I FANTASMI",
+                    "translation": "Make her speak!"
+                },
+                {
+                    "startTime": 1390.88,
+                    "endTime": 1395.0,
+                    "text": "Fa che l’udiamo!",
+                    "singer": "I FANTASMI",
+                    "translation": "Let us hear her!"
+                },
+                {
+                    "startTime": 1397.25,
+                    "endTime": 1402.31,
+                    "text": "Io l’amo! Io l’amo!",
+                    "singer": "I FANTASMI",
+                    "translation": "I love her! I love her!"
+                },
+                {
+                    "startTime": 1402.4,
+                    "endTime": 1407.89,
+                    "text": "No! No! Io solo, l’amo!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "No! I, only I love her!"
+                },
+                {
+                    "startTime": 1407.89,
+                    "endTime": 1409.63,
+                    "text": "L’ami? Che cosa? Chi?",
+                    "singer": "I MINISTRI",
+                    "translation": "You love her? What? who?"
+                },
+                {
+                    "startTime": 1409.8,
+                    "endTime": 1414.87,
+                    "text": "Turandot? Ah, ah, ah!",
+                    "singer": "I MINISTRI",
+                    "translation": "Turandot? Ha, ha, ha!"
+                },
+                {
+                    "startTime": 1414.87,
+                    "endTime": 1416.59,
+                    "text": "O ragazzo demente!",
+                    "singer": "PONG",
+                    "translation": "O mad boy!"
+                },
+                {
+                    "startTime": 1416.83,
+                    "endTime": 1418.37,
+                    "text": "Turandot non esiste!",
+                    "singer": "PANG",
+                    "translation": "Turandot doesn’t exist!"
+                },
+                {
+                    "startTime": 1418.37,
+                    "endTime": 1420.57,
+                    "text": "Non esiste che il niente",
+                    "singer": "PING",
+                    "translation": "Only the Nothingness exists,"
+                },
+                {
+                    "startTime": 1420.57,
+                    "endTime": 1422.23,
+                    "text": "nel quale ti annulli!...",
+                    "singer": "PING",
+                    "translation": "in which you annihilate yourself!..."
+                },
+                {
+                    "startTime": 1422.23,
+                    "endTime": 1425.23,
+                    "text": "Turandot non esiste!",
+                    "singer": "PONG e PANG",
+                    "translation": "Turandot doesn’t exist!"
+                },
+                {
+                    "startTime": 1426.17,
+                    "endTime": 1430.61,
+                    "text": "Turandot! come tutti quei citrulli",
+                    "singer": "PING",
+                    "translation": "Turandot! Like all those blockheads"
+                },
+                {
+                    "startTime": 1430.61,
+                    "endTime": 1431.92,
+                    "text": "tuoi pari!",
+                    "singer": "PING",
+                    "translation": "who went before you!"
+                },
+                {
+                    "startTime": 1431.92,
+                    "endTime": 1433.64,
+                    "text": "L’uomo! Il Dio! Io!",
+                    "singer": "PING",
+                    "translation": "Man! God! The Ego!"
+                },
+                {
+                    "startTime": 1433.64,
+                    "endTime": 1437.63,
+                    "text": "I popoli! I sovrani...Pu-Tin-Pao...",
+                    "singer": "PING",
+                    "translation": "Peoples! Kings...Pu-Tin-Pao..."
+                },
+                {
+                    "startTime": 1440.85,
+                    "endTime": 1443.83,
+                    "text": "Non esiste che il Tao!",
+                    "singer": "I MINISTRI",
+                    "translation": "Only the Tao exists!"
+                },
+                {
+                    "startTime": 1442.83,
+                    "endTime": 1446.23,
+                    "text": "A me il trionfo!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I want the triumph!"
+                },
+                {
+                    "startTime": 1446.23,
+                    "endTime": 1449.52,
+                    "text": "A me l’amore!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I want love!"
+                },
+                {
+                    "startTime": 1449.52,
+                    "endTime": 1452.52,
+                    "text": "Stolto! Ecco l’amore!",
+                    "singer": "I MINISTRI",
+                    "translation": "Fool! There’s love!"
+                },
+                {
+                    "startTime": 1457.49,
+                    "endTime": 1461.4,
+                    "text": "Così la luna bacerà",
+                    "singer": "I MINISTRI",
+                    "translation": "That’s how the moon will kiss"
+                },
+                {
+                    "startTime": 1461.4,
+                    "endTime": 1463.33,
+                    "text": "il tuo volto!",
+                    "singer": "I MINISTRI",
+                    "translation": "your face!"
+                },
+                {
+                    "startTime": 1465.51,
+                    "endTime": 1468.92,
+                    "text": "O figlio, vuoi dunque ch’io solo",
+                    "singer": "TIMUR",
+                    "translation": "Oh, son, do you want me then"
+                },
+                {
+                    "startTime": 1468.92,
+                    "endTime": 1472.08,
+                    "text": "ch’io solo trascini pel mondo",
+                    "singer": "TIMUR",
+                    "translation": "to drag along through the world"
+                },
+                {
+                    "startTime": 1472.08,
+                    "endTime": 1476.65,
+                    "text": "la mia torturata vecchiezza?",
+                    "singer": "TIMUR",
+                    "translation": "my tortured old age, all alone?"
+                },
+                {
+                    "startTime": 1477.25,
+                    "endTime": 1482.37,
+                    "text": "Aiuto! Non c’è voce umana",
+                    "singer": "TIMUR",
+                    "translation": "Help! Isn’t there any human voice"
+                },
+                {
+                    "startTime": 1482.37,
+                    "endTime": 1488.83,
+                    "text": "che muova il tuo cuore feroce?",
+                    "singer": "TIMUR",
+                    "translation": "that can move your fierce heart?"
+                },
+                {
+                    "startTime": 1492.55,
+                    "endTime": 1503.09,
+                    "text": "Signore, ascolta! Ah, signore, ascolta!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "My lord, listen, ah! listen!"
+                },
+                {
+                    "startTime": 1503.96,
+                    "endTime": 1509.56,
+                    "text": "Liù non regge più!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "Liù can bear it no more!"
+                },
+                {
+                    "startTime": 1509.81,
+                    "endTime": 1514.16,
+                    "text": "Si spezza il cuor!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "My heart is breaking!"
+                },
+                {
+                    "startTime": 1514.16,
+                    "endTime": 1523.65,
+                    "text": "Ahimè, ahimè, quanto cammino",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "Alas, how long have I travelled"
+                },
+                {
+                    "startTime": 1523.65,
+                    "endTime": 1534.05,
+                    "text": "col tuo nome nell’anima",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "with your name in my soul,"
+                },
+                {
+                    "startTime": 1534.36,
+                    "endTime": 1546.09,
+                    "text": "col nome tuo sulle labbra!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "your name on my lips!"
+                },
+                {
+                    "startTime": 1546.36,
+                    "endTime": 1551.67,
+                    "text": "Ma se il tuo destino",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "But if your Fate"
+                },
+                {
+                    "startTime": 1551.67,
+                    "endTime": 1559.67,
+                    "text": "doman sarà deciso",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "is decided tomorrow"
+                },
+                {
+                    "startTime": 1560.45,
+                    "endTime": 1575.41,
+                    "text": "noi morrem sulla strada dell’esilio!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "we’ll die on the road to exile!"
+                },
+                {
+                    "startTime": 1575.93,
+                    "endTime": 1585.8,
+                    "text": "Ei perderà suo figlio...",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "He will lose his son..."
+                },
+                {
+                    "startTime": 1586.28,
+                    "endTime": 1598.83,
+                    "text": "io...l’ombra d’un sorriso!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "And I...the shadow of a smile!"
+                },
+                {
+                    "startTime": 1598.83,
+                    "endTime": 1610.4,
+                    "text": "Liù non regge più!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "Liù can bear it no more!"
+                },
+                {
+                    "startTime": 1610.4,
+                    "endTime": 1628.29,
+                    "text": "Ah, pietà!",
+                    "singer": "LIÙ (si avvicina al Principe; piangendo)",
+                    "translation": "Ah, have pity!"
+                },
+                {
+                    "startTime": 1643.25,
+                    "endTime": 1647.99,
+                    "text": "Non piangere, Liù!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Don’t weep, Liù"
+                },
+                {
+                    "startTime": 1647.99,
+                    "endTime": 1652.35,
+                    "text": "Se in un lontano giorno",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "If one far-off day,"
+                },
+                {
+                    "startTime": 1652.35,
+                    "endTime": 1656.93,
+                    "text": "io t’ho sorriso",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I smiled at you,"
+                },
+                {
+                    "startTime": 1656.93,
+                    "endTime": 1663.33,
+                    "text": "per quel sorriso",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "then for that smile,"
+                },
+                {
+                    "startTime": 1663.33,
+                    "endTime": 1668.83,
+                    "text": "dolce mia fanciulla",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "my sweet girl,"
+                },
+                {
+                    "startTime": 1668.83,
+                    "endTime": 1679.0,
+                    "text": "m’ascolta: il tuo signore",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "listen to me: your master tomorrow"
+                },
+                {
+                    "startTime": 1679.0,
+                    "endTime": 1689.52,
+                    "text": "sarà domani forse solo al mondo...",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "will be perhaps alone in the world..."
+                },
+                {
+                    "startTime": 1689.52,
+                    "endTime": 1694.29,
+                    "text": "Non lo lasciare",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Don’t leave him!"
+                },
+                {
+                    "startTime": 1694.29,
+                    "endTime": 1701.64,
+                    "text": "portalo via con te!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Take him away with you!"
+                },
+                {
+                    "startTime": 1700.36,
+                    "endTime": 1708.68,
+                    "text": "Noi morrem sulla strada dell’esilio!",
+                    "singer": "LIÙ",
+                    "translation": "We’ll die on the road to exile!"
+                },
+                {
+                    "startTime": 1709.36,
+                    "endTime": 1712.16,
+                    "text": "Noi morrem!",
+                    "singer": "TIMUR",
+                    "translation": "We’ll die!"
+                },
+                {
+                    "startTime": 1712.16,
+                    "endTime": 1720.4,
+                    "text": "Dell’esilio addolcisci a lui le strade!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Soften for him the road to exile!"
+                },
+                {
+                    "startTime": 1720.4,
+                    "endTime": 1734.01,
+                    "text": "Questo, questo, o mia povera Liù",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "O my poor Liù, this, this"
+                },
+                {
+                    "startTime": 1734.01,
+                    "endTime": 1742.59,
+                    "text": "al tuo piccolo cuore che non cade",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "is what he who smiles no more"
+                },
+                {
+                    "startTime": 1742.85,
+                    "endTime": 1753.0,
+                    "text": "chiede colui che non sorride più...",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "asks of your unfailing heart..."
+                },
+                {
+                    "startTime": 1753.0,
+                    "endTime": 1763.25,
+                    "text": "che non sorride più!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "he who smiles no more!"
+                },
+                {
+                    "startTime": 1768.47,
+                    "endTime": 1772.14,
+                    "text": "Ah! per l’ultima volta!",
+                    "singer": "TIMUR",
+                    "translation": "Ah, for the last time!"
+                },
+                {
+                    "startTime": 1772.14,
+                    "endTime": 1774.0,
+                    "text": "Vinci il fascino orribile!",
+                    "singer": "LIÙ",
+                    "translation": "Overcome this horrible spell!"
+                },
+                {
+                    "startTime": 1774.0,
+                    "endTime": 1776.09,
+                    "text": "La vita è così bella!",
+                    "singer": "I MINISTRI",
+                    "translation": "Life is so beautiful!"
+                },
+                {
+                    "startTime": 1776.09,
+                    "endTime": 1778.02,
+                    "text": "Abbi di Liù pietà!",
+                    "singer": "TIMUR",
+                    "translation": "Have pity on me!"
+                },
+                {
+                    "startTime": 1777.05,
+                    "endTime": 1778.02,
+                    "text": "Abbi di Liù pietà!",
+                    "singer": "LIÙ",
+                    "translation": "Have pity on Liù"
+                },
+                {
+                    "startTime": 1780.9,
+                    "endTime": 1782.93,
+                    "text": "Signore, pietà!",
+                    "singer": "LIÙ",
+                    "translation": "Pity, lord!"
+                },
+                {
+                    "startTime": 1782.93,
+                    "endTime": 1785.23,
+                    "text": "Non perderti così!",
+                    "singer": "I MINISTRI",
+                    "translation": "Don’t destroy yourself like this!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Afferralo, portalo via!",
+                    "singer": "I MINISTRI",
+                    "translation": "Seize him, carry him away!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Trattieni quel pazzo furente!",
+                    "singer": "I MINISTRI",
+                    "translation": "Restrain that raging madman!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Folle tu sei!",
+                    "singer": "I MINISTRI",
+                    "translation": "You are mad!"
+                },
+                {
+                    "startTime": 1778.02,
+                    "endTime": 1780.29,
+                    "text": "La vita è bella!",
+                    "singer": "I MINISTRI",
+                    "translation": "Life is beautiful!"
+                },
+                {
+                    "startTime": 1780.29,
+                    "endTime": 1783.58,
+                    "text": "Abbi di me, di me pietà!",
+                    "singer": "TIMUR",
+                    "translation": "Have pity, have pity on me!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Non posso staccarmi da te!",
+                    "singer": "TIMUR",
+                    "translation": "I can’t tear myself from you!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Non voglio staccarmi da te!",
+                    "singer": "TIMUR",
+                    "translation": "I don’t want to tear myself from you!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Pietà! Mi getto ai tuoi piedi",
+                    "singer": "TIMUR",
+                    "translation": "Pity! I throw myself at your feet,"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "gemente! Abbi pietà!",
+                    "singer": "TIMUR",
+                    "translation": "moaning! Have pity!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Non voler la mia morte!",
+                    "singer": "TIMUR",
+                    "translation": "Don’t make me die!"
+                },
+                {
+                    "startTime": 1785.77,
+                    "endTime": 1787.69,
+                    "text": "Signore, pietà!",
+                    "singer": "LIÙ",
+                    "translation": "Pity, lord!"
+                },
+                {
+                    "startTime": 1787.69,
+                    "endTime": 1793.0,
+                    "text": "Pietà di Liù, Signore!",
+                    "singer": "LIÙ",
+                    "translation": "Lord, have pity on Liù!"
+                },
+                {
+                    "startTime": 1784.73,
+                    "endTime": 1788.0,
+                    "text": "Son io che domando pietà!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I’m the one who asks for pity!"
+                },
+                {
+                    "startTime": 1789.7,
+                    "endTime": 1791.43,
+                    "text": "Nessuno più ascolto!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I can’t listen to anyone any more!"
+                },
+                {
+                    "startTime": 1791.73,
+                    "endTime": 1795.07,
+                    "text": "Io  vedo il suo fulgido volto!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I see her radiant face!"
+                },
+                {
+                    "startTime": 1795.07,
+                    "endTime": 1797.5,
+                    "text": "La vedo! mi chiama!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I see her! She calls me!"
+                },
+                {
+                    "startTime": 1797.5,
+                    "endTime": 1798.77,
+                    "text": "Essa è là!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "She is there!"
+                },
+                {
+                    "startTime": 1801.0,
+                    "endTime": 1804.57,
+                    "text": "Il tuo perdono chiedo",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I ask your pardon,"
+                },
+                {
+                    "startTime": 1804.57,
+                    "endTime": 1816.26,
+                    "text": "come colui che non sorride più!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "as one who smiles no more!"
+                },
+                {
+                    "startTime": 1814.83,
+                    "endTime": 1816.26,
+                    "text": "Su, un ultimo sforzo",
+                    "singer": "PING",
+                    "translation": "Come, a last effort:"
+                },
+                {
+                    "startTime": 1816.26,
+                    "endTime": 1817.68,
+                    "text": "Portiamolo via!",
+                    "singer": "PING",
+                    "translation": "Let’s carry him away!"
+                },
+                {
+                    "startTime": 1817.68,
+                    "endTime": 1821.47,
+                    "text": "portiamolo via!",
+                    "singer": "I MINISTRI",
+                    "translation": "Let’s carry him away!"
+                },
+                {
+                    "startTime": 1821.64,
+                    "endTime": 1823.61,
+                    "text": "Lasciatemi:",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Leave me alone!"
+                },
+                {
+                    "startTime": 1823.61,
+                    "endTime": 1826.07,
+                    "text": "ho troppo sofferto!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I’ve suffered too much!"
+                },
+                {
+                    "startTime": 1826.07,
+                    "endTime": 1831.79,
+                    "text": "La gloria mi aspetta laggiù!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Glory awaits me there!"
+                },
+                {
+                    "startTime": 1831.79,
+                    "endTime": 1834.47,
+                    "text": "Forza umana non c’è",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "No human strength exists"
+                },
+                {
+                    "startTime": 1834.47,
+                    "endTime": 1838.03,
+                    "text": "che mi trattenga!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "that can restrain!"
+                },
+                {
+                    "startTime": 1838.03,
+                    "endTime": 1841.03,
+                    "text": "Io seguo la mia sorte!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I’m following my destiny!"
+                },
+                {
+                    "startTime": 1841.03,
+                    "endTime": 1843.5,
+                    "text": "Son tutto una febbre",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "I’m in a fever,"
+                },
+                {
+                    "startTime": 1843.5,
+                    "endTime": 1845.27,
+                    "text": "son tutto un delirio!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "a delirium!"
+                },
+                {
+                    "startTime": 1845.27,
+                    "endTime": 1847.43,
+                    "text": "ogni senso è un martirio feroce!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "My senses are all fierce torture!"
+                },
+                {
+                    "startTime": 1847.43,
+                    "endTime": 1849.07,
+                    "text": "Ogni fibra dell’anima",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Every fibre of my soul"
+                },
+                {
+                    "startTime": 1849.07,
+                    "endTime": 1850.93,
+                    "text": "ha una voce che grida:",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "has a voice that shouts:"
+                },
+                {
+                    "startTime": 1851.5,
+                    "endTime": 1853.5,
+                    "text": "Turandot!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Turandot!"
+                },
+                {
+                    "startTime": 1854.8,
+                    "endTime": 1856.45,
+                    "text": "Turandot!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Turandot!"
+                },
+                {
+                    "startTime": 1858.65,
+                    "endTime": 1867.85,
+                    "text": "Turandot!",
+                    "singer": "IL PRINCIPE IGNOTO",
+                    "translation": "Turandot!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Tu passi su un povero cuore",
+                    "singer": "TIMUR",
+                    "translation": "You’re treading on a poor heart"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "che sanguina invano per te!",
+                    "singer": "TIMUR",
+                    "translation": "that bleeds for you in vain!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Nessuno ha mai vinto, nessuno!",
+                    "singer": "TIMUR",
+                    "translation": "Nobody has ever won, nobody!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Su tutti la spada piombò!",
+                    "singer": "TIMUR",
+                    "translation": "The sword has struck them all!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Mi getto ai tuoi piedi!",
+                    "singer": "TIMUR",
+                    "translation": "I throw myself at your feet!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Non voler la mia morte!",
+                    "singer": "TIMUR",
+                    "translation": "Don’t put me to death!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "La morte! La morte!",
+                    "singer": "TIMUR",
+                    "translation": "Death! Death!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Ah! Pietà! Pietà di noi!",
+                    "singer": "LIÙ",
+                    "translation": "Ah, have pity, pity on us!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Se questo suo strazio non basta",
+                    "singer": "LIÙ",
+                    "translation": "As if your torment weren’t enough,"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "signore, noi siamo perduti! Con te!",
+                    "singer": "LIÙ",
+                    "translation": "lord, we are lost! With you!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Ah fuggiamo, signore, fuggiamo!",
+                    "singer": "LIÙ",
+                    "translation": "Let us flee, lord, flee!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "La morte! la morte! la morte!",
+                    "singer": "LIÙ",
+                    "translation": "Death! Death! Death!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Il volto che vedi è illusione!",
+                    "singer": "I MINISTRI",
+                    "translation": "The face you see is an illusion!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "La luce che splende è funesta!",
+                    "singer": "I MINISTRI",
+                    "translation": "The light that shines is fatal!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Tu giochi la tua perdizione!",
+                    "singer": "I MINISTRI",
+                    "translation": "You’re gambling your own destruction!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Tu giochi la testa: La morte!",
+                    "singer": "I MINISTRI",
+                    "translation": "You’re gambling your head! Death!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "C’è l’ombra del boia laggiù!",
+                    "singer": "I MINISTRI",
+                    "translation": "The executioner’s shadow is there!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Tu corri alla rovina!",
+                    "singer": "I MINISTRI",
+                    "translation": "You’re hastening to your ruin!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "La vita non giocar!",
+                    "singer": "I MINISTRI",
+                    "translation": "Don’t risk your life!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "La morte! la morte! la morte!",
+                    "singer": "I MINISTRI",
+                    "translation": "Death! Death! Death!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "La fossa già scaviam per te",
+                    "singer": "CORO",
+                    "translation": "We’re already digging your grave,"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "che vuoi sfidar l’amor!",
+                    "singer": "CORO",
+                    "translation": "you who would challenge love!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Nel buio c’è segnato, ahimè",
+                    "singer": "CORO",
+                    "translation": "In the darkness, alas,"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "il tuo crudel destino! Ah!",
+                    "singer": "CORO",
+                    "translation": "your destiny is written! Ah!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "E lasciamolo andar!",
+                    "singer": "I MINISTRI",
+                    "translation": "Well, let him go!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Inutile è gridar",
+                    "singer": "I MINISTRI",
+                    "translation": "There’s no use shouting"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "in sanscrito, in cinese, in lingua mongola!",
+                    "singer": "I MINISTRI",
+                    "translation": "in Sanskrit, Chinese, or Mongolian!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "Quando rangola il gong",
+                    "singer": "I MINISTRI",
+                    "translation": "When the gong clangs,"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "la morte gongola!",
+                    "singer": "I MINISTRI",
+                    "translation": "Death is happy!"
+                },
+                {
+                    "startTime": 1887.8,
+                    "endTime": 1891.35,
+                    "text": "Ah, ah, ah!",
+                    "singer": "I MINISTRI",
+                    "translation": "Ha, ha, ha!"
+                },
+                {
+                    "startTime": 0.0,
+                    "endTime": 0.0,
+                    "text": "(Fuggono sghignazzando.)",
+                    "singer": "I MINISTRI",
+                    "translation": "(They run away, snickering.)"
+                }
+            ]
+        }
+    ]
+}
