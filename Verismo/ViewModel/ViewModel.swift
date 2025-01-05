@@ -5,26 +5,63 @@
 //  Created by Michał Lisicki on 25/12/2024.
 //
 import AVFoundation
+import SwiftUI
 import Combine
+import Translation
 
 
-
-final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
+class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     override init() {
         super.init()
-        loadSettings()
         loadLibrettoDatabase()
         #if os(iOS)
         configureAudioSession()
         #endif
+        prepareSupportedLanguages()
     }
     
-    //MARK: Interface Changes
+    //MARK: - Translator
+    
+    var availableLanguages: [AvailableLanguage] = []
+    var translationPossible = false
+
+    func prepareSupportedLanguages() {
+        Task { @MainActor in
+            let supportedLanguages = await LanguageAvailability().supportedLanguages
+            availableLanguages = supportedLanguages.map {
+                AvailableLanguage(locale: $0)
+            }
+            .filter { language in
+                let shortName = language.shortName()
+                return shortName != "it" && shortName != "en-US"
+            }
+            .sorted()
+        }
+    }
+    
+    var configuration: TranslationSession.Configuration?
+    
+    let availability = LanguageAvailability()
+    
+    func checkLanguageAvailability() async {
+        let status = await availability.status(from: Locale.Language(languageCode: "en", region: "GB"), to: targetLanguage)
+        if status == .installed {
+            translationPossible = true
+        } else if status == .supported {
+            /*DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+                //Checks to automaticaly switch to new translation if user downloads translation
+                Task {
+                    await self.checkLanguageAvailability()
+                }
+            }*/
+        }
+    }
+    
+    //MARK: - Interface Changes
     @Published var showingWelcome: Bool = true
     @Published var showingOperaPicker: Bool = true
 
-    // Exit playback mode and reset states
     func resetWhileLeavingPlayback() {
         reset()
         cancelLyricsUpdator()
@@ -34,43 +71,25 @@ final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         showingWelcome = false
     }
     
-    //MARK: User Defaults
+    //MARK: - User Defaults
     @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
     
-    @Published var lyricsFontSize: Double = 18.0 {
-        didSet {
-            UserDefaults.standard.set(lyricsFontSize, forKey: "LyricsFontSize")
-        }
-    }
-    @Published var volume: Float = 1.0 {
+    @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
+    @AppStorage("volume") var volume: Double = 1.0 {
         didSet {
             if let player = audioPlayer {
-                player.volume = volume
+                player.volume = Float(volume)
             }
-            UserDefaults.standard.set(volume, forKey: "Volume")
         }
     }
     
-    private func loadSettings() {
-        let defaults = UserDefaults.standard
-        
-        if defaults.object(forKey: "Volume") != nil {
-            volume = defaults.float(forKey: "Volume")
-        }
-        
-        if defaults.object(forKey: "LyricsFontSize") != nil {
-            lyricsFontSize = defaults.double(forKey: "LyricsFontSize")
-        }
-    }
-    
-    //MARK: Opera Database Operations
+    //MARK: - Opera Database Operations
     @Published var operas: [LibrettoDatabase.Libretto] = []
     @Published var selectedLibretto: LibrettoDatabase.Libretto?
     @Published var currentLyric: String = ""
     @Published var currentSinger: String = ""
     @Published var currentTranslation: String = "..."
     
-    // Load opera data from the JSON database
     func loadLibrettoDatabase() {
         guard let url = Bundle.main.url(forResource: "librettoDatabase", withExtension: "json") else {
             print("Libretto database file not found.")
@@ -92,19 +111,18 @@ final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         showingOperaPicker = false
     }
     
-    //MARK: Audio Player
+    //MARK: - Audio Player
     var audioPlayer: AVAudioPlayer?
 
     @Published var playbackProgress: Double = 0.0
     @Published var totalTime: TimeInterval = 0.0
     
-    // Function to prepare audio player with a given URL
     func prepareAudioPlayer(with url: URL) {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
-            audioPlayer?.volume = volume //to ackowledge UserDefaults
+            audioPlayer?.volume = Float(volume) //to ackowledge UserDefaults
             totalTime = audioPlayer?.duration ?? 0.0
             setupLyricsUpdator()
             play()
@@ -115,13 +133,12 @@ final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
     }
     
-    //Finish of playing
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         isPlaying = false
         reset() // Reset playback states
     }
     
-    //MARK: Playback Controls
+    //MARK: - Playback Controls
     @Published var isPlaying: Bool = false
 
     // Toggle action
@@ -158,7 +175,7 @@ final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         playbackProgress = 0.0
     }
     
-    //MARK: Timer (playback)
+    //MARK: - Timer (playback)
 
     private var timerCancellable: AnyCancellable?
     private func startTimer() {
@@ -175,7 +192,7 @@ final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         timerCancellable = nil
     }
     
-    //MARK: Lyrics Updates
+    //MARK: - Lyrics Updates
     private var lyricsCancellable: AnyCancellable?
     private func setupLyricsUpdator() {
         lyricsCancellable = $playbackProgress
@@ -193,7 +210,6 @@ final class OperaViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     private func updateLyric(for time: TimeInterval) {
         guard let lyrics = selectedLibretto?.lyrics else { return }
         
-        // Optimize by finding the active lyric directly
         if let lyric = lyrics.first(where: { $0.startTime <= time && $0.endTime > time }) {
             currentLyric = lyric.text
             currentSinger = lyric.singer

@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct Composers: View {
+struct ComposersView: View {
     @Binding var chosenComposer: Int?
     @State var click = false
 
-    
     var body: some View {
         VStack(spacing: 70) {
-            Text("Select composer:")
+            Text("Select Composer:")
                 .fadingText()
             HStack(spacing: 65) {
                 ComposerButton(name: "Verdi", lifespan: "1813–1901", imageName: "Verdi") {
@@ -70,12 +69,6 @@ struct ComposerButton: View {
         .onHover { hovering in
             isHovered = hovering
         }
-        /*.opacity(opacity)
-        .onAppear {
-            withAnimation(.easeInOut(duration: 1)) {
-                opacity = 1.0
-            }
-        }*/
     }
 }
 

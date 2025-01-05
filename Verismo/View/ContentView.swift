@@ -6,46 +6,41 @@
 //
 
 import SwiftUI
-import TipKit
 
 struct ContentView: View {
-    @StateObject private var viewModel = OperaViewModel()
-    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var viewModel: ViewModel
     @State var isConfirmationDialogPresentedBack: Bool = false
     @State var isConfirmationDialogPresentedHome: Bool = false
     
     @State private var showingPlaybackSettings = false
-    @State private var isFileImporterPresented = false
     
-    //Mark: Steps
+    //MARK: - Steps
     @State var chosenMode: Int?
     @State var chosenComposer: Int?
     @State var chosenOpera: String?
     
-    let subtitlesTip = SubtitlesTip()
     
     var body: some View {
         ZStack {
-            BackgroundGradient(colorScheme: colorScheme)
+            BackgroundGradient()
             VStack {
                 if viewModel.showingWelcome {
-                    Welcome(chosenMode: $chosenMode) {
+                    WelcomeView(chosenMode: $chosenMode) {
                         viewModel.continueButtonClicked()
                     }
                 } else if chosenComposer == nil {
-                    Composers(chosenComposer: $chosenComposer)
+                    ComposersView(chosenComposer: $chosenComposer)
                 } else if chosenOpera == nil {
-                    Operas(chosenComposer: chosenComposer, chosenOpera: $chosenOpera)
+                    OperasView(chosenComposer: chosenComposer, chosenOpera: $chosenOpera)
                 } else if viewModel.selectedLibretto == nil {
-                    PickOpera(viewModel: viewModel, operaName: chosenOpera)
+                    PickOperaView(operaName: chosenOpera)
                 } else if viewModel.audioPlayer == nil {
-                    PickAndLoadAudio(prepareAudioPlayer: viewModel.prepareAudioPlayer)
+                    PickAndLoadAudioView()
                 } else {
-                    PlaybackView(viewModel: viewModel, opera: viewModel.selectedLibretto!) //force unwrap
+                    PlaybackView()
                 }
                 
             }
-            .frame(minWidth: 400, minHeight: 530)
         }
         .toolbar {
             // Back Button
@@ -71,7 +66,7 @@ struct ContentView: View {
                             }
                         )
                         Button(action: { isConfirmationDialogPresentedHome = true } ) {
-                            Label("Home", systemImage: "music.note.house")
+                            Label("Go Home", systemImage: "music.note.house")
                                 .symbolRenderingMode(.hierarchical)
                         }
                         .confirmationDialog(
@@ -91,18 +86,16 @@ struct ContentView: View {
             // Settings Button
             ToolbarItemGroup(placement: .primaryAction) {
                 if viewModel.audioPlayer != nil {
-                    Button(action: {showingPlaybackSettings = true;
-                        subtitlesTip.invalidate(reason: .actionPerformed)}) {
-                            Label("Playback Preferences", systemImage: "dial.medium")
-                                .symbolRenderingMode(.hierarchical)
-                        }
-                    //.popoverTip(subtitlesTip)
+                    Button(action: {showingPlaybackSettings = true} ) {
+                        Label("Playback Preferences", systemImage: "dial.medium")
+                            .symbolRenderingMode(.hierarchical)
+                    }
                 }
             }
         }
         .toolbarBackground(.thinMaterial)
         .sheet(isPresented: $showingPlaybackSettings) {
-            PlaybackSettings(viewModel: viewModel)
+            PlaybackSettingsView()
         }
         .gesture(
             DragGesture().onEnded { value in
@@ -115,7 +108,6 @@ struct ContentView: View {
     }
     
     @State var toolbarIconClickedChevron = false
-    @State var toolbarIconClickedGear = false
     
     func goBack() {
         if viewModel.audioPlayer != nil {
@@ -145,8 +137,8 @@ struct ContentView: View {
 }
 
 struct BackgroundGradient: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var isAnimating = true
-    var colorScheme: ColorScheme
     
     var body: some View {
         MeshGradient(
@@ -160,17 +152,18 @@ struct BackgroundGradient: View {
             colors: colorScheme == .light ?
             [.white, .white, .white,
              .red, .white, .red,
-             .orange, .yellow, .orange] :
+             .orange, .yellow, .orange]
+            :
                 [.black, .black, .black,
                  .red, .black, .red,
                  .black, .orange, .yellow],
             smoothsColors: true
         )
         /*.onAppear {
-            withAnimation(.easeInOut(duration: 10).repeatForever(autoreverses: true)) {
-                isAnimating.toggle()
-            }
-        }*/
+         withAnimation(.easeInOut(duration: 10).repeatForever(autoreverses: true)) {
+         isAnimating.toggle()
+         }
+         }*/
         .ignoresSafeArea()
     }
 }
@@ -182,8 +175,7 @@ struct FadingText: ViewModifier {
         content
             .font(.title)
             .fontDesign(.serif)
-            .italic()
-        //.opacity(opacity)
+            .opacity(opacity)
             .onAppear {
                 withAnimation(.easeInOut(duration: 1.5)) {
                     opacity = 1.0
@@ -195,20 +187,5 @@ struct FadingText: ViewModifier {
 extension View {
     func fadingText() -> some View {
         modifier(FadingText())
-    }
-}
-
-struct SubtitlesTip: Tip {
-    
-    var title: Text {
-        Text("Select Your Subtitle Language")
-    }
-    
-    var message: Text? {
-        Text("Enjoy the opera in your preferred language.")
-    }
-    
-    var image: Image? {
-        Image(systemName: "globe")
     }
 }

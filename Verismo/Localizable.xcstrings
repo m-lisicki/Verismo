@@ -6,7 +6,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Czy na pewno chcesz powrócić do poprzedniego ekranu?"
+            "value" : "Czy chcesz powrócić do poprzedniego ekranu?"
           }
         }
       }
@@ -16,7 +16,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Czy na pewno chcesz powrócić do ekranu głównego?"
+            "value" : "Czy chcesz powrócić do ekranu głównego?"
           }
         }
       }
@@ -31,19 +31,15 @@
         }
       }
     },
-    "Choose Your Edition from our catalouge" : {
-      "extractionState" : "stale",
+    "Choose Your Edition from Our Catalouge:" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz wydanie z naszego katalogu"
+            "value" : "Wybierz wydanie z naszego katalogu:"
           }
         }
       }
-    },
-    "Choose Your Edition from our catalouge:" : {
-
     },
     "Conductor: %@" : {
       "localizations" : {
@@ -55,22 +51,22 @@
         }
       }
     },
-    "Enjoy the opera in your preferred language." : {
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ciesz się operą w swoim preferowanym języku."
-          }
-        }
-      }
-    },
     "Font Size: %lld" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rozmiar Czcionki: %lld"
+            "value" : "Rozmiar czcionki: %lld"
+          }
+        }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ogólne"
           }
         }
       }
@@ -80,17 +76,17 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Powróć"
+            "value" : "Wróć"
           }
         }
       }
     },
-    "Home" : {
+    "Go Home" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ekran Główny"
+            "value" : "Wróć do ekranu głównego"
           }
         }
       }
@@ -140,7 +136,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preferencje Odtwarzania"
+            "value" : "Preferencje odtwarzania"
           }
         }
       }
@@ -165,7 +161,7 @@
         }
       }
     },
-    "Select composer:" : {
+    "Select Composer:" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -185,12 +181,12 @@
         }
       }
     },
-    "Select Your Subtitle Language" : {
+    "Timer Transition Animation" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz język napisów"
+            "value" : "Animacja minutnika"
           }
         }
       }

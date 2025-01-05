@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Operas: View {
+struct OperasView: View {
     let chosenComposer: Int?
     @Binding var chosenOpera: String?
     @State var click = false

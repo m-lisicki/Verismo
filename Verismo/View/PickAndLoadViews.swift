@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct PickOpera: View {
-    @ObservedObject var viewModel: OperaViewModel
+struct PickOperaView: View {
+    @EnvironmentObject var viewModel: ViewModel
     
     @State var operaName: String?
     
@@ -22,7 +22,7 @@ struct PickOpera: View {
     
     var body: some View {
         VStack {
-            Text("Choose Your Edition from our catalouge:")
+            Text("Choose Your Edition from Our Catalouge:")
                 .fadingText()
             
             List(filteredOperas) { opera in
@@ -121,9 +121,10 @@ struct OperaRow: View {
 }
 #endif
 
-struct PickAndLoadAudio: View {
+struct PickAndLoadAudioView: View {
+    @EnvironmentObject var viewModel: ViewModel
+
     @State var isPresented = false
-    let prepareAudioPlayer: (URL) -> Void
     
     var body: some View {
         Button(action: {
@@ -153,7 +154,7 @@ struct PickAndLoadAudio: View {
                 _ = selectedFile.startAccessingSecurityScopedResource()
                 defer { selectedFile.stopAccessingSecurityScopedResource() }
                 
-                prepareAudioPlayer(selectedFile)
+                viewModel.prepareAudioPlayer(with: selectedFile)
             } catch {
                 print("Failed to load the audio file: \(error.localizedDescription)")
             }

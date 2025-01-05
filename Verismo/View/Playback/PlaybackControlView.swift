@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct PlaybackControl: View {
-    @ObservedObject var viewModel: OperaViewModel
+struct PlaybackControlView: View {
+    @EnvironmentObject var viewModel: ViewModel
     @State private var isStopActive = false
     
     var body: some View {

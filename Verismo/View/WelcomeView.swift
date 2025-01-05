@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Welcome: View {
+struct WelcomeView: View {
     @Binding var chosenMode: Int?
     @State var click = false
     var continueClicked: () -> Void
