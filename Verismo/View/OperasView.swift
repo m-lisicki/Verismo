@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OperasView: View {
-    let chosenComposer: Int?
-    @Binding var chosenOpera: String?
+    @EnvironmentObject var viewModel: ViewModel
+
     @State var click = false
 
     
@@ -17,11 +17,11 @@ struct OperasView: View {
         VStack(spacing: 70) {
             Text("Select an Opera:")
                 .fadingText()
-            if chosenComposer == 0 { //Verdi
+            if viewModel.chosenComposer == 0 { //Verdi
                 
             } else { //Puccini
                 OperaButton(name: "Turandot", year: "1926", imageName: "Turandot") {
-                    chosenOpera = "Turandot";
+                    viewModel.chosenOpera = "Turandot";
                     click.toggle()
                 }
             }

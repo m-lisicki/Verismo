@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@MainActor
 struct PlaybackView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?

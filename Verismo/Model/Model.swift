@@ -25,6 +25,8 @@ struct LibrettoDatabase: Codable {
         let orchestra: String
         let thumbnailImageName: String
         let lyrics: [LibrettoText]
+        let sourceUrl: String
+        let audioUrl: String
     }
     let operas: [Libretto]
 }

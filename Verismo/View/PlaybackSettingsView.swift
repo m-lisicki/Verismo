@@ -9,45 +9,49 @@ import SwiftUI
 import Translation
 
 struct PlaybackSettingsView: View {
+    @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
     @EnvironmentObject var viewModel: ViewModel
-    @State private var availableLanguages: [AvailableLanguage] = []
-        
+    
     var body: some View {
         Form {
             VStack {
-                // Lyrics Settings
-                Text("Font Size: \(Int(viewModel.lyricsFontSize))")
-                Slider(value: $viewModel.lyricsFontSize, in: 30...48, step: 2)
+                // Section for Lyrics Settings
+                VStack {
+                    Text("Volume: \(Int(viewModel.volume * 100))%")
+                        .font(.headline)
+                    Slider(value: $viewModel.volume, in: 0...1)
+                        .accessibilityValue("\(Int(viewModel.volume * 100)) percent")
+                }
+                .padding(.bottom, 20)
                 
-                // Playback Settings
-                
-                Text("Volume: \(Int(viewModel.volume * 100))%")
-                Slider(value: $viewModel.volume, in: 0...1)
-
-                // Target Language Picker
-                HStack {
+                VStack(spacing: 15) {
+                    Text("Font Size: \(Int(lyricsFontSize))")
+                        .font(.headline)
+                    Slider(value: $lyricsFontSize, in: 30...48, step: 2)
+                        .accessibilityValue("\(Int(lyricsFontSize)) points")
+                    
                     Picker("Select Subtitles Language:", selection: $viewModel.targetLanguage) {
                         ForEach(viewModel.availableLanguages, id: \.locale) { language in
                             Text(language.localizedName()).tag(language.locale)
                         }
                     }
-
-                    .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: viewModel.targetLanguage)) { session in
-                        try? await session.prepareTranslation()
+#if os(iOS)
+                    .onAppear {
+                        viewModel.stopTimer()
                     }
-                    /*.onSubmit {
-                        translationService.translationPossible = false
+                    .onDisappear {
+                        viewModel.startTimer()
                     }
-                    if !translationService.translationPossible && viewModel.targetLanguage != Locale.Language(languageCode: "en", script: nil, region: "GB") && viewModel.targetLanguage !=  Locale.Language(languageCode: "en", script: nil, region: "US")
-                    {
-                        Image(systemName: "slowmo")
-                        .symbolEffect(.variableColor.iterative.dimInactiveLayers.nonReversing, options: .repeat(.continuous))
-                    }*/
+#endif
                 }
-                .padding(.top, 7)
             }
         }
         .padding()
         .navigationTitle("Playback Preferences")
     }
+}
+
+#Preview {
+    @Previewable @StateObject var model = ViewModel()
+    PlaybackSettingsView().environmentObject(model)
 }

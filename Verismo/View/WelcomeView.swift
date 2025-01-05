@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @Binding var chosenMode: Int?
+    @EnvironmentObject var viewModel: ViewModel
     @State var click = false
-    var continueClicked: () -> Void
     
     var body: some View {
         VStack(spacing: 70) {
@@ -18,8 +17,7 @@ struct WelcomeView: View {
                 .fadingText()
             HStack(spacing: 25) {
                 Button(action: {
-                    chosenMode = 0
-                    continueClicked()
+                    viewModel.chosenMode = 0
                     click.toggle()
                 }) {
                     VStack(spacing: 13) {
@@ -38,8 +36,7 @@ struct WelcomeView: View {
                 .cornerRadius(5)
                 
                 Button(action: {
-                    chosenMode = 1
-                    continueClicked()
+                    viewModel.chosenMode = 1
                 }) {
                     VStack(spacing: 13) {
                         Image(systemName: "book.pages")

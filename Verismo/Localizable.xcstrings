@@ -1,32 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Are you sure you want to go back?" : {
+    "%lld percent" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Czy chcesz powrócić do poprzedniego ekranu?"
+            "value" : "%lld procentów"
           }
         }
       }
     },
-    "Are you sure you want to go home?" : {
+    "%lld points" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Czy chcesz powrócić do ekranu głównego?"
-          }
-        }
-      }
-    },
-    "Cancel" : {
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anuluj"
+            "value" : "%lld punktów"
           }
         }
       }
@@ -111,6 +101,17 @@
         }
       }
     },
+    "Lyrics Settings" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia napisów"
+          }
+        }
+      }
+    },
     "Now Playing:" : {
       "localizations" : {
         "pl" : {
@@ -131,12 +132,33 @@
         }
       }
     },
+    "Play Audio from URL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odtwórz Audio Online"
+          }
+        }
+      }
+    },
     "Playback Preferences" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preferencje odtwarzania"
+          }
+        }
+      }
+    },
+    "Playback Settings" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia odtwarzania"
           }
         }
       }

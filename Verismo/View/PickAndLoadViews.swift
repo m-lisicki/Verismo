@@ -9,12 +9,10 @@ import SwiftUI
 
 struct PickOperaView: View {
     @EnvironmentObject var viewModel: ViewModel
-    
-    @State var operaName: String?
-    
+        
     var filteredOperas: [LibrettoDatabase.Libretto] {
-        if let operaName = operaName, !operaName.isEmpty {
-            return viewModel.operas.filter { $0.operaTitle.contains(operaName) }
+        if let chosenOpera = viewModel.chosenOpera {
+            return viewModel.operas.filter { $0.operaTitle.contains(chosenOpera) }
         } else {
             return viewModel.operas
         }
@@ -123,41 +121,64 @@ struct OperaRow: View {
 
 struct PickAndLoadAudioView: View {
     @EnvironmentObject var viewModel: ViewModel
-
-    @State var isPresented = false
+    @State var fileImporterPresented = false
     
     var body: some View {
-        Button(action: {
-            isPresented = true
-        }) {
-            VStack(spacing: 13) {
-                Image(systemName: "folder.badge.plus")
-                    .font(.system(size: 23))
-                    .symbolRenderingMode(.hierarchical)
-                Text("Load Audio from Disk")
-                    .font(.footnote)
+        HStack(spacing: 25) {
+            Button(action: {
+                if let url = URL(string: viewModel.selectedLibretto!.audioUrl) {
+                    print("Audio URL: \(viewModel.selectedLibretto!.audioUrl)")
+                    viewModel.prepareToPlay(from: url)
+                }
+            }) {
+                VStack(spacing: 13) {
+                    Image(systemName: "globe")
+                        .font(.system(size: 23))
+                        .symbolRenderingMode(.hierarchical)
+                    Text("Play Audio from URL")
+                        .font(.footnote)
+                }
+                .frame(height: 55)
+                .fontWeight(.light)
+                .padding()
             }
-            .frame(height: 55)
-            .fontWeight(.light)
-            .padding()
-        }
-        .buttonStyle(.borderless)
-        .background(.ultraThickMaterial)
-        .cornerRadius(5)
-        .fileImporter(
-            isPresented: $isPresented,
-            allowedContentTypes: [.audio],
-            allowsMultipleSelection: false
-        ) { result in
-            do {
-                guard let selectedFile = try result.get().first else { return }
-                _ = selectedFile.startAccessingSecurityScopedResource()
-                defer { selectedFile.stopAccessingSecurityScopedResource() }
-                
-                viewModel.prepareAudioPlayer(with: selectedFile)
-            } catch {
-                print("Failed to load the audio file: \(error.localizedDescription)")
+            .buttonStyle(.borderless)
+            .background(.ultraThickMaterial)
+            .cornerRadius(5)
+            
+            Button(action: {
+                fileImporterPresented = true
+            }) {
+                VStack(spacing: 13) {
+                    Image(systemName: "folder.badge.plus")
+                        .font(.system(size: 23))
+                        .symbolRenderingMode(.hierarchical)
+                    Text("Load Audio from Disk")
+                        .font(.footnote)
+                }
+                .frame(height: 55)
+                .fontWeight(.light)
+                .padding()
+            }
+            .buttonStyle(.borderless)
+            .background(.ultraThickMaterial)
+            .cornerRadius(5)
+            .fileImporter(
+                isPresented: $fileImporterPresented,
+                allowedContentTypes: [.audio],
+                allowsMultipleSelection: false
+            ) { result in
+                do {
+                    guard let selectedFile = try result.get().first else { return }
+                    _ = selectedFile.startAccessingSecurityScopedResource()
+                    defer { selectedFile.stopAccessingSecurityScopedResource() }
+                    
+                    viewModel.prepareToPlay(from: selectedFile)
+                } catch {
+                    print("Failed to load the audio file: \(error.localizedDescription)")
+                }
             }
         }
     }
+    
 }

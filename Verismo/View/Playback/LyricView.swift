@@ -6,71 +6,69 @@
 //
 
 import SwiftUI
-import Translation
+@preconcurrency import Translation
 
 struct LyricView: View {
     @EnvironmentObject var viewModel: ViewModel
+    
+    @State private var configuration: TranslationSession.Configuration?
     @State private var targetText = ""
+    
+    @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Text(viewModel.currentSinger)
-                .font(.system(size: viewModel.lyricsFontSize - 10))
+                .font(.system(size: lyricsFontSize - 10))
                 .padding(.top)
             
             Text(viewModel.currentLyric)
-                .font(.system(size: viewModel.lyricsFontSize))
+                .font(.system(size: lyricsFontSize))
                 .fontWeight(.light)
                 .fontDesign(.serif)
                 .italic()
                 .padding()
             
             Text(targetText)
-                .font(.system(size: viewModel.lyricsFontSize - 13))
+                .font(.system(size: lyricsFontSize - 13))
                 .padding()
                 .background(Color.gray.opacity(0.3))
                 .cornerRadius(7)
                 .opacity(viewModel.currentTranslation.isEmpty ? 0 : 1)
-                .onDisappear {
-                    print("Boing")
-                    viewModel.configuration?.invalidate()
-                }
-                .translationTask(viewModel.configuration) { session in
-                    do {
-                        let response = try await session.translate(viewModel.currentTranslation)
-                        targetText = response.targetText
-                    } catch {
-                        //Errors
-                    }
+                .translationTask(configuration) { session in
+                    let response = try? await session.translate(viewModel.currentTranslation)
+                    targetText = response?.targetText ?? viewModel.currentTranslation
                 }
         }
         .padding()
+        .onChange(of: viewModel.translationPossible) { _, newValue in
+            if newValue && !viewModel.currentTranslation.isEmpty {
+                triggerTranslation()
+            }
+        }
         .onChange(of: viewModel.currentTranslation) {
-            if viewModel.translationPossible && !viewModel.currentTranslation.isEmpty {
+            if viewModel.translationPossible && !viewModel.tempSneezeTranslation && !viewModel.currentTranslation.isEmpty {
                 triggerTranslation()
             } else {
                 targetText = viewModel.currentTranslation
             }
         }
         .onChange(of: viewModel.targetLanguage) { oldValue, newValue in
-            if (oldValue != newValue) {
-                viewModel.translationPossible = false
-                viewModel.configuration?.invalidate()
-                viewModel.configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en", region: "GB"), target: viewModel.targetLanguage)
-                Task {
-                    await viewModel.checkLanguageAvailability()
-                }
+            viewModel.translationPossible = false
+            configuration?.invalidate()
+            configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en", region: "GB"), target: viewModel.targetLanguage)
+            Task {
+                await viewModel.checkLanguageAvailability()
             }
         }
     }
     
     private func triggerTranslation() {
-        guard viewModel.configuration == nil else {
-            viewModel.configuration?.invalidate()
+        guard configuration == nil else {
+            configuration?.invalidate()
             return
         }
-        
-        viewModel.configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en",region: "GB"),
-                                                             target: viewModel.targetLanguage)
+        configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en",region: "GB"),
+                                                         target: viewModel.targetLanguage)
     }
 }

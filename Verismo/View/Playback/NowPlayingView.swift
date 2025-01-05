@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct NowPlayingView: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -16,7 +17,7 @@ struct NowPlayingView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Now Playing:")
-                    Text(viewModel.selectedLibretto!.operaTitle)
+                    Text(viewModel.selectedLibretto?.operaTitle ?? "")
                         .fontDesign(.serif)
                         .italic()
                 }
@@ -24,21 +25,30 @@ struct NowPlayingView: View {
                 Text(formattedTime(viewModel.playbackProgress))
                     .contentTransition(timerTransition ? .numericText(countsDown: false) : .identity)
                     .animation(.default, value: viewModel.playbackProgress)
-                    //.frame(width: 32, alignment: .leading)
+                //.frame(width: 32, alignment: .leading)
             }
             .font(.subheadline)
             .padding(.horizontal)
             
-            Slider(value: $viewModel.playbackProgress, in: 0...(viewModel.audioPlayer?.duration ?? 0), onEditingChanged: handleSliderEditingChanged)
-                .padding()
+            Slider(value: $viewModel.playbackProgress, in: 0...viewModel.totalTime, onEditingChanged: handleSliderEditingChanged)
+            .padding()
         }
     }
     
     private func handleSliderEditingChanged(editingStarted: Bool) {
         if editingStarted {
+            viewModel.tempSneezeTranslation = true
             viewModel.pause()
         } else {
-            viewModel.audioPlayer?.currentTime = viewModel.playbackProgress
+            viewModel.tempSneezeTranslation = false
+            
+            if let localPlayer = viewModel.audioPlayer {
+                localPlayer.currentTime = viewModel.playbackProgress
+            } else if let remotePlayer = viewModel.streamingPlayer {
+                let cmTime = CMTimeMakeWithSeconds(viewModel.playbackProgress, preferredTimescale: 1)
+                remotePlayer.seek(to: cmTime)
+            }
+            
             viewModel.play()
         }
     }

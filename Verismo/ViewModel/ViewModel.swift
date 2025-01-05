@@ -4,30 +4,31 @@
 //
 //  Created by Michał Lisicki on 25/12/2024.
 //
+
 import AVFoundation
-import SwiftUI
 import Combine
-import Translation
+import SwiftUI
+@preconcurrency import Translation
 
-
-class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
+final class ViewModel: NSObject, ObservableObject {
     
     override init() {
         super.init()
         loadLibrettoDatabase()
-        #if os(iOS)
+#if os(iOS)
         configureAudioSession()
-        #endif
-        prepareSupportedLanguages()
+#endif
     }
     
     //MARK: - Translator
     
+    @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
     var availableLanguages: [AvailableLanguage] = []
+    var tempSneezeTranslation = false
     var translationPossible = false
-
-    func prepareSupportedLanguages() {
-        Task { @MainActor in
+    
+    @MainActor
+    func prepareSupportedLanguages() async {
             let supportedLanguages = await LanguageAvailability().supportedLanguages
             availableLanguages = supportedLanguages.map {
                 AvailableLanguage(locale: $0)
@@ -37,58 +38,51 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
                 return shortName != "it" && shortName != "en-US"
             }
             .sorted()
-        }
     }
     
-    var configuration: TranslationSession.Configuration?
-    
-    let availability = LanguageAvailability()
-    
+    @MainActor
     func checkLanguageAvailability() async {
-        let status = await availability.status(from: Locale.Language(languageCode: "en", region: "GB"), to: targetLanguage)
+        let status = await LanguageAvailability().status(from: Locale.Language(languageCode: "en", region: "GB"), to: targetLanguage)
         if status == .installed {
+            print("possible")
             translationPossible = true
         } else if status == .supported {
-            /*DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-                //Checks to automaticaly switch to new translation if user downloads translation
-                Task {
-                    await self.checkLanguageAvailability()
-                }
-            }*/
+            try? await Task.sleep(nanoseconds: 15 * 1_000_000_000) // 15 seconds
+            //Checks to automaticaly switch to new translation if user downloads translation
+            print("rechecking")
+            await self.checkLanguageAvailability()
         }
     }
     
     //MARK: - Interface Changes
-    @Published var showingWelcome: Bool = true
-    @Published var showingOperaPicker: Bool = true
-
+    
     func resetWhileLeavingPlayback() {
         reset()
         cancelLyricsUpdator()
     }
-    
-    func continueButtonClicked() {
-        showingWelcome = false
-    }
-    
+
     //MARK: - User Defaults
-    @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
-    
-    @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
     @AppStorage("volume") var volume: Double = 1.0 {
         didSet {
             if let player = audioPlayer {
                 player.volume = Float(volume)
+            } else if let stream = streamingPlayer {
+                stream.volume = Float(volume)
             }
         }
     }
     
     //MARK: - Opera Database Operations
-    @Published var operas: [LibrettoDatabase.Libretto] = []
+    @Published var chosenMode: Int?
+    @Published var chosenComposer: Int?
+    @Published var chosenOpera: String?
     @Published var selectedLibretto: LibrettoDatabase.Libretto?
+
+    
+    var operas: [LibrettoDatabase.Libretto] = []
     @Published var currentLyric: String = ""
-    @Published var currentSinger: String = ""
-    @Published var currentTranslation: String = "..."
+    var currentSinger: String = ""
+    var currentTranslation: String = "..."
     
     func loadLibrettoDatabase() {
         guard let url = Bundle.main.url(forResource: "librettoDatabase", withExtension: "json") else {
@@ -108,17 +102,27 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func selectOpera(_ opera: LibrettoDatabase.Libretto) {
         selectedLibretto = opera
-        showingOperaPicker = false
     }
     
     //MARK: - Audio Player
     var audioPlayer: AVAudioPlayer?
-
+    var streamingPlayer: AVPlayer?
+    
     @Published var playbackProgress: Double = 0.0
-    @Published var totalTime: TimeInterval = 0.0
+    var totalTime: TimeInterval = 0.0
+    
+    func prepareToPlay(from url: URL) {
+        if url.isFileURL {
+            prepareAudioPlayer(with: url)
+        } else {
+            prepareStreamingPlayer(with: url)
+        }
+    }
     
     func prepareAudioPlayer(with url: URL) {
         do {
+            streamingPlayer = nil
+            
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
@@ -133,14 +137,21 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        isPlaying = false
-        reset() // Reset playback states
+    func prepareStreamingPlayer(with url: URL) {
+        audioPlayer = nil
+        /*https://developer.apple.com/documentation/avfoundation/controlling-the-transport-behavior-of-a-player*/
+        streamingPlayer = AVPlayer(url: url)
+        streamingPlayer?.volume = Float(volume)
+        
+        totalTime = 10000
+        
+        setupLyricsUpdator()
+        play()
     }
     
     //MARK: - Playback Controls
     @Published var isPlaying: Bool = false
-
+    
     // Toggle action
     func togglePlayback() {
         if isPlaying {
@@ -152,13 +163,19 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     // Play action
     func play() {
-        audioPlayer?.play()
+        if let player = audioPlayer {
+            player.play()
+        } else if let player = streamingPlayer {
+            player.play()
+        }
+        
         isPlaying = true
         startTimer()
     }
     
     // Pause action
     func pause() {
+        streamingPlayer?.pause()
         audioPlayer?.pause()
         isPlaying = false
         stopTimer()
@@ -167,27 +184,37 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     // Stop action
     func reset() {
         audioPlayer?.stop()
-        isPlaying = false
+        streamingPlayer?.pause()
 
+        isPlaying = false
+        
         audioPlayer?.currentTime = 0.0
+        streamingPlayer?.seek(to: .zero)
+
         stopTimer()
         
         playbackProgress = 0.0
     }
     
     //MARK: - Timer (playback)
-
+    
     private var timerCancellable: AnyCancellable?
-    private func startTimer() {
+    
+     func startTimer() {
         timerCancellable = Timer.publish(every: 0.5, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                guard let self = self, let player = self.audioPlayer else { return }
-                self.playbackProgress = player.currentTime
+                guard let self = self else { return }
+                
+                if let player = self.audioPlayer {
+                    self.playbackProgress = player.currentTime
+                } else if let stream = self.streamingPlayer?.currentItem {
+                    self.playbackProgress = stream.currentTime().seconds
+                }
             }
     }
     
-    private func stopTimer() {
+     func stopTimer() {
         timerCancellable?.cancel()
         timerCancellable = nil
     }
@@ -200,7 +227,7 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
                 self?.updateLyric(for: time)
             }
     }
-
+    
     private func cancelLyricsUpdator() {
         lyricsCancellable?.cancel()
         lyricsCancellable = nil
@@ -222,51 +249,21 @@ class ViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
 #if os(iOS)
-    /// Configures the audio session for iOS to handle audio playback
+    // Configures the audio session for iOS to handle audio playback
     private func configureAudioSession() {
         do {
-            // Set the audio session category to playback
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            // Activate the audio session
             try AVAudioSession.sharedInstance().setActive(true)
-            print("Audio session successfully configured for iOS.")
-            
-            // Optional: Handle interruptions (e.g., incoming calls)
-            /*NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleInterruption),
-                name: AVAudioSession.interruptionNotification,
-                object: AVAudioSession.sharedInstance()
-            )*/
         } catch {
             print("Failed to configure audio session: \(error)")
         }
     }
-    
-    /// Handles audio session interruptions
-    /*@objc private func handleInterruption(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
-            return
-        }
-        
-        if type == .began {
-            // Interruption began, update UI or state as needed
-            print("Audio session interruption began.")
-            pause()
-        } else if type == .ended {
-            // Interruption ended, resume playback if needed
-            if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
-                let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-                if options.contains(.shouldResume) {
-                    print("Audio session interruption ended. Resuming playback.")
-                    play()
-                }
-            }
-        }
-    }*/
-    
 #endif
+}
 
+extension ViewModel: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        isPlaying = false
+        reset()
+    }
 }

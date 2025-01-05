@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ComposersView: View {
-    @Binding var chosenComposer: Int?
+    @EnvironmentObject var viewModel: ViewModel
+
     @State var click = false
 
     var body: some View {
@@ -17,14 +18,14 @@ struct ComposersView: View {
                 .fadingText()
             HStack(spacing: 65) {
                 ComposerButton(name: "Verdi", lifespan: "1813–1901", imageName: "Verdi") {
-                    chosenComposer = 0
+                    viewModel.chosenComposer = 0
                     click.toggle()
                 }
                 .disabled(true)
 
                 
                 ComposerButton(name: "Puccini", lifespan: "1858–1924", imageName: "Puccini") {
-                    chosenComposer = 1
+                    viewModel.chosenComposer = 1
                     click.toggle()
                 }
                 
