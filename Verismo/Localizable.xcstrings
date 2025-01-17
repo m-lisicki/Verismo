@@ -21,7 +21,26 @@
         }
       }
     },
+    "Act 1" : {
+
+    },
+    "Act 2" : {
+
+    },
+    "Act 3" : {
+
+    },
+    "Act 4" : {
+
+    },
+    "An opera in four acts by Giacomo Puccini." : {
+
+    },
+    "Choose Your Edition" : {
+
+    },
     "Choose Your Edition from Our Catalouge:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -30,6 +49,9 @@
           }
         }
       }
+    },
+    "Composers Map" : {
+
     },
     "Conductor: %@" : {
       "localizations" : {
@@ -40,6 +62,9 @@
           }
         }
       }
+    },
+    "Explore %@ Operas" : {
+
     },
     "Font Size: %lld" : {
       "localizations" : {
@@ -62,6 +87,7 @@
       }
     },
     "Go Back" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -72,6 +98,7 @@
       }
     },
     "Go Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -81,7 +108,14 @@
         }
       }
     },
+    "La Bohème" : {
+
+    },
+    "List" : {
+
+    },
     "Listen" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -92,6 +126,7 @@
       }
     },
     "Load Audio from Disk" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -112,6 +147,9 @@
         }
       }
     },
+    "Map" : {
+
+    },
     "Now Playing:" : {
       "localizations" : {
         "pl" : {
@@ -123,6 +161,7 @@
       }
     },
     "Orchestra: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -132,7 +171,11 @@
         }
       }
     },
+    "Performer: %@" : {
+
+    },
     "Play Audio from URL" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -164,6 +207,7 @@
       }
     },
     "Read" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -173,7 +217,11 @@
         }
       }
     },
+    "Select an Opera" : {
+
+    },
     "Select an Opera:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -183,7 +231,11 @@
         }
       }
     },
+    "Select Composer" : {
+
+    },
     "Select Composer:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {

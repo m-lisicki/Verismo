@@ -2,15 +2,30 @@
     "operas": [
         {
             "id": 0,
+            "composer": "Giacomo Puccini",
+            "operaTitle": "La Boheme - Che gelida manina",
+            "translationLanguage": "English",
+            "conductor": "Eugene Aynsley Goossens",
+            "year": "1931",
+            "performer":  "Beniamino Gigli (Tenor)",
+            "orchestra": "Orchestra Del Teatro Dell'Opera Di Roma",
+            "thumbnailImageName": "Beniamino_Gigli",
+            "audioName": "La boheme - Che gelida manina",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:PDP-CH_-_Beniamino_Gigli,_Tenor_-_La_bohème_-_Che_gelida_manina_-_Puccini_-_Hmv-db1538-8769a.flac",
+            "lyrics": []
+        },
+        {
+            "id": 1,
             "composer": "Puccini",
             "operaTitle": "Turandot (ATTO PRIMO)",
             "translationLanguage": "English",
             "conductor": "Birgit Nilsson",
             "year": "1966",
+            "performer": "",
             "orchestra": "Orchestra Del Teatro Dell'Opera Di Roma",
             "thumbnailImageName": "Pang",
+            "audioName": "",
             "sourceUrl": "https://archive.org/details/lp_turandot_giacomo-puccini-birgit-nilsson-franco-core",
-            "audioUrl": "https://ia902904.us.archive.org/11/items/lp_turandot_giacomo-puccini-birgit-nilsson-franco-core/disc1/01.01.%20Acte%201.mp3",
             "lyrics": [
                 {
                     "startTime": 33.92,

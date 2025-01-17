@@ -1,6 +1,6 @@
 //
 //  LyricView.swift
-//  Opera Lyrics
+//  Verismo
 //
 //  Created by Michał Lisicki on 25/12/2024.
 //

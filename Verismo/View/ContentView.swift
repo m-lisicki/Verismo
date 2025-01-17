@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Opera Lyrics
+//  Verismo
 //
 //  Created by Michał Lisicki on 25/12/2024.
 //
@@ -8,48 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @StateObject private var viewModel = ViewModel()
     @State private var showingPlaybackSettings = false
     
     var body: some View {
         ZStack {
-            BackgroundGradient()
-            VStack {
-                if viewModel.chosenMode == nil {
+            //BackgroundGradient()
+            NavigationView() {
+                ZStack {
+                    BackgroundGradient()
                     WelcomeView()
-                } else if viewModel.chosenComposer == nil {
-                    ComposersView()
-                } else if viewModel.chosenOpera == nil {
-                    OperasView()
-                } else if viewModel.selectedLibretto == nil {
-                    PickOperaView()
-                } else if viewModel.audioPlayer == nil && viewModel.streamingPlayer == nil {
-                    PickAndLoadAudioView()
-                } else {
-                    PlaybackView()
                 }
             }
+            .environmentObject(viewModel)
         }
         .toolbar {
-            // Back Button
-            ToolbarItemGroup(placement: .navigation) {
-                if viewModel.chosenMode != nil {
-                    if viewModel.audioPlayer == nil  && viewModel.streamingPlayer == nil {
-                        Button(action: goBack ) {
-                            Label("Go Back", systemImage: "chevron.left")
-                        }
-                    } else {
-                        Button(action: goBack ) {
-                            Label("Go Back", systemImage: "chevron.left")
-                        }
-                        Button(action: goHome ) {
-                            Label("Go Home", systemImage: "music.note.house")
-                                .symbolRenderingMode(.hierarchical)
-                        }
-                    }
-                }
-            }
-            
             // Settings Button
             ToolbarItemGroup(placement: .primaryAction) {
                 if viewModel.audioPlayer != nil || viewModel.streamingPlayer != nil {
@@ -69,41 +42,6 @@ struct ContentView: View {
                 }
         }
         .toolbarBackground(.thinMaterial)
-        .gesture(
-            DragGesture().onEnded { value in
-                if viewModel.audioPlayer == nil && viewModel.streamingPlayer == nil && value.startLocation.x < 20 && value.translation.width > 50 {
-                    goBack()
-                }
-            }
-        )
-        
-    }
-        
-    func goBack() {
-        if viewModel.audioPlayer != nil || viewModel.streamingPlayer != nil {
-            viewModel.resetWhileLeavingPlayback()
-            viewModel.audioPlayer = nil
-            viewModel.streamingPlayer = nil
-        } else if viewModel.selectedLibretto != nil {
-            viewModel.selectedLibretto = nil
-        } else if viewModel.chosenOpera != nil {
-            viewModel.chosenOpera = nil
-        } else if viewModel.chosenComposer != nil {
-            viewModel.chosenComposer = nil
-        } else {
-            viewModel.chosenMode = nil
-        }
-    }
-    
-    func goHome() {
-        viewModel.resetWhileLeavingPlayback()
-        viewModel.audioPlayer = nil
-        viewModel.streamingPlayer = nil
-        viewModel.selectedLibretto = nil
-        viewModel.chosenOpera = nil
-        viewModel.chosenComposer = nil
-        viewModel.chosenMode = nil
-        
     }
 }
 
@@ -159,4 +97,10 @@ extension View {
     func fadingText() -> some View {
         modifier(FadingText())
     }
+}
+
+#Preview {
+    @Previewable @StateObject var model = ViewModel()
+    ContentView()
+        .environmentObject(model)
 }

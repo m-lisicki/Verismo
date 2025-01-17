@@ -1,5 +1,5 @@
 //
-//  OperaViewModel.swift
+//  ViewModel.swift
 //  Opera Lyrics
 //
 //  Created by Michał Lisicki on 25/12/2024.
@@ -8,6 +8,7 @@
 import AVFoundation
 import Combine
 import SwiftUI
+import MapKit
 @preconcurrency import Translation
 
 final class ViewModel: NSObject, ObservableObject {
@@ -20,6 +21,25 @@ final class ViewModel: NSObject, ObservableObject {
 #endif
     }
     
+    var composers: [Composer] = [
+        Composer(
+            name: "Giuseppe Verdi",
+            birthPlace: "",
+            coordinate: CLLocationCoordinate2D(latitude: 51.3397, longitude: 12.3731),
+            imageName: "Verdi",
+            birthYear: 1813,
+            lifespan: "1813-1901"
+        ),
+        Composer(
+            name: "Giacomo Puccini",
+            birthPlace: "Lukka, Italy",
+            coordinate: CLLocationCoordinate2D(latitude: 43.8430, longitude: 10.5074),
+            imageName: "Puccini",
+            birthYear: 1858,
+            lifespan: "1858-1924"
+        )
+    ]
+    
     //MARK: - Translator
     
     @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
@@ -29,15 +49,15 @@ final class ViewModel: NSObject, ObservableObject {
     
     @MainActor
     func prepareSupportedLanguages() async {
-            let supportedLanguages = await LanguageAvailability().supportedLanguages
-            availableLanguages = supportedLanguages.map {
-                AvailableLanguage(locale: $0)
-            }
-            .filter { language in
-                let shortName = language.shortName()
-                return shortName != "it" && shortName != "en-US"
-            }
-            .sorted()
+        let supportedLanguages = await LanguageAvailability().supportedLanguages
+        availableLanguages = supportedLanguages.map {
+            AvailableLanguage(locale: $0)
+        }
+        .filter { language in
+            let shortName = language.shortName()
+            return shortName != "it" && shortName != "en-US"
+        }
+        .sorted()
     }
     
     @MainActor
@@ -59,8 +79,9 @@ final class ViewModel: NSObject, ObservableObject {
     func resetWhileLeavingPlayback() {
         reset()
         cancelLyricsUpdator()
+        audioPlayer = nil
     }
-
+    
     //MARK: - User Defaults
     @AppStorage("volume") var volume: Double = 1.0 {
         didSet {
@@ -76,8 +97,9 @@ final class ViewModel: NSObject, ObservableObject {
     @Published var chosenMode: Int?
     @Published var chosenComposer: Int?
     @Published var chosenOpera: String?
+    @Published var infoRead: Bool = false
     @Published var selectedLibretto: LibrettoDatabase.Libretto?
-
+    
     
     var operas: [LibrettoDatabase.Libretto] = []
     @Published var currentLyric: String = ""
@@ -100,8 +122,16 @@ final class ViewModel: NSObject, ObservableObject {
         }
     }
     
-    func selectOpera(_ opera: LibrettoDatabase.Libretto) {
+    func selectOperaAndPlay(_ opera: LibrettoDatabase.Libretto) {
         selectedLibretto = opera
+        
+        guard let url = Bundle.main.url(forResource: selectedLibretto!.audioName, withExtension: "mp3")  else {
+            print("Audio file not found")
+            return
+        }
+        
+        print("Audio URL: \(selectedLibretto!.audioName)")
+        prepareToPlay(from: url)
     }
     
     //MARK: - Audio Player
@@ -112,11 +142,11 @@ final class ViewModel: NSObject, ObservableObject {
     var totalTime: TimeInterval = 0.0
     
     func prepareToPlay(from url: URL) {
-        if url.isFileURL {
-            prepareAudioPlayer(with: url)
-        } else {
-            prepareStreamingPlayer(with: url)
-        }
+        //if url.isFileURL {
+        prepareAudioPlayer(with: url)
+        /*} else {
+         prepareStreamingPlayer(with: url)
+         }*/
     }
     
     func prepareAudioPlayer(with url: URL) {
@@ -185,12 +215,12 @@ final class ViewModel: NSObject, ObservableObject {
     func reset() {
         audioPlayer?.stop()
         streamingPlayer?.pause()
-
+        
         isPlaying = false
         
         audioPlayer?.currentTime = 0.0
         streamingPlayer?.seek(to: .zero)
-
+        
         stopTimer()
         
         playbackProgress = 0.0
@@ -200,8 +230,8 @@ final class ViewModel: NSObject, ObservableObject {
     
     private var timerCancellable: AnyCancellable?
     
-     func startTimer() {
-        timerCancellable = Timer.publish(every: 0.5, on: .main, in: .common)
+    func startTimer() {
+        timerCancellable = Timer.publish(every: 1.0, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -214,7 +244,7 @@ final class ViewModel: NSObject, ObservableObject {
             }
     }
     
-     func stopTimer() {
+    func stopTimer() {
         timerCancellable?.cancel()
         timerCancellable = nil
     }

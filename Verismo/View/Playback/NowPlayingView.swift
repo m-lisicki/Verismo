@@ -1,6 +1,6 @@
 //
 //  NowPlayingView.swift
-//  Opera Lyrics
+//  Verismo
 //
 //  Created by Michał Lisicki on 25/12/2024.
 //
@@ -24,7 +24,7 @@ struct NowPlayingView: View {
                 Spacer()
                 Text(formattedTime(viewModel.playbackProgress))
                     .contentTransition(timerTransition ? .numericText(countsDown: false) : .identity)
-                    .animation(.default, value: viewModel.playbackProgress)
+                    .animation(timerTransition ? .default : .none, value: viewModel.playbackProgress)
                 //.frame(width: 32, alignment: .leading)
             }
             .font(.subheadline)

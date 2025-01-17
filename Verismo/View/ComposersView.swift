@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  ComposersView.swift
 //  Verismo
 //
 //  Created by Michał Lisicki on 29/12/2024.
@@ -9,29 +9,28 @@ import SwiftUI
 
 struct ComposersView: View {
     @EnvironmentObject var viewModel: ViewModel
-
+    
     @State var click = false
-
+    
     var body: some View {
         VStack(spacing: 70) {
-            Text("Select Composer:")
-                .fadingText()
-            HStack(spacing: 65) {
-                ComposerButton(name: "Verdi", lifespan: "1813–1901", imageName: "Verdi") {
-                    viewModel.chosenComposer = 0
-                    click.toggle()
+            //Text("Select Composer:").fadingText()
+            HStack(spacing: 60) {
+                ForEach(viewModel.composers.indices, id: \.self) { index in
+                    ComposerButton(name: viewModel.composers[index].name, lifespan: viewModel.composers[index].lifespan, imageName: viewModel.composers[index].imageName) {
+                        viewModel.chosenComposer = index
+                        click.toggle()
+                    }
                 }
-                .disabled(true)
-
-                
-                ComposerButton(name: "Puccini", lifespan: "1858–1924", imageName: "Puccini") {
-                    viewModel.chosenComposer = 1
-                    click.toggle()
-                }
-                
                 // Add more ComposerButton instances for other composers...
             }
             .sensoryFeedback(.selection, trigger: click)
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Select Composer")
+                    .font(.headline)
+            }
         }
     }
 }
