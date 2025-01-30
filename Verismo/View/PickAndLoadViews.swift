@@ -9,55 +9,62 @@ import SwiftUI
 
 struct PickOperaView: View {
     @EnvironmentObject var viewModel: ViewModel
-    var chosenOpera: String?
+    var chosenOpera: operaID?
     
-    var filteredOperas: [LibrettoDatabase.Libretto] {
+    var filteredRecordings: [Recording] {
         if let chosenOpera = self.chosenOpera {
-            return viewModel.operas.filter { $0.operaTitle.contains(chosenOpera) }
+            return viewModel.recordings.filter { arias[$0.ariaID].operaID == chosenOpera}
         } else {
-            return viewModel.operas
+            return viewModel.recordings
         }
     }
     
     var body: some View {
-        VStack {
-            List(filteredOperas) { opera in
-                NavigationLink(destination: PlaybackView(opera: opera)) {
-                    OperaRow(opera: opera).padding(.vertical, 8)
+        ZStack {
+            BackgroundGradient()
+            VStack {
+                List(filteredRecordings) { recording in
+                    NavigationLink(destination: PlaybackView(recording: recording)) {
+                        OperaRow(recording: recording)
+                            .padding(.vertical, 8)
+                    }
                 }
 #if os(macOS)
                 .buttonStyle(.borderless)
-#endif
-            }
-#if os(macOS)
-            .listStyle(.plain)
+                .listStyle(.plain)
 #else
-            .listStyle(.inset)
+                .listStyle(.inset)
 #endif
-            .cornerRadius(10)
-        }
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("Choose Your Edition")
-                    .font(.headline)
+                .cornerRadius(10)
             }
-        }
-#if os(macOS)
-        .padding(50)
-#else
-        .padding(10)
+            .navigationTitle("Editions List")
+#if os(iOS)
+            .navigationBarTitleDisplayMode(.large)
 #endif
+            
+#if os(macOS)
+            .padding(50)
+#else
+            .padding(10)
+#endif
+        }
     }
+}
+
+#Preview {
+    @Previewable @StateObject var model = ViewModel()
+    PickOperaView()
+        .environmentObject(model)
 }
 
 #if os(macOS)
 struct OperaRow: View {
-    let opera: LibrettoDatabase.Libretto
+    let recording: Recording
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             
-            Image(opera.thumbnailImageName)
+            Image(recording.imageName)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 60, height: 85)
@@ -66,130 +73,63 @@ struct OperaRow: View {
             
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(opera.operaTitle)
+                Text(arias[ariaID(rawValue: recording.ariaID)!.rawValue].title)
                     .font(.headline)
-                    .foregroundColor(.primary)
                     .fontDesign(.serif)
                 
                 HStack {
-                    Text("Conductor: \(opera.conductor)")
+                    Text("Opera: \(operas[operaID(rawValue: arias[ariaID(rawValue: recording.ariaID)!.rawValue].operaID.rawValue)!.rawValue].title)")
                     Spacer()
-                    Text("Year: \(opera.year)")
+                    Text("Year: \(recording.year)")
                 }
+                .foregroundStyle(.secondary)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
                 
                 HStack {
-                    Text("Performer: \(opera.performer)")
+                    Text("Performer: \(recording.singer)")
                     Spacer()
-                    Text("Translation: \(opera.translationLanguage)")
+                    Text("Translation: \(recording.subtitlesLanguage)")
                 }
+                .foregroundStyle(.secondary)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
             }
         }
     }
 }
 #else
 struct OperaRow: View {
-    let opera: LibrettoDatabase.Libretto
+    let recording: Recording
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             
-            Image(opera.thumbnailImageName)
+            Image(recording.imageName)
                 .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 85)
-                .cornerRadius(8)
-                .clipped()
+                .scaledToFit()
+                .containerRelativeFrame(.horizontal) { size, axis in
+                    size * 0.2
+                }
+                .cornerRadius(7)
             
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(opera.operaTitle)
+                Text(arias[ariaID(rawValue: recording.ariaID)!.rawValue].title)
                     .font(.headline)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                     .fontDesign(.serif)
                 
                 Group {
-                    Text("Conductor: \(opera.conductor)")
-                    Text("Year: \(opera.year)")
-                    Text("Translation: \(opera.translationLanguage)")
+                    Text("Opera: \(operas[operaID(rawValue: arias[ariaID(rawValue: recording.ariaID)!.rawValue].operaID.rawValue)!.rawValue].title)")
+                    Text("Year: \(recording.year)")
+                    Text("Translation: \(recording.subtitlesLanguage)")
                     /*Text("Orchestra: \(opera.orchestra)")
                      .font(.subheadline)
-                     .foregroundColor(.secondary)*/
+                     .foregroundStyle(.secondary)*/
                 }
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
             }
         }
     }
 }
 #endif
-/*
- struct PickAndLoadAudioView: View {
- @EnvironmentObject var viewModel: ViewModel
- @State var fileImporterPresented = false
- 
- var body: some View {
- HStack(spacing: 25) {
- Button(action: {
- if let url = URL(string: viewModel.selectedLibretto!.audioName) {
- print("Audio URL: \(viewModel.selectedLibretto!.audioName)")
- viewModel.prepareToPlay(from: url)
- }
- }) {
- VStack(spacing: 13) {
- Image(systemName: "globe")
- .font(.system(size: 23))
- .symbolRenderingMode(.hierarchical)
- Text("Play Audio from URL")
- .font(.footnote)
- }
- .frame(height: 55)
- .fontWeight(.light)
- .padding()
- }
- .buttonStyle(.borderless)
- .background(.ultraThickMaterial)
- .cornerRadius(5)
- 
- Button(action: {
- fileImporterPresented = true
- }) {
- VStack(spacing: 13) {
- Image(systemName: "folder.badge.plus")
- .font(.system(size: 23))
- .symbolRenderingMode(.hierarchical)
- Text("Load Audio from Disk")
- .font(.footnote)
- }
- .frame(height: 55)
- .fontWeight(.light)
- .padding()
- }
- .disabled(true)
- .buttonStyle(.borderless)
- .background(.ultraThickMaterial)
- .cornerRadius(5)
- .fileImporter(
- isPresented: $fileImporterPresented,
- allowedContentTypes: [.audio],
- allowsMultipleSelection: false
- ) { result in
- do {
- guard let selectedFile = try result.get().first else { return }
- _ = selectedFile.startAccessingSecurityScopedResource()
- defer { selectedFile.stopAccessingSecurityScopedResource() }
- 
- viewModel.prepareToPlay(from: selectedFile)
- } catch {
- print("Failed to load the audio file: \(error.localizedDescription)")
- }
- }
- }
- }
- 
- }
- 
- */

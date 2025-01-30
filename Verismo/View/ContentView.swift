@@ -9,37 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
-    @State private var showingPlaybackSettings = false
     
     var body: some View {
         ZStack {
-            //BackgroundGradient()
-            NavigationView() {
+            NavigationStack() {
                 ZStack {
                     BackgroundGradient()
                     WelcomeView()
                 }
             }
             .environmentObject(viewModel)
-        }
-        .toolbar {
-            // Settings Button
-            ToolbarItemGroup(placement: .primaryAction) {
-                if viewModel.audioPlayer != nil || viewModel.streamingPlayer != nil {
-                    Button(action: { showingPlaybackSettings = true } ) {
-                        Label("Playback Preferences", systemImage: "dial.medium")
-                            .symbolRenderingMode(.hierarchical)
-                    }
-                }
-            }
-        }
-        .sheet(isPresented: $showingPlaybackSettings) {
-            PlaybackSettingsView()
-                .onAppear {
-                    Task {
-                        await viewModel.prepareSupportedLanguages()
-                    }
-                }
         }
         .toolbarBackground(.thinMaterial)
     }
@@ -68,11 +47,11 @@ struct BackgroundGradient: View {
                  .black, .orange, .yellow],
             smoothsColors: true
         )
-        /*.onAppear {
-         withAnimation(.easeInOut(duration: 10).repeatForever(autoreverses: true)) {
-         isAnimating.toggle()
-         }
-         }*/
+        .onAppear {
+            withAnimation(.easeInOut(duration: 60).repeatForever(autoreverses: true)) {
+                isAnimating.toggle()
+            }
+        }
         .ignoresSafeArea()
     }
 }
@@ -84,6 +63,7 @@ struct FadingText: ViewModifier {
         content
             .font(.title)
             .fontDesign(.serif)
+            .italic()
             .opacity(opacity)
             .onAppear {
                 withAnimation(.easeInOut(duration: 1.5)) {
@@ -92,6 +72,7 @@ struct FadingText: ViewModifier {
             }
     }
 }
+
 
 extension View {
     func fadingText() -> some View {

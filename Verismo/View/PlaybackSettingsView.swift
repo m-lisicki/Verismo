@@ -6,52 +6,93 @@
 //
 
 import SwiftUI
-import Translation
+@preconcurrency import Translation
 
 struct PlaybackSettingsView: View {
     @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
-    @EnvironmentObject var viewModel: ViewModel
+    @AppStorage("timerTransition") private var timerTransition = true
+    
+    let availableLanguages: [AvailableLanguage]
+    @Binding var targetLanguage: Locale.Language
+    @Binding var translationPossible: Bool
+    @Binding var volume: Double
     
     var body: some View {
         Form {
-            VStack {
-                // Section for Lyrics Settings
+#if os(iOS)
+            Section(header: Text("Playback")) {
                 VStack {
-                    Text("Volume: \(Int(viewModel.volume * 100))%")
+                    Text("Volume: \(Int(volume * 100))%")
                         .font(.headline)
-                    Slider(value: $viewModel.volume, in: 0...1)
-                        .accessibilityValue("\(Int(viewModel.volume * 100)) percent")
+                    Slider(value: $volume, in: 0...1)
+                        .accessibilityValue("\(Int(volume * 100)) percent")
                 }
-                .padding(.bottom, 20)
-                
+                Toggle("Timer Transition Animation", isOn: $timerTransition)
+            }
+            Section(header: Text("Lyrics")) {
+                HStack {
+                    Picker("Select Subtitles Language:", selection: $targetLanguage) {
+                        ForEach(availableLanguages, id: \.locale) { language in
+                            Text(language.localizedName()).tag(language.locale)
+                        }
+                    }
+                    .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: targetLanguage)) { session in
+                        try? await session.prepareTranslation()
+                    }
+                    .onSubmit {
+                        translationPossible = false
+                    }
+                    if !translationPossible && targetLanguage != Locale.Language(languageCode: "en", script: nil, region: "GB")
+                    {
+                        Image(systemName: "slowmo")
+                            .symbolEffect(.variableColor.iterative.dimInactiveLayers.nonReversing, options: .repeat(.continuous))
+                    }
+                }
+            }
+            
+#else
+            VStack {
+                VStack {
+                    Text("Volume: \(Int(volume * 100))%")
+                        .font(.headline)
+                    Slider(value: $volume, in: 0...1)
+                        .accessibilityValue("\(Int(volume * 100)) percent")
+                }
+                .padding(.bottom, 10)
+                Toggle("Timer Transition Animation", isOn: $timerTransition)
+                    .padding(.bottom, 13)
+                Divider()
                 VStack(spacing: 15) {
                     Text("Font Size: \(Int(lyricsFontSize))")
                         .font(.headline)
                     Slider(value: $lyricsFontSize, in: 30...48, step: 2)
                         .accessibilityValue("\(Int(lyricsFontSize)) points")
-                    
-                    Picker("Select Subtitles Language:", selection: $viewModel.targetLanguage) {
-                        ForEach(viewModel.availableLanguages, id: \.locale) { language in
-                            Text(language.localizedName()).tag(language.locale)
+                    HStack {
+                        Picker("Select Subtitles Language:", selection: $targetLanguage) {
+                            ForEach(availableLanguages, id: \.locale) { language in
+                                Text(language.localizedName()).tag(language.locale)
+                            }
+                        }
+                        .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: targetLanguage)) { session in
+                            try? await session.prepareTranslation()
+                        }
+                        if !translationPossible && targetLanguage != Locale.Language(languageCode: "en", script: nil, region: "GB")
+                        {
+                            Image(systemName: "slowmo")
+                                .symbolEffect(.variableColor.iterative.dimInactiveLayers.nonReversing, options: .repeat(.continuous))
                         }
                     }
-#if os(iOS)
-                    .onAppear {
-                        viewModel.stopTimer()
-                    }
-                    .onDisappear {
-                        viewModel.startTimer()
-                    }
-#endif
                 }
             }
+                .padding(.top, 13)
+            .padding()
+#endif
         }
-        .padding()
         .navigationTitle("Playback Preferences")
     }
 }
 
 #Preview {
     @Previewable @StateObject var model = ViewModel()
-    PlaybackSettingsView().environmentObject(model)
+    PlaybackSettingsView(availableLanguages: model.availableLanguages, targetLanguage: $model.targetLanguage, translationPossible: $model.translationPossible, volume: $model.volume).environmentObject(model)
 }

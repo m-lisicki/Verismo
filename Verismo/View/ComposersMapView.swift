@@ -8,56 +8,44 @@
 import SwiftUI
 import MapKit
 
-
 struct ComposersMapView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @Namespace private var transitionNamespace
     
     var body: some View {
         ZStack {
-            Map(selection: $viewModel.chosenComposer) {
-                ForEach(viewModel.composers.indices, id: \.self) { index in
-                    Annotation(viewModel.composers[index].name, coordinate: viewModel.composers[index].coordinate) {
-                        NavigationLink(destination: ComposerInfoView()) {
+            Map() {
+                ForEach(composers) { composer in
+                    Annotation("\(composer.firstname) \(composer.surname)", coordinate: composer.birthCoordinates) {
+                        NavigationLink(destination: ComposerReadingView(chosenComposer: composer.composerID)
+                                       #if os(iOS)
+                            .navigationTransition(.zoom(sourceID: composer.id, in: transitionNamespace))
+                                       #endif
+                        ) {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .fill(borderColor(for: viewModel.composers[index].birthYear))
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(.secondary, lineWidth: 5)
-                                Image(viewModel.composers[index].imageName)
+                                RoundedRectangle(cornerRadius: 7)
+                                    .stroke(.primary, lineWidth: 3)
+                                Image(composer.surname)
                                     .resizable()
-                                    .scaledToFill()
-                                    .frame(maxWidth: 50, maxHeight: 80)
-                                    .cornerRadius(5)
-                                    .padding(5)
+                                    .scaledToFit()
+                                    .frame(width: 45)
+                                    .cornerRadius(3)
+                                    .padding(1)
                             }
+                            .matchedTransitionSource(id: composer.id, in: transitionNamespace)
                         }
                         .buttonStyle(.borderless)
                     }
-                    .tag(index)
                 }
             }
             .mapStyle(.standard(elevation: .realistic))
         }
-        .toolbar {
-            // ToolbarItem(placement: .principal) {
-            Text("Composers Map")
-            // .font(.headline)
-            //}
-        }
-        
+        .navigationTitle("Composers Map")
+#if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+#endif
     }
-    
-    
-    private func borderColor(for year: Int) -> Color {
-        switch year {
-        case ..<1800:
-            return .blue
-        case 1800..<1850:
-            return .green
-        case 1850...:
-            return .orange
-        default:
-            return .gray
-        }
-    }
+}
+
+#Preview {
+    ComposersMapView()
 }

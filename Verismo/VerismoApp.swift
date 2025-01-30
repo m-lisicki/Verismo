@@ -12,15 +12,10 @@ struct VerismoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-            #if os(macOS)
-            .frame(minWidth: 800, minHeight: 530)
-            #endif
+#if os(macOS)
+                .frame(minWidth: 800, minHeight: 530)
+#endif
         }
-        .windowResizability(.contentSize)
-        #if os(macOS)
-        Settings {
-            SettingsView()
-        }
-        #endif
+        //.windowResizability(.contentSize)
     }
 }

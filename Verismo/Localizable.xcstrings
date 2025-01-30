@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@  %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@  %2$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@  %2$@"
+          }
+        }
+      }
+    },
     "%lld percent" : {
       "localizations" : {
         "pl" : {
@@ -21,50 +37,75 @@
         }
       }
     },
-    "Act 1" : {
-
-    },
-    "Act 2" : {
-
-    },
-    "Act 3" : {
-
-    },
-    "Act 4" : {
-
-    },
-    "An opera in four acts by Giacomo Puccini." : {
-
-    },
-    "Choose Your Edition" : {
-
-    },
-    "Choose Your Edition from Our Catalouge:" : {
-      "extractionState" : "stale",
+    "Aria" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz wydanie z naszego katalogu:"
+            "value" : "Aria"
+          }
+        }
+      }
+    },
+    "Choose an Opera" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz Operę"
+          }
+        }
+      }
+    },
+    "Composer" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompozytor"
           }
         }
       }
     },
     "Composers Map" : {
-
-    },
-    "Conductor: %@" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dyrygent: %@"
+            "value" : "Mapa Kompozytorów"
           }
         }
       }
     },
-    "Explore %@ Operas" : {
-
+    "Editions List" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista Edycji"
+          }
+        }
+      }
+    },
+    "Explore" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odkrywaj"
+          }
+        }
+      }
+    },
+    "Famous Arias" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Słynne Arie"
+          }
+        }
+      }
     },
     "Font Size: %lld" : {
       "localizations" : {
@@ -76,46 +117,17 @@
         }
       }
     },
-    "General" : {
+    "Home" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ogólne"
+            "value" : "Dom"
           }
         }
       }
-    },
-    "Go Back" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wróć"
-          }
-        }
-      }
-    },
-    "Go Home" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wróć do ekranu głównego"
-          }
-        }
-      }
-    },
-    "La Bohème" : {
-
-    },
-    "List" : {
-
     },
     "Listen" : {
-      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -125,30 +137,15 @@
         }
       }
     },
-    "Load Audio from Disk" : {
-      "extractionState" : "stale",
+    "Lyrics" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wgraj plik z dysku"
+            "value" : "Napisy"
           }
         }
       }
-    },
-    "Lyrics Settings" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ustawienia napisów"
-          }
-        }
-      }
-    },
-    "Map" : {
-
     },
     "Now Playing:" : {
       "localizations" : {
@@ -160,27 +157,42 @@
         }
       }
     },
-    "Orchestra: %@" : {
-      "extractionState" : "stale",
+    "Opera" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Orkiestra: %@"
+            "value" : "Opera"
+          }
+        }
+      }
+    },
+    "Opera: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opera: %@"
           }
         }
       }
     },
     "Performer: %@" : {
-
-    },
-    "Play Audio from URL" : {
-      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odtwórz Audio Online"
+            "value" : "Wykonawca: %@"
+          }
+        }
+      }
+    },
+    "Playback" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odtwarzanie"
           }
         }
       }
@@ -195,52 +207,22 @@
         }
       }
     },
-    "Playback Settings" : {
-      "extractionState" : "stale",
+    "Premiere: %@" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ustawienia odtwarzania"
+            "value" : "Premiera: %@"
           }
         }
       }
     },
     "Read" : {
-      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Czytaj"
-          }
-        }
-      }
-    },
-    "Select an Opera" : {
-
-    },
-    "Select an Opera:" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wybierz operę:"
-          }
-        }
-      }
-    },
-    "Select Composer" : {
-
-    },
-    "Select Composer:" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wybierz kompozytora:"
           }
         }
       }
@@ -251,6 +233,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wybierz język napisów:"
+          }
+        }
+      }
+    },
+    "Singer: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postać: %@"
           }
         }
       }
@@ -301,6 +293,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rok: %@"
+          }
+        }
+      }
+    },
+    "Year: %lld" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rok: %lld"
           }
         }
       }

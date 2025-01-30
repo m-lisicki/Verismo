@@ -11,44 +11,71 @@ struct WelcomeView: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-        VStack(spacing: 70) {
-            Text("Welcome to Verismo.")
-                .fadingText()
-            HStack(spacing: 25) {
-                NavigationLink(destination: ComposersView()) {
-                    VStack(spacing: 13) {
-                        Image(systemName: "book.pages")
-                            .font(.system(size: 23))
-                            .symbolRenderingMode(.hierarchical)
-                        Text("List")
-                            .font(.headline)
+        VStack {
+            if /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/ {
+                VStack(spacing: 70) {
+                    Text("Welcome to Verismo.")
+                        .fadingText()
+                    HStack(spacing: 20) {
+                        NavigationLink(destination: PickOperaView()){
+                            VStack(spacing: 10) {
+                                Image(systemName: "music.note")
+                                    .font(.title2)
+                                    .fontWeight(.light)
+                                    .symbolRenderingMode(.hierarchical)
+                                Text("Listen")
+                                    .font(.headline)
+                                    .fontWeight(.light)
+                            }
+                            .padding()
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .buttonStyle(.borderless)
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(5)
+                        
+                        NavigationLink(destination: ComposersMapView()){
+                            VStack(spacing: 10) {
+                                ZStack {
+                                    Image(systemName: "music.note")
+                                        .font(.title2)
+                                        .fontWeight(.light)
+                                        .hidden()
+                                    Image(systemName: "eyeglasses")
+                                        .font(.title2)
+                                        .fontWeight(.light)
+                                        .symbolRenderingMode(.hierarchical)
+                                }
+                                Text("Explore")
+                                    .font(.headline)
+                                    .fontWeight(.light)
+                            }
+                            .padding()
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .buttonStyle(.borderless)
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(5)
+                        
                     }
-                    .fontWeight(.light)
-                    .frame(width: 75, height: 55)
-                    .padding()
+                    .fixedSize(horizontal: true, vertical: true)
                 }
-                .disabled(true)
-                .buttonStyle(.borderless)
-                .background(.ultraThickMaterial)
-                .cornerRadius(5)
-                
-                NavigationLink(destination: ComposersMapView()){
-                    VStack(spacing: 13) {
-                        Image(systemName: "mappin.and.ellipse")
-                            .font(.system(size: 23))
-                            .symbolRenderingMode(.hierarchical)
-                        Text("Map")
-                            .font(.headline)
-                    }
-                    .fontWeight(.light)
-                    .frame(width: 75, height: 55)
-                    .padding()
-                }
-                .buttonStyle(.borderless)
-                .background(.ultraThickMaterial)
-                .cornerRadius(5)
+                .navigationTitle("Home")
+#if os(iOS)
+                .navigationBarHidden(true)
+#endif
+                .shadow(radius: 0.5)
+            } else {
+                /*@START_MENU_TOKEN@*/EmptyView()/*@END_MENU_TOKEN@*/
             }
         }
-        .shadow(radius: 0.5)
     }
+}
+
+#Preview {
+    @Previewable @StateObject var model = ViewModel()
+    WelcomeView()
+        .environmentObject(model)
 }

@@ -5,11 +5,11 @@
 //  Created by Michał Lisicki on 25/12/2024.
 //
 
-import AVFoundation
+import AVFAudio.AVAudioPlayer
 import Combine
-import SwiftUI
-import MapKit
 @preconcurrency import Translation
+import OSLog
+let logger = Logger()
 
 final class ViewModel: NSObject, ObservableObject {
     
@@ -19,31 +19,13 @@ final class ViewModel: NSObject, ObservableObject {
 #if os(iOS)
         configureAudioSession()
 #endif
+        self.volume = UserDefaults.standard.double(forKey: "volume") // Load initial volume value from UserDefaults
     }
-    
-    var composers: [Composer] = [
-        Composer(
-            name: "Giuseppe Verdi",
-            birthPlace: "",
-            coordinate: CLLocationCoordinate2D(latitude: 51.3397, longitude: 12.3731),
-            imageName: "Verdi",
-            birthYear: 1813,
-            lifespan: "1813-1901"
-        ),
-        Composer(
-            name: "Giacomo Puccini",
-            birthPlace: "Lukka, Italy",
-            coordinate: CLLocationCoordinate2D(latitude: 43.8430, longitude: 10.5074),
-            imageName: "Puccini",
-            birthYear: 1858,
-            lifespan: "1858-1924"
-        )
-    ]
     
     //MARK: - Translator
     
     @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
-    var availableLanguages: [AvailableLanguage] = []
+    @Published var availableLanguages: [AvailableLanguage] = []
     var tempSneezeTranslation = false
     var translationPossible = false
     
@@ -64,12 +46,12 @@ final class ViewModel: NSObject, ObservableObject {
     func checkLanguageAvailability() async {
         let status = await LanguageAvailability().status(from: Locale.Language(languageCode: "en", region: "GB"), to: targetLanguage)
         if status == .installed {
-            print("possible")
+            logger.info("Translation possible")
             translationPossible = true
         } else if status == .supported {
             try? await Task.sleep(nanoseconds: 15 * 1_000_000_000) // 15 seconds
             //Checks to automaticaly switch to new translation if user downloads translation
-            print("rechecking")
+            logger.info("Rechecking avaibility of translation")
             await self.checkLanguageAvailability()
         }
     }
@@ -83,76 +65,59 @@ final class ViewModel: NSObject, ObservableObject {
     }
     
     //MARK: - User Defaults
-    @AppStorage("volume") var volume: Double = 1.0 {
+    @Published var volume: Double = 1.0 {
         didSet {
+            UserDefaults.standard.set(volume, forKey: "volume")
             if let player = audioPlayer {
                 player.volume = Float(volume)
-            } else if let stream = streamingPlayer {
-                stream.volume = Float(volume)
             }
         }
     }
     
     //MARK: - Opera Database Operations
-    @Published var chosenMode: Int?
-    @Published var chosenComposer: Int?
-    @Published var chosenOpera: String?
-    @Published var infoRead: Bool = false
-    @Published var selectedLibretto: LibrettoDatabase.Libretto?
+    @Published var selectedRecording: Recording?
+    var recordings: [Recording] = []
     
-    
-    var operas: [LibrettoDatabase.Libretto] = []
     @Published var currentLyric: String = ""
     var currentSinger: String = ""
     var currentTranslation: String = "..."
     
     func loadLibrettoDatabase() {
-        guard let url = Bundle.main.url(forResource: "librettoDatabase", withExtension: "json") else {
-            print("Libretto database file not found.")
+        guard let url = Bundle.main.url(forResource: "recordingsDatabase", withExtension: "json") else {
+            logger.warning("Libretto database file not found.")
             return
         }
         
         do {
             let data = try Data(contentsOf: url)
-            let operaDatabase = try JSONDecoder().decode(LibrettoDatabase.self, from: data)
-            operas = operaDatabase.operas
-            print("Loading of database successful")
+            let recordingsDatabase = try JSONDecoder().decode([Recording].self, from: data)
+            recordings = recordingsDatabase
+            logger.info("Loading of database successful")
         } catch {
-            print("Failed to load libretto database: \(error)")
+            logger.error("Failed to load libretto database: \(error)")
         }
     }
     
-    func selectOperaAndPlay(_ opera: LibrettoDatabase.Libretto) {
-        selectedLibretto = opera
+    func selectOperaAndPlay(_ opera: Recording) {
+        selectedRecording = opera
         
-        guard let url = Bundle.main.url(forResource: selectedLibretto!.audioName, withExtension: "mp3")  else {
-            print("Audio file not found")
+        guard let url = Bundle.main.url(forResource: selectedRecording!.audioPath, withExtension: "mp3")  else {
+            logger.error("Audio file not found")
             return
         }
         
-        print("Audio URL: \(selectedLibretto!.audioName)")
-        prepareToPlay(from: url)
+        logger.info("Audio URL: \(self.selectedRecording!.audioPath)")
+        prepareAudioPlayer(with: url)
     }
     
     //MARK: - Audio Player
     var audioPlayer: AVAudioPlayer?
-    var streamingPlayer: AVPlayer?
     
     @Published var playbackProgress: Double = 0.0
     var totalTime: TimeInterval = 0.0
     
-    func prepareToPlay(from url: URL) {
-        //if url.isFileURL {
-        prepareAudioPlayer(with: url)
-        /*} else {
-         prepareStreamingPlayer(with: url)
-         }*/
-    }
-    
     func prepareAudioPlayer(with url: URL) {
         do {
-            streamingPlayer = nil
-            
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
@@ -161,22 +126,10 @@ final class ViewModel: NSObject, ObservableObject {
             setupLyricsUpdator()
             play()
         } catch {
-            print("Failed to prepare audio player: \(error)")
+            logger.error("Failed to prepare audio player: \(error)")
             isPlaying = false
             reset()
         }
-    }
-    
-    func prepareStreamingPlayer(with url: URL) {
-        audioPlayer = nil
-        /*https://developer.apple.com/documentation/avfoundation/controlling-the-transport-behavior-of-a-player*/
-        streamingPlayer = AVPlayer(url: url)
-        streamingPlayer?.volume = Float(volume)
-        
-        totalTime = 10000
-        
-        setupLyricsUpdator()
-        play()
     }
     
     //MARK: - Playback Controls
@@ -195,8 +148,6 @@ final class ViewModel: NSObject, ObservableObject {
     func play() {
         if let player = audioPlayer {
             player.play()
-        } else if let player = streamingPlayer {
-            player.play()
         }
         
         isPlaying = true
@@ -205,7 +156,6 @@ final class ViewModel: NSObject, ObservableObject {
     
     // Pause action
     func pause() {
-        streamingPlayer?.pause()
         audioPlayer?.pause()
         isPlaying = false
         stopTimer()
@@ -214,13 +164,9 @@ final class ViewModel: NSObject, ObservableObject {
     // Stop action
     func reset() {
         audioPlayer?.stop()
-        streamingPlayer?.pause()
-        
         isPlaying = false
         
         audioPlayer?.currentTime = 0.0
-        streamingPlayer?.seek(to: .zero)
-        
         stopTimer()
         
         playbackProgress = 0.0
@@ -231,6 +177,9 @@ final class ViewModel: NSObject, ObservableObject {
     private var timerCancellable: AnyCancellable?
     
     func startTimer() {
+        if let player = self.audioPlayer {
+            self.playbackProgress = player.currentTime
+        }
         timerCancellable = Timer.publish(every: 1.0, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
@@ -238,9 +187,8 @@ final class ViewModel: NSObject, ObservableObject {
                 
                 if let player = self.audioPlayer {
                     self.playbackProgress = player.currentTime
-                } else if let stream = self.streamingPlayer?.currentItem {
-                    self.playbackProgress = stream.currentTime().seconds
                 }
+                
             }
     }
     
@@ -265,9 +213,9 @@ final class ViewModel: NSObject, ObservableObject {
     
     // Update the current lyric based on playback time
     private func updateLyric(for time: TimeInterval) {
-        guard let lyrics = selectedLibretto?.lyrics else { return }
+        guard let lyrics = selectedRecording?.lyrics else { return }
         
-        if let lyric = lyrics.first(where: { $0.startTime <= time && $0.endTime > time }) {
+        if let lyric = lyrics.first(where: { $0.start <= time && $0.end > time }) {
             currentLyric = lyric.text
             currentSinger = lyric.singer
             currentTranslation = lyric.translation ?? ""
@@ -285,7 +233,7 @@ final class ViewModel: NSObject, ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Failed to configure audio session: \(error)")
+            logger.error("Failed to configure audio session: \(error)")
         }
     }
 #endif
