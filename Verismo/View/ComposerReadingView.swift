@@ -8,14 +8,14 @@ import SwiftUI
 
 struct ComposerReadingView: View {
     @EnvironmentObject var viewModel: ViewModel
-    let chosenComposer: composerID
+    let chosenComposer: ComposerID
     
-    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var isPortraitMode: Bool {
 #if os(iOS)
-        horizontalSizeClass == .compact && verticalSizeClass == .regular || horizontalSizeClass == .regular && verticalSizeClass == .regular
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
 #else
         false
 #endif
@@ -29,80 +29,35 @@ struct ComposerReadingView: View {
             VStack(spacing: 20) {
                 if isPortraitMode {
                     ScrollView {
-                        VStack() {
-                            Image(composerData.surname)
-                                .resizable()
-                                .scaledToFit()
-                                .cornerRadius(7)
-                                .frame(maxHeight: 250)
-                                .shadow(radius: 10)
-                                .padding(.bottom, 4)
-                            VStack() {
-                                // Lifespan
-                                Text(composerData.lifespan)
-                                Text(composerData.birthPlace)
-                            }
-                            .font(.footnote)
-                        }
-                        .padding()
-                        
+                        ComposerInformationSection(composerData: composerData)
                         
                         InformationSection(title: "Biography", content: composerData.biography)
                             .padding(.horizontal)
+                    }.safeAreaInset(edge: .bottom) {
+                        VStack {
+                            Divider()
+                                .padding(.bottom)
+                            HorizontalButtonView(chosenComposer: chosenComposer)
+                        }
+                        .background(.thinMaterial)
                     }
-                    Divider()
-                        .padding([.leading, .bottom, .trailing])
-                    
-                    // Navigation to Operas View
-                    HStack(spacing: 25) {
-                        HorizontalButtonView(text: "Listen", image: "music.note", listenMode: true, chosenComposer: chosenComposer)
-                        HorizontalButtonView(text: "Read", image: "book.pages", listenMode: false, chosenComposer: chosenComposer)
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom)
                 } else {
                     HStack {
-                        VStack() {
-#if os(macOS)
-                            Text(composerData.surname)
-                                .fadingText()
-                            Divider()
-                                .padding(.bottom, 5)
-#endif
-                            Image(composerData.surname)
-                                .resizable()
-                                .scaledToFit()
-                                .cornerRadius(7)
-                                .frame(maxHeight: 250)
-                                .shadow(radius: 10)
-                            
-                            VStack() {
-                                // Lifespan
-                                Text(composerData.lifespan)
-                                Text(composerData.birthPlace)
-                            }
-                            .font(.footnote)
-                        }
-                        .padding()
+                        ComposerInformationSection(composerData: composerData)
                         
                         VStack {
                             ScrollView {
                                 InformationSection(title: "Biography", content: composerData.biography)
                                     .padding()
-                            }
-                            
-                            
-                            
-                            VStack {
-                                Divider()
-                                    .padding([.leading, .bottom, .trailing])
-                                // Navigation to Operas View
-                                HStack(spacing: 25) {
-                                    HorizontalButtonView(text: "Listen", image: "music.note", listenMode: true, chosenComposer: chosenComposer)
-                                    HorizontalButtonView(text: "Read", image: "book.pages", listenMode: false, chosenComposer: chosenComposer)
+                            }.safeAreaInset(edge: .bottom) {
+                                VStack {
+                                    Divider()
+                                    HorizontalButtonView(chosenComposer: chosenComposer)
+                                    Divider()
                                 }
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.bottom)
+                                .background(.thinMaterial)
+                                .cornerRadius(7)
+                                .padding(.horizontal)
                             }
                         }
 #if os(macOS)
@@ -112,7 +67,7 @@ struct ComposerReadingView: View {
                 }
             }
 #if os(iOS)
-            .navigationTitle("\(composerData.firstname)  \(composerData.surname)")
+            .navigationTitle("\(composerData.firstname) \(composerData.surname)")
             .navigationBarTitleDisplayMode(.large)
 #else
             .navigationTitle("Composer")
@@ -121,11 +76,57 @@ struct ComposerReadingView: View {
     }
 }
 
+struct ComposerInformationSection: View {
+    let composerData: Composer
+    
+    var body: some View {
+        
+        VStack() {
+#if os(macOS)
+            Text(composerData.surname)
+                .fadingText()
+            Divider()
+                .padding(.bottom, 5)
+#endif
+            Image(decorative: composerData.surname)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(7)
+                .frame(maxHeight: 250)
+                .shadow(radius: 5)
+                .padding(.bottom, 4)
+            
+            VStack() {
+                Text(composerData.lifespan)
+                    .accessibilityLabel("Lifespan: \(composerData.lifespan)")
+                Text(composerData.birthPlace)
+                    .accessibilityLabel("Birth place: \(composerData.birthPlace)")
+            }
+            .font(.footnote)
+        }
+        .padding()
+    }
+}
+
 struct HorizontalButtonView: View {
+    let chosenComposer: ComposerID
+    
+    var body: some View {
+        HStack(spacing: 25) {
+            if chosenComposer != .szymanowski {
+                HorizontalButton(text: "Listen", image: "music.note", listenMode: true, chosenComposer: chosenComposer)
+            }
+            HorizontalButton(text: "Read", image: "book.pages", listenMode: false, chosenComposer: chosenComposer)
+        }
+        .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+struct HorizontalButton: View {
     let text: String
     let image: String
     let listenMode: Bool
-    let chosenComposer: composerID
+    let chosenComposer: ComposerID
     
     var body: some View {
         NavigationLink(destination: OperasView(listenMode: listenMode, chosenComposer: chosenComposer)){
@@ -136,9 +137,12 @@ struct HorizontalButtonView: View {
                 Text(text)
                     .font(.headline)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(text)
             .fontWeight(.light)
             .frame(maxHeight: .infinity)
             .padding()
+            .accessibilityLabel(text)
         }
         .background(.ultraThickMaterial)
         .cornerRadius(5)
@@ -152,7 +156,7 @@ struct HorizontalButtonViewPlayback: View {
     let recording: Recording
     
     var body: some View {
-        NavigationLink(destination: PlaybackView(recording: recording)){
+        NavigationLink(destination: PickOperaView(chosenRecording: recording)){
             HStack(spacing: 13) {
                 Image(systemName: image)
                     .font(.title3)
@@ -160,6 +164,8 @@ struct HorizontalButtonViewPlayback: View {
                 Text(text)
                     .font(.headline)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(text)
             .fontWeight(.light)
             .padding()
         }

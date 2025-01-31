@@ -30,14 +30,15 @@ final class ViewModel: NSObject, ObservableObject {
     var translationPossible = false
     
     @MainActor
-    func prepareSupportedLanguages() async {
+    func prepareSupportedLanguages(originalLanguage: String) async {
         let supportedLanguages = await LanguageAvailability().supportedLanguages
         availableLanguages = supportedLanguages.map {
             AvailableLanguage(locale: $0)
         }
         .filter { language in
             let shortName = language.shortName()
-            return shortName != "it" && shortName != "en-US"
+            logger.info("\(shortName)")
+            return shortName != originalLanguage && shortName != "en-US"
         }
         .sorted()
     }
@@ -45,14 +46,17 @@ final class ViewModel: NSObject, ObservableObject {
     @MainActor
     func checkLanguageAvailability() async {
         let status = await LanguageAvailability().status(from: Locale.Language(languageCode: "en", region: "GB"), to: targetLanguage)
-        if status == .installed {
+        switch status {
+        case .installed:
             logger.info("Translation possible")
             translationPossible = true
-        } else if status == .supported {
-            try? await Task.sleep(nanoseconds: 15 * 1_000_000_000) // 15 seconds
-            //Checks to automaticaly switch to new translation if user downloads translation
+        case .supported:
+            // Wait before rechecking avaibility. Model can be downloaded in the background
+            try? await Task.sleep(for: .seconds(15), tolerance: .seconds(5))
             logger.info("Rechecking avaibility of translation")
-            await self.checkLanguageAvailability()
+            await checkLanguageAvailability()
+        default:
+            logger.info("Translation not supported")
         }
     }
     
@@ -100,9 +104,16 @@ final class ViewModel: NSObject, ObservableObject {
     
     func selectOperaAndPlay(_ opera: Recording) {
         selectedRecording = opera
+        guard let audioPath = selectedRecording?.audioPath else {
+            logger.error("Audio path not found for the selected recording.")
+            return
+        }
         
-        guard let url = Bundle.main.url(forResource: selectedRecording!.audioPath, withExtension: "mp3")  else {
-            logger.error("Audio file not found")
+        let mp3URL = Bundle.main.url(forResource: audioPath, withExtension: "mp3")
+        let mpgaURL = Bundle.main.url(forResource: audioPath, withExtension: "mpga")
+        
+        guard let url = mp3URL ?? mpgaURL else {
+            logger.error("Audio file not found for the selected recording.")
             return
         }
         
@@ -144,7 +155,6 @@ final class ViewModel: NSObject, ObservableObject {
         }
     }
     
-    // Play action
     func play() {
         if let player = audioPlayer {
             player.play()
@@ -154,14 +164,12 @@ final class ViewModel: NSObject, ObservableObject {
         startTimer()
     }
     
-    // Pause action
     func pause() {
         audioPlayer?.pause()
         isPlaying = false
         stopTimer()
     }
     
-    // Stop action
     func reset() {
         audioPlayer?.stop()
         isPlaying = false
@@ -174,13 +182,13 @@ final class ViewModel: NSObject, ObservableObject {
     
     //MARK: - Timer (playback)
     
-    private var timerCancellable: AnyCancellable?
+    var timerCancellable: AnyCancellable?
     
     func startTimer() {
         if let player = self.audioPlayer {
             self.playbackProgress = player.currentTime
         }
-        timerCancellable = Timer.publish(every: 1.0, on: .main, in: .common)
+        timerCancellable = Timer.publish(every: 0.5, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -198,21 +206,20 @@ final class ViewModel: NSObject, ObservableObject {
     }
     
     //MARK: - Lyrics Updates
-    private var lyricsCancellable: AnyCancellable?
-    private func setupLyricsUpdator() {
+    var lyricsCancellable: AnyCancellable?
+    func setupLyricsUpdator() {
         lyricsCancellable = $playbackProgress
             .sink { [weak self] time in
                 self?.updateLyric(for: time)
             }
     }
     
-    private func cancelLyricsUpdator() {
+    func cancelLyricsUpdator() {
         lyricsCancellable?.cancel()
         lyricsCancellable = nil
     }
     
-    // Update the current lyric based on playback time
-    private func updateLyric(for time: TimeInterval) {
+    func updateLyric(for time: TimeInterval) {
         guard let lyrics = selectedRecording?.lyrics else { return }
         
         if let lyric = lyrics.first(where: { $0.start <= time && $0.end > time }) {
@@ -227,8 +234,7 @@ final class ViewModel: NSObject, ObservableObject {
     }
     
 #if os(iOS)
-    // Configures the audio session for iOS to handle audio playback
-    private func configureAudioSession() {
+    func configureAudioSession() {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)

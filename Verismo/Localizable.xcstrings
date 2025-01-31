@@ -1,18 +1,31 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@  %@" : {
+    "" : {
+
+    },
+    "%@ %@" : {
+      "shouldTranslate" : false
+    },
+    "%@, %@" : {
+      "shouldTranslate" : false
+    },
+    "%@, sung by %@" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@  %2$@"
-          }
-        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@  %2$@"
+            "value" : "%@, śpiewane przez %@"
+          }
+        }
+      }
+    },
+    "%lld minutes, %lld seconds" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld minut, %lld sekund"
           }
         }
       }
@@ -22,7 +35,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld procentów"
+            "value" : "%lld procent"
           }
         }
       }
@@ -37,6 +50,26 @@
         }
       }
     },
+    "Acknowledgments" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podziękowania"
+          }
+        }
+      }
+    },
+    "All uncredited photos are in the public domain." : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wszystkie zdjęcia bez akredytacji należą do domeny publicznej."
+          }
+        }
+      }
+    },
     "Aria" : {
       "localizations" : {
         "pl" : {
@@ -47,12 +80,42 @@
         }
       }
     },
-    "Choose an Opera" : {
+    "Birth place: %@" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz Operę"
+            "value" : "Miejsce urodzenia: %@"
+          }
+        }
+      }
+    },
+    "Character: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postać: %@"
+          }
+        }
+      }
+    },
+    "Choose Your Composer" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz kompozytora"
+          }
+        }
+      }
+    },
+    "Choose Your Opera" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz operę"
           }
         }
       }
@@ -77,6 +140,26 @@
         }
       }
     },
+    "Conductor: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dyrygent: %@"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gotowe"
+          }
+        }
+      }
+    },
     "Editions List" : {
       "localizations" : {
         "pl" : {
@@ -86,6 +169,9 @@
           }
         }
       }
+    },
+    "Europeana" : {
+      "shouldTranslate" : false
     },
     "Explore" : {
       "localizations" : {
@@ -127,12 +213,62 @@
         }
       }
     },
+    "Learn more about Europeana:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dowiedz się więcej o Europeanie:"
+          }
+        }
+      }
+    },
+    "License Details" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szczegóły Licencji"
+          }
+        }
+      }
+    },
+    "License: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licencja: %@"
+          }
+        }
+      }
+    },
+    "Lifespan: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Długość życia: %@"
+          }
+        }
+      }
+    },
     "Listen" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Słuchaj"
+          }
+        }
+      }
+    },
+    "loading spinner" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ikona ładowania"
           }
         }
       }
@@ -147,12 +283,32 @@
         }
       }
     },
+    "Lyrics font size" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wielkość czcionki napisów"
+          }
+        }
+      }
+    },
     "Now Playing:" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teraz odtwarzane:"
+          }
+        }
+      }
+    },
+    "Now Playing: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teraz odtwarzane: %@"
           }
         }
       }
@@ -177,12 +333,52 @@
         }
       }
     },
+    "Orchestra: %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orkiestra: %@"
+          }
+        }
+      }
+    },
+    "Pause" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pauza"
+          }
+        }
+      }
+    },
     "Performer: %@" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wykonawca: %@"
+          }
+        }
+      }
+    },
+    "Photo Credits" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uznanie autorstwa zdjęć"
+          }
+        }
+      }
+    },
+    "Play" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odtwórz"
           }
         }
       }
@@ -207,6 +403,16 @@
         }
       }
     },
+    "Playback progress" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postęp odtwarzania"
+          }
+        }
+      }
+    },
     "Premiere: %@" : {
       "localizations" : {
         "pl" : {
@@ -227,12 +433,38 @@
         }
       }
     },
+    "Recording of aria: %@ sung by: %@, recorded in: %@, translation source libretto language: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Recording of aria: %1$@ sung by: %2$@, recorded in: %3$@, translation source libretto language: %4$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nagranie arii: %1$@ śpiewanej przez: %2$@, nagrane w: %3$@, język źródłowy tłumaczenia libretta: %4$@"
+          }
+        }
+      }
+    },
     "Select Subtitles Language:" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wybierz język napisów:"
+          }
+        }
+      }
+    },
+    "Show license details" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż szczegóły licencji"
           }
         }
       }
@@ -247,6 +479,16 @@
         }
       }
     },
+    "Stop" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatrzymaj"
+          }
+        }
+      }
+    },
     "Timer Transition Animation" : {
       "localizations" : {
         "pl" : {
@@ -257,12 +499,22 @@
         }
       }
     },
-    "Translation: %@" : {
+    "Visit europeana.eu" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tłumaczenie: %@"
+            "value" : "Odwiedź europeana.eu"
+          }
+        }
+      }
+    },
+    "Volume" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Głośność"
           }
         }
       }
@@ -273,6 +525,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Głośność: %lld%%"
+          }
+        }
+      }
+    },
+    "We would like to acknowledge the Europeana initiative for collecting and providing access to Europe's cultural heritage. Their efforts have made it possible to include a rich collection of recordings and photographs in this app." : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chcielibyśmy podziękować inicjatywie Europeana za gromadzenie i udostępnianie europejskiego dziedzictwa kulturowego. Ich wysiłki umożliwiły włączenie bogatej kolekcji nagrań oraz zdjęć do tej aplikacji."
           }
         }
       }

@@ -9,19 +9,23 @@ import SwiftUI
 
 struct PlaybackView: View {
     @EnvironmentObject var viewModel: ViewModel
-    var recording: Recording
-    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    let recording: Recording
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var isPortraitMode: Bool {
 #if os(iOS)
-        horizontalSizeClass == .compact && verticalSizeClass == .regular
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            horizontalSizeClass == .compact && verticalSizeClass == .regular
+        } else {
+            true
+        }
 #else
         true
 #endif
     }
     
-    @State private var showingPlaybackSettings = false
+    @State var showingPlaybackSettings = false
     
     
     var body: some View {
@@ -46,21 +50,9 @@ struct PlaybackView: View {
                 ToolbarItemGroup(placement: .primaryAction) {
                     Button(action: { showingPlaybackSettings = true } ) {
                         Label("Playback Preferences", systemImage: "dial.medium")
-                            .symbolEffect(.rotate.byLayer, options: .nonRepeating)
-                            .symbolRenderingMode(.hierarchical)
                     }
                 }
             }
-            .sheet(isPresented: $showingPlaybackSettings) {
-                PlaybackSettingsView(availableLanguages: viewModel.availableLanguages, targetLanguage: $viewModel.targetLanguage, translationPossible: $viewModel.translationPossible, volume: $viewModel.volume)
-                    .presentationDetents([.medium, .large])
-                    .onAppear {
-                        Task {
-                            await viewModel.prepareSupportedLanguages()
-                        }
-                    }
-            }
-            
             .onAppear {
                 viewModel.selectOperaAndPlay(recording)
             }
@@ -69,26 +61,53 @@ struct PlaybackView: View {
             }
             .padding()
         }
+        .sheet(isPresented: $showingPlaybackSettings) {
+            PlaybackSettingsView(dismissSheet: $showingPlaybackSettings)
+                .toolbar {
+#if os(macOS)
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Done") {
+                            showingPlaybackSettings = false
+                        }
+                    }
+#endif
+                }
+                .presentationBackground(.thinMaterial)
+                .presentationDetents([.medium, .large])
+                .onAppear {
+                    Task {
+                        await viewModel.prepareSupportedLanguages(originalLanguage: recording.subtitlesLanguage)
+                    }
+                }
+        }
     }
-    
 }
 
 struct PlaybackControlView: View {
     @EnvironmentObject var viewModel: ViewModel
-    @State private var isStopActive = false
+    @State var isStopActive = false
     
     var body: some View {
-        HStack(spacing: 30) {
+        let spacing = {
+#if os(macOS)
+            30.0
+#else
+            40.0
+#endif
+        }()
+        
+        HStack(spacing: spacing) {
             
-            //Play/Pause Button
+            // Play/Pause Button
             Button(action: viewModel.togglePlayback) {
                 Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
                     .contentTransition(.symbolEffect(.replace.downUp.byLayer, options: .nonRepeating))
             }
+            .accessibilityLabel(viewModel.isPlaying ? "Pause" : "Play")
             .keyboardShortcut(.space, modifiers: [])
             .sensoryFeedback(.start, trigger: viewModel.isPlaying)
             
-            //Stop Button
+            // Stop Button
             Button(action: {
                 viewModel.reset()
                 isStopActive.toggle()
@@ -97,6 +116,7 @@ struct PlaybackControlView: View {
                 Image(systemName: "stop.fill")
                     .symbolEffect(.bounce.down, value: isStopActive)
             }
+            .accessibilityLabel("Stop")
             .sensoryFeedback(.warning, trigger: isStopActive)
         }
         .fixedSize(horizontal: true, vertical: true)
@@ -110,7 +130,9 @@ import AVFoundation
 
 struct NowPlayingView: View {
     @EnvironmentObject var viewModel: ViewModel
-    @AppStorage("timerTransition") private var timerTransition = true
+    @Environment(\.accessibilityReduceMotion) var reducedMotion
+    
+    @AppStorage("timerTransition") var timerTransition = true
     
     var body: some View {
         VStack(spacing: 20) {
@@ -121,22 +143,26 @@ struct NowPlayingView: View {
                         .fontDesign(.serif)
                         .italic()
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Now Playing: \(arias[viewModel.selectedRecording?.ariaID ?? 0].title)")
                 Spacer()
                 Text(formattedTime(viewModel.playbackProgress))
                     .monospacedDigit()
                     .contentTransition(timerTransition ? .numericText(countsDown: false) : .identity)
-                    .animation(timerTransition ? .default : .none, value: viewModel.playbackProgress)
-                //.frame(width: 32, alignment: .leading)
+                    .animation(timerTransition && !reducedMotion ? .default : .none, value: viewModel.playbackProgress)
+                    .accessibility(hidden: true)
             }
             .font(.subheadline)
             .padding(.horizontal)
             
             Slider(value: $viewModel.playbackProgress, in: 0...viewModel.totalTime, onEditingChanged: handleSliderEditingChanged)
                 .padding()
+                .accessibilityLabel("Playback progress")
+                .accessibilityValue("\(Int(viewModel.playbackProgress) / 60) minutes, \(Int(viewModel.playbackProgress) % 60) seconds")
         }
     }
     
-    private func handleSliderEditingChanged(editingStarted: Bool) {
+    func handleSliderEditingChanged(editingStarted: Bool) {
         if editingStarted {
             viewModel.tempSneezeTranslation = true
             viewModel.pause()
@@ -159,8 +185,8 @@ struct NowPlayingView: View {
 struct LyricView: View {
     @EnvironmentObject var viewModel: ViewModel
     
-    @State private var configuration: TranslationSession.Configuration?
-    @State private var targetText = ""
+    @State var configuration: TranslationSession.Configuration?
+    @State var targetText = ""
     
     @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
     
@@ -170,7 +196,6 @@ struct LyricView: View {
 #if os(macOS)
                 .font(.system(size: lyricsFontSize - 15))
 #else
-            //.font(.system(size: lyricsFontSize - 15))
                 .font(.title2)
 #endif
                 .padding(.top)
@@ -179,18 +204,15 @@ struct LyricView: View {
 #if os(macOS)
                 .font(.system(size: lyricsFontSize))
 #else
-            //.font(.system(size: lyricsFontSize))
                 .font(.largeTitle)
 #endif
                 .italic()
                 .fontDesign(.serif)
                 .padding()
-            
             Text(targetText)
 #if os(macOS)
                 .font(.system(size: lyricsFontSize - 13))
 #else
-            //.font(.system(size: lyricsFontSize - 13))
                 .font(.body)
 #endif
                 .padding()
@@ -203,12 +225,6 @@ struct LyricView: View {
                 }
         }
         .padding()
-        //        // Start translation without waiting for the timer if model downloaded in the background
-        //        .onChange(of: viewModel.translationPossible) { _, newValue in
-        //            if newValue && !viewModel.currentTranslation.isEmpty {
-        //                triggerTranslation()
-        //            }
-        //        }
         .onChange(of: viewModel.currentTranslation) {
             if viewModel.translationPossible && !viewModel.tempSneezeTranslation && !viewModel.currentTranslation.isEmpty {
                 triggerTranslation()
@@ -227,7 +243,7 @@ struct LyricView: View {
         }
     }
     
-    private func triggerTranslation() {
+    func triggerTranslation() {
         guard configuration == nil else {
             configuration?.invalidate()
             return
@@ -238,6 +254,8 @@ struct LyricView: View {
 }
 
 #Preview {
-    //@Previewable @StateObject var model = ViewModel()
-    //PlaybackView(opera: model.operas[3]).environmentObject(model)
+    @Previewable @StateObject var model = ViewModel()
+    NavigationStack {
+        PlaybackView(recording: model.recordings[0]).environmentObject(model)
+    }
 }

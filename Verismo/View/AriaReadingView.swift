@@ -10,12 +10,12 @@ struct AriaReadingView: View {
     @EnvironmentObject var viewModel: ViewModel
     let aria: Aria
     
-    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var isPortraitMode: Bool {
 #if os(iOS)
-        horizontalSizeClass == .compact && verticalSizeClass == .regular || horizontalSizeClass == .regular && verticalSizeClass == .regular
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
 #else
         false
 #endif
@@ -25,27 +25,31 @@ struct AriaReadingView: View {
         ZStack {
             BackgroundGradient()
             if isPortraitMode {
-                VStack(spacing: 20) {
-                    ScrollView {
-                        VStack() {
-                            Image(aria.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .cornerRadius(7)
-                                .frame(maxHeight: 250)
-                                .shadow(radius: 10)
-                            Text(aria.mainCharacter)
-                                .font(.footnote)
-                        }
-                        .padding()
-                        InformationSection(title: "Context", content: aria.background)
-                            .padding(.horizontal)
-                    }
-                    if let index = aria.recordingID {
+                ScrollView {
+                    VStack(spacing: 10) {
+                        Text("Character: \(aria.mainCharacter)")
+                            .font(.headline)
+                        Image(decorative: aria.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(7)
+                            .shadow(radius: 10)
+                        
                         Divider()
-                            .padding([.leading, .bottom, .trailing])
-                        HorizontalButtonViewPlayback(text: "Listen", image: "music.note", recording: viewModel.recordings[index])
-                            .padding(.bottom)
+                        
+                        InformationSection(title: "Context", content: aria.background)
+                    }
+                    .padding()
+                }
+                .safeAreaInset(edge: .bottom) {
+                    if let index = aria.recordingID {
+                        VStack {
+                            Divider()
+                                .padding(.bottom)
+                            HorizontalButtonViewPlayback(text: "Listen", image: "music.note", recording: viewModel.recordings[index])
+                                .padding(.bottom)
+                        }
+                        .background(.thinMaterial)
                     }
                 }
             } else {
@@ -55,16 +59,16 @@ struct AriaReadingView: View {
                         Text(aria.title)
                             .fadingText()
 #endif
-                        Text(aria.mainCharacter)
+                        Text("Character: \(aria.mainCharacter)")
 #if os(macOS)
                             .font(.caption)
 #else
                             .font(.headline)
 #endif
+                        
                         Divider()
                         
-                        
-                        Image(aria.imageName)
+                        Image(decorative: aria.imageName)
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(7)
@@ -74,27 +78,29 @@ struct AriaReadingView: View {
 #else
                             .padding(.top)
 #endif
-                    }
-                    .padding()
-                    VStack {
-                        ScrollView {
-                            InformationSection(title: "Context", content: aria.background)
-                                .padding()
-                        }
-                        VStack {
-                            if let index = aria.recordingID {
-                                Divider()
-                                    .padding([.leading, .bottom, .trailing])
-                                HorizontalButtonViewPlayback(text: "Listen", image: "music.note", recording: viewModel.recordings[index])
-                                    .padding(.bottom)
-                            }
-                        }
-#if os(macOS)
-                        .padding(.vertical)
-#endif
                         
                     }
-                    
+                    .padding()
+                    ScrollView {
+                        InformationSection(title: "Context", content: aria.background)
+                            .padding()
+                    }.safeAreaInset(edge: .bottom) {
+                        VStack {
+                            if let index = aria.recordingID {
+                                VStack {
+                                    Divider()
+                                    HorizontalButtonViewPlayback(text: "Listen", image: "music.note", recording: viewModel.recordings[index])
+                                    Divider()
+                                }
+                                .background(.thinMaterial)
+                                .cornerRadius(7)
+                                .padding(.horizontal)
+                            }
+                        }
+                    }
+#if os(macOS)
+                    .padding(.vertical)
+#endif
                 }
             }
         }
@@ -107,7 +113,11 @@ struct AriaReadingView: View {
     }
 }
 
+
 #Preview {
-    //@Previewable @StateObject var model = ViewModel()
-    //AriaReadingView(aria: composers[composerID.puccini.rawValue].operas[0].arias[3]).environmentObject(model)
+    @Previewable @StateObject var viewModel = ViewModel()
+    NavigationStack {
+        
+        AriaReadingView(aria: arias[1]).environmentObject(viewModel)
+    }
 }

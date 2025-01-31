@@ -25,6 +25,7 @@ struct InformationSection: View {
                 .font(.body)
                 .padding(.top, 5)
         }
+        .accessibilityElement(children: .combine)
         .padding()
         .background()
         .cornerRadius(7)
@@ -34,29 +35,21 @@ struct InformationSection: View {
 
 struct OperaReadingView: View {
     @EnvironmentObject var viewModel: ViewModel
-    @Environment(\.colorScheme) var colorScheme
-    let chosenComposer: composerID
+    let chosenComposer: ComposerID
     let chosenOpera: Opera
     
-    var filteredArias: [Aria] {
-        arias.filter { $0.operaID == chosenOpera.operaID}
-    }
-    
-    @State private var expandedAria: String? = nil
-    @Namespace private var transitionNamespace
-    
-    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var isPortraitMode: Bool {
 #if os(iOS)
-        horizontalSizeClass == .compact && verticalSizeClass == .regular || horizontalSizeClass == .regular && verticalSizeClass == .regular
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
 #else
         false
 #endif
     }
     
-    private let dateFormatter: () -> DateFormatter = {
+    static let dateFormatter: () -> DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter
@@ -65,18 +58,20 @@ struct OperaReadingView: View {
     var body: some View {
         ZStack {
             BackgroundGradient()
+            
             if isPortraitMode {
                 ScrollView {
                     VStack(spacing: 10) {
-                        Text("Premiere: \(chosenOpera.premiereDate, formatter: dateFormatter())")
+                        Text("Premiere: \(chosenOpera.premiereDate, formatter: OperaReadingView.dateFormatter())")
                             .font(.headline)
-                        Image(chosenOpera.coverImageName)
+                        Image(decorative: chosenOpera.coverImageName)
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(7)
+                            .shadow(radius: 10)
+                        
                         Divider()
                         
-                        // Sections for Premiere, Background, Synopsis, etc.
                         InformationSection(title: "Background", content: chosenOpera.background)
                         InformationSection(title: "Synopsis", content: chosenOpera.synopsis)
                         InformationSection(title: "Music Insights", content: chosenOpera.musicInsights)
@@ -84,52 +79,7 @@ struct OperaReadingView: View {
                         
                         Divider()
                         
-                        // List of Arias
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Famous Arias")
-                                .font(.title2.bold())
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 15) {
-                                    ForEach(filteredArias, id: \.title) { aria in
-                                        NavigationLink(destination: AriaReadingView(aria: aria)
-                                                       #if os(iOS)
-                                            .navigationTransition(.zoom(sourceID: aria.ariaID, in: transitionNamespace))
-                                                       #endif
-                                        )
-                                        {
-                                            HStack(spacing: 10) {
-                                                Image(aria.imageName)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .cornerRadius(7)
-                                                    .frame(maxHeight: 101)
-#if os(iOS)
-                                                    .matchedTransitionSource(id: aria.ariaID, in: transitionNamespace)
-#endif
-                                                
-                                                VStack(alignment: .leading) {
-                                                    Text(aria.title)
-                                                        .font(.title3)
-                                                        .fontWeight(.semibold)
-                                                        .fontDesign(.serif)
-                                                    
-                                                    Text("Singer: \(aria.mainCharacter)")
-                                                        .font(.subheadline)
-                                                        .foregroundStyle(.secondary)
-                                                    
-                                                }
-                                            }
-                                            .padding(15)
-                                            .background()
-                                            .cornerRadius(7)
-                                            .padding(.vertical, 5)
-                                            
-                                        }
-                                        .buttonStyle(.plain)
-                                    }
-                                }
-                            }
-                        }
+                        AriaScrollView(chosenOpera: chosenOpera)
                     }
                     .padding()
                 }
@@ -140,14 +90,14 @@ struct OperaReadingView: View {
                         Text(chosenOpera.title)
                             .fadingText()
 #endif
-                        Text("Premiere: \(chosenOpera.premiereDate, formatter: dateFormatter())")
+                        Text("Premiere: \(chosenOpera.premiereDate, formatter: OperaReadingView.dateFormatter())")
 #if os(macOS)
                             .font(.caption)
 #else
                             .font(.headline)
 #endif
                         Divider()
-                        Image(chosenOpera.coverImageName)
+                        Image(decorative: chosenOpera.coverImageName)
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(7)
@@ -161,59 +111,14 @@ struct OperaReadingView: View {
                     .padding()
                     
                     ScrollView {
-                        // Sections for Premiere, Background, Synopsis, etc.
                         InformationSection(title: "Background", content: chosenOpera.background)
                         InformationSection(title: "Synopsis", content: chosenOpera.synopsis)
                         InformationSection(title: "Music Insights", content: chosenOpera.musicInsights)
                         
                         
-                        Divider()                        
-                        // List of Arias
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Famous Arias")
-                                .font(.title2.bold())
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 15) {
-                                    ForEach(filteredArias, id: \.title) { aria in
-                                        NavigationLink(destination: AriaReadingView(aria: aria)
-                                                       #if os(iOS)
-                                            .navigationTransition(.zoom(sourceID: aria.ariaID, in: transitionNamespace))
-                                                       #endif
-                                        )
-                                        {
-                                            HStack(spacing: 10) {
-                                                Image(aria.imageName)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .cornerRadius(7)
-                                                    .frame(maxHeight: 101)
-#if os(iOS)
-                                                    .matchedTransitionSource(id: aria.ariaID, in: transitionNamespace)
-#endif
-                                                
-                                                VStack(alignment: .leading) {
-                                                    Text(aria.title)
-                                                        .font(.title3)
-                                                        .fontWeight(.semibold)
-                                                        .fontDesign(.serif)
-                                                    
-                                                    Text("Singer: \(aria.mainCharacter)")
-                                                        .font(.subheadline)
-                                                        .foregroundStyle(.secondary)
-                                                    
-                                                }
-                                            }
-                                            .padding(15)
-                                            .background()
-                                            .cornerRadius(7)
-                                            .padding(.vertical, 5)
-                                            
-                                        }
-                                        .buttonStyle(.plain)
-                                    }
-                                }
-                            }
-                        }
+                        Divider()
+                        
+                        AriaScrollView(chosenOpera: chosenOpera)
                     }
                     .padding()
                 }
@@ -228,10 +133,71 @@ struct OperaReadingView: View {
     }
 }
 
+struct AriaScrollView : View {
+    @Namespace var transitionNamespace
+    
+    let chosenOpera: Opera
+    var filteredArias: [Aria] {
+        arias.filter { $0.operaID == chosenOpera.operaID}
+    }
+    
+    var body: some View {
+        if !filteredArias.isEmpty {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Famous Arias")
+                    .font(.title2.bold())
+                    .accessibilityAddTraits(.isHeader)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(filteredArias, id: \.title) { aria in
+                            NavigationLink(destination: AriaReadingView(aria: aria)
+                                           #if os(iOS)
+                                .navigationTransition(.zoom(sourceID: aria.ariaID, in: transitionNamespace))
+                                           #endif
+                            )
+                            {
+                                HStack(spacing: 10) {
+                                    Image(decorative: aria.imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(7)
+                                        .frame(maxHeight: 101)
+#if os(iOS)
+                                        .matchedTransitionSource(id: aria.ariaID, in: transitionNamespace)
+#endif
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(aria.title)
+                                            .font(.title3)
+                                            .fontWeight(.semibold)
+                                            .fontDesign(.serif)
+                                        
+                                        Text("Singer: \(aria.mainCharacter)")
+                                            .font(.subheadline)
+                                            .foregroundStyle(.secondary)
+                                        
+                                    }
+                                }
+                                .padding(15)
+                                .background()
+                                .cornerRadius(7)
+                                .padding(.vertical, 5)
+                                .accessibilityElement(children: .combine)
+                                .accessibilityLabel("\(aria.title), sung by \(aria.mainCharacter)")
+                                
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     @Previewable @StateObject var model = ViewModel()
     OperaReadingView(chosenComposer: .puccini, chosenOpera: operas[0])
         .environmentObject(model)
 }
-

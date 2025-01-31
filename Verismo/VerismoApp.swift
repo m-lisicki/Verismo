@@ -13,9 +13,8 @@ struct VerismoApp: App {
         WindowGroup {
             ContentView()
 #if os(macOS)
-                .frame(minWidth: 800, minHeight: 530)
+                .frame(minWidth: 800, minHeight: 535)
 #endif
         }
-        //.windowResizability(.contentSize)
     }
 }

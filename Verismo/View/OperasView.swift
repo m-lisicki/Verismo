@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OperasView: View {
     let listenMode: Bool
-    let chosenComposer: composerID
+    let chosenComposer: ComposerID
     
     var body: some View {
         ZStack {
@@ -21,7 +21,7 @@ struct OperasView: View {
                 )
             }
             .buttonStyle(.plain)
-            .navigationTitle("Choose an Opera")
+            .navigationTitle("Choose Your Opera")
 #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
 #endif
@@ -29,10 +29,9 @@ struct OperasView: View {
     }
 }
 
-// MARK: - Subviews
 struct ComposerOperasView: View {
     let listenMode: Bool
-    let chosenComposer: composerID
+    let chosenComposer: ComposerID
     
     var body: some View {
         OperaGridView(
@@ -44,33 +43,32 @@ struct ComposerOperasView: View {
 
 struct OperaGridView: View {
     let listenMode: Bool
-    let chosenComposer: composerID
-    @Namespace private var transitionNamespace
+    let chosenComposer: ComposerID
+    @Namespace var transitionNamespace
     
     var filteredOperas: [Opera] {
         operas.filter { $0.composerID == chosenComposer}
     }
     
+    @ViewBuilder
+    func destinationView(for opera: Opera) -> some View {
+        if listenMode {
+            PickOperaView(chosenOpera: opera.operaID)
+        } else {
+            OperaReadingView(chosenComposer: chosenComposer, chosenOpera: opera)
+        }
+    }
+    
     var body: some View {
         HStack(spacing: 35) {
             ForEach(filteredOperas) { opera in
-                if listenMode {
-                    NavigationLink(destination: PickOperaView(chosenOpera: opera.operaID)
-                                   #if os(iOS)
-                        .navigationTransition(
-                            .zoom(sourceID: opera.title, in: transitionNamespace))
-                                   #endif
-                    ) {
-                        OperaFrame(title: opera.title, year: opera.premiereDate)
-                    }
-                } else {
-                    NavigationLink(destination: OperaReadingView(chosenComposer: chosenComposer, chosenOpera: opera)
-                                   #if os(iOS)
-                        .navigationTransition(.zoom(sourceID: opera.title, in: transitionNamespace))
-                                   #endif
-                    ) {
-                        OperaFrame(title: opera.title, year: opera.premiereDate)
-                    }
+                NavigationLink(destination: destinationView(for: opera)
+                               #if os(iOS)
+                    .navigationTransition(
+                        .zoom(sourceID: opera.title, in: transitionNamespace))
+                               #endif
+                ) {
+                    OperaFrame(title: opera.title, year: opera.premiereDate)
                 }
             }
         }
@@ -83,19 +81,19 @@ struct OperaFrame: View {
     let title: String
     let year: Date
     
-    @State private var isHovered = false
-    @State private var opacity = 0.0
-    @Namespace private var transitionNamespace
+    @State var isHovered = false
+    @State var opacity = 0.0
+    @Namespace var transitionNamespace
     
-    private let dateFormatter: () -> DateFormatter = {
+    let dateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
         return formatter
-    }
+    }()
     
     var body: some View {
         VStack {
-            Image(title)
+            Image(decorative: title)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 150, height: 210)
@@ -108,12 +106,14 @@ struct OperaFrame: View {
             VStack {
                 Text(title)
                     .font(.title3)
-                Text(year, formatter: dateFormatter())
+                Text(year, formatter: dateFormatter)
                     .font(.subheadline)
             }
             .fontDesign(.serif)
             .offset(y: isHovered ? 25: 0)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title), \(year, formatter: dateFormatter)")
         .animation(.spring(duration: 1), value: isHovered)
         .onHover { hovering in
             isHovered = hovering

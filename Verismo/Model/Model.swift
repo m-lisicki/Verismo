@@ -8,55 +8,57 @@
 import CoreLocation.CLLocation
 
 struct Composer: Identifiable {
-    var id = UUID()
-    var composerID: composerID
-    var firstname: String
-    var surname: String
-    var birthPlace: String
-    var birthCoordinates: CLLocationCoordinate2D
-    var lifespan: String
-    var biography: String
+    let id = UUID()
+    let composerID: ComposerID
+    let firstname: String
+    let surname: String
+    let birthPlace: String
+    let birthCoordinates: CLLocationCoordinate2D
+    let lifespan: String
+    let biography: String
 }
 
 struct Opera: Identifiable {
-    var id = UUID()
-    var operaID: operaID
-    var composerID: composerID
-    var title: String
-    var coverImageName: String
-    var premiereDate: Date
-    var background: String
-    var synopsis: String
-    var musicInsights: String
+    let id = UUID()
+    let operaID: OperaID
+    let composerID: ComposerID
+    let title: String
+    let coverImageName: String
+    let premiereDate: Date
+    let background: String
+    let synopsis: String
+    let musicInsights: String
 }
 
 struct Aria {
-    var ariaID: ariaID
-    var operaID: operaID
-    var title: String
-    var imageName: String
-    var mainCharacter: String
-    var background: String
-    var recordingID: Int?
+    let ariaID: AriaID
+    let operaID: OperaID
+    let title: String
+    let imageName: String
+    let mainCharacter: String
+    let background: String
+    let recordingID: Int?
 }
 
 struct Recording: Identifiable, Decodable {
-    var id: Int
-    var ariaID: Int
-    var conductor: String
-    var singer: String
-    var orchestra: String
-    var year: String
-    var subtitlesLanguage: String
-    var audioPath: String
-    var imageName: String
-    var lyrics: [Lyric] = []
+    let id: Int
+    let ariaID: Int
+    let conductor: String
+    let singer: String
+    let orchestra: String
+    let year: String
+    let subtitlesLanguage: String
+    let audioPath: String
+    let imageName: String
+    let license: String
+    let originalAttribution: String?
+    let lyrics: [Lyric]
 }
 
 struct Lyric: Decodable {
-    var start: TimeInterval
-    var end: TimeInterval
-    var text: String
-    var singer: String
-    var translation: String?
+    let start: TimeInterval
+    let end: TimeInterval
+    let text: String
+    let singer: String
+    let translation: String?
 }

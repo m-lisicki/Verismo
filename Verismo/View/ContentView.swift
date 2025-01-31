@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = ViewModel()
+    @StateObject var viewModel = ViewModel()
     
     var body: some View {
         ZStack {
@@ -26,7 +26,8 @@ struct ContentView: View {
 
 struct BackgroundGradient: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var isAnimating = true
+    @Environment(\.accessibilityReduceMotion) var reducedMotion
+    @State var isAnimating = true
     
     var body: some View {
         MeshGradient(
@@ -38,9 +39,10 @@ struct BackgroundGradient: View {
                 [0.0, 1.0], [isAnimating ? 0.3 : 0.6, 1.0], [1.0, 1.0]
             ],
             colors: colorScheme == .light ?
-            [.white, .white, .white,
-             .red, .white, .red,
-             .orange, .yellow, .orange]
+            [   .white, .red, .white,
+                .orange, .white, .yellow,
+                .white, .orange, .white
+            ]
             :
                 [.black, .black, .black,
                  .red, .black, .red,
@@ -48,8 +50,10 @@ struct BackgroundGradient: View {
             smoothsColors: true
         )
         .onAppear {
-            withAnimation(.easeInOut(duration: 60).repeatForever(autoreverses: true)) {
-                isAnimating.toggle()
+            if !reducedMotion {
+                withAnimation(.easeInOut(duration: 60).repeatForever(autoreverses: true)) {
+                    isAnimating.toggle()
+                }
             }
         }
         .ignoresSafeArea()
@@ -57,7 +61,7 @@ struct BackgroundGradient: View {
 }
 
 struct FadingText: ViewModifier {
-    @State private var opacity: Double = 0.0
+    @State var opacity: Double = 0.0
     
     func body(content: Content) -> some View {
         content

@@ -1,14 +1,339 @@
 [
     {
         "id": 0,
-        "ariaID": 1,
-        "conductor": "Manilo di Veroli",
-        "singer": "Alessandro Valente",
-        "orchestra": "NONE",
-        "year": "1927",
-        "subtitlesLanguage": "English",
-        "audioPath": "Non Piagnere Liu",
-        "imageName": "Mandarin",
-        "lyrics": []
+        "ariaID": 0,
+        "conductor": "Tiberiu Soare",
+        "singer": "Teodor Ilincăi",
+        "orchestra": "Orchestra of the Princess Margareta Foundation of Romania",
+        "year": "2015",
+        "subtitlesLanguage": "it-IT",
+        "audioPath": "Nessun Dorma",
+        "imageName": "Calaf",
+        "license": "CC BY-SA",
+        "originalAttribution": "Aria „Nessun dorma“ din opera „Turandot“ - Romanian Radio Broadcasting Company, Romania - CC BY-SA.",
+        "lyrics": [
+            {
+                "start": 6.0,
+                "end": 10.96,
+                "text": "Nessun dorma!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "No one must sleep!"
+            },
+            {
+                "start": 11.0,
+                "end": 16.22,
+                "text": "Nessun dorma...",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "No one must sleep..."
+            },
+            {
+                "start": 18.98,
+                "end": 24.4,
+                "text": "Tu pure, o Principessa",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "You, too, o Princess,"
+            },
+            {
+                "start": 24.8,
+                "end": 30.07,
+                "text": "nella tua fredda stanza",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "in your cold room"
+            },
+            {
+                "start": 30.62,
+                "end": 38.91,
+                "text": "guardi le stelle che tremano",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "look at the stars, that tremble"
+            },
+            {
+                "start": 38.91,
+                "end": 50.98,
+                "text": "d’amore e di speranza!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "with love and with hope!"
+            },
+            {
+                "start": 52.31,
+                "end": 59.02,
+                "text": "Ma il mio mistero è chiuso in me",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "But my mystery is shut within me;"
+            },
+            {
+                "start": 59.27,
+                "end": 64.02,
+                "text": "il nome mio nessun saprà!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "no one will know my name!"
+            },
+            {
+                "start": 64.31,
+                "end": 76.89,
+                "text": "No, no, sulla tua bocca lo dirò",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "No, I will say it on your mouth"
+            },
+            {
+                "start": 76.89,
+                "end": 92.53,
+                "text": "quando la luce splenderà!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "when the daylight shines!"
+            },
+            {
+                "start": 97.28999999999999,
+                "end": 107.36,
+                "text": "Ed il mio bacio scioglierà il silenzio",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "And my kiss will break the silence"
+            },
+            {
+                "start": 107.75999999999999,
+                "end": 116.02000000000001,
+                "text": "che ti fa mia!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "that makes you mine!"
+            },
+            {
+                "start": 116.72999999999999,
+                "end": 123.98,
+                "text": "Il nome suo nessun saprà...",
+                "singer": "VOCI DI DONNE",
+                "translation": "No one will know his name..."
+            },
+            {
+                "start": 124.33,
+                "end": 131.33,
+                "text": "E noi dovrem, ahimè, morir!",
+                "singer": "VOCI DI DONNE",
+                "translation": "And, alas, we must die!"
+            },
+            {
+                "start": 131.33,
+                "end": 135.56,
+                "text": "Dilegua, o notte!...",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "Vanish, o night!"
+            },
+            {
+                "start": 135.56,
+                "end": 147.07,
+                "text": "tramontate, stelle!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "Set, you stars!"
+            },
+            {
+                "start": 147.47,
+                "end": 155.32999999999998,
+                "text": "All’alba vincerò!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "At dawn I will win!"
+            },
+            {
+                "start": 157.42000000000002,
+                "end": 171.0,
+                "text": "Vincerò! Vincerò!",
+                "singer": "IL PRINCIPE IGNOTO",
+                "translation": "I will win! I will win!"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "ariaID": 4,
+        "conductor": "Edward T. King",
+        "singer": "Jakov M. Medvedieff",
+        "orchestra": "King's Orchestra",
+        "year": "1916",
+        "subtitlesLanguage": "pl-PL",
+        "audioPath": "Szumią Jodły",
+        "imageName": "Jontek",
+        "license": "Public Domain",
+        "lyrics": [
+            {
+                "start": 12.09,
+                "end": 17.27,
+                "text": "Szumią jodły na gór szczycie",
+                "singer": "Jontek",
+                "translation": "The fir trees rustle on the mountain's peak,"
+            },
+            {
+                "start": 17.27,
+                "end": 22.09,
+                "text": "Szumią sobie w dal!",
+                "singer": "Jontek",
+                "translation": "They rustle softly in the distance!"
+            },
+            {
+                "start": 22.67,
+                "end": 28.02,
+                "text": "I młodemu smutne życie",
+                "singer": "Jontek",
+                "translation": "And life is sad for the young,"
+            },
+            {
+                "start": 28.27,
+                "end": 33.02,
+                "text": "Gdy ma w sercu żal...",
+                "singer": "Jontek",
+                "translation": "When sorrow fills the heart..."
+            },
+            {
+                "start": 33.82,
+                "end": 38.78,
+                "text": "Z innych ludzi do nikogo",
+                "singer": "Jontek",
+                "translation": "From all people, to no one,"
+            },
+            {
+                "start": 39.02,
+                "end": 44.0,
+                "text": "Jeno do ciebie, niebogo!",
+                "singer": "Jontek",
+                "translation": "Only to you, my dear!"
+            },
+            {
+                "start": 44.36,
+                "end": 50.02,
+                "text": "Oj, Halino, oj, jedyna",
+                "singer": "Jontek",
+                "translation": "Oh, Halina, oh, my only one,"
+            },
+            {
+                "start": 50.38,
+                "end": 61.51,
+                "text": "Dziewczyno moja! Dziewczyno moja!",
+                "singer": "Jontek",
+                "translation": "My girl!"
+            },
+            {
+                "start": 61.51,
+                "end": 74.62,
+                "text": "Oj, Halino, oj, jedyna dziewczyno moja",
+                "singer": "Jontek",
+                "translation": "My girl!"
+            },
+            {
+                "start": 80.69,
+                "end": 85.58,
+                "text": "Już w dziecinne lata nasze",
+                "singer": "Jontek",
+                "translation": "Even in our childhood days,"
+            },
+            {
+                "start": 85.91,
+                "end": 89.33,
+                "text": "Ja do czarnych skał",
+                "singer": "Jontek",
+                "translation": "I would run to the black rocks"
+            },
+            {
+                "start": 89.8,
+                "end": 95.58,
+                "text": "Po gniazdeczko biegłem nad przepaście",
+                "singer": "Jontek",
+                "translation": "Above the precipice to find a nest,"
+            },
+            {
+                "start": 95.58,
+                "end": 99.72999999999999,
+                "text": "Bym ci ptaszę dał.",
+                "singer": "Jontek",
+                "translation": "So I could give you a bird."
+            },
+            {
+                "start": 101.28999999999999,
+                "end": 106.11,
+                "text": "Zawszem tobie najwonniejszych",
+                "singer": "Jontek",
+                "translation": "I always brought you the sweetest"
+            },
+            {
+                "start": 106.58,
+                "end": 110.62,
+                "text": "Kwiatów przyniósł z gór",
+                "singer": "Jontek",
+                "translation": "Flowers from the mountains,"
+            },
+            {
+                "start": 110.96000000000001,
+                "end": 117.28999999999999,
+                "text": "A z odpustu najpiękniejszych dawał",
+                "singer": "Jontek",
+                "translation": "And from the fair, the most beautiful"
+            },
+            {
+                "start": 117.28999999999999,
+                "end": 121.64,
+                "text": "Koralików sznur.",
+                "singer": "Jontek",
+                "translation": "Strings of coral beads."
+            },
+            {
+                "start": 121.89,
+                "end": 133.69,
+                "text": "A z odpustu najpiękniejszych dawał koralików sznur.",
+                "singer": "Jontek",
+                "translation": "And from the fair, the most beautiful strings of coral beads."
+            },
+            {
+                "start": 134.73,
+                "end": 139.24,
+                "text": "Nie mam żalu do nikogo",
+                "singer": "Jontek",
+                "translation": "I have no sorrow for anyone,"
+            },
+            {
+                "start": 139.42000000000002,
+                "end": 144.38,
+                "text": "Jeno do ciebie, niebogo!",
+                "singer": "Jontek",
+                "translation": "Only for you, my dear!"
+            },
+            {
+                "start": 144.38,
+                "end": 149.57999999999998,
+                "text": "Oj Halino, oj, jedyna",
+                "singer": "Jontek",
+                "translation": "Oh, Halina, oh, my only one,"
+            },
+            {
+                "start": 149.91,
+                "end": 153.78,
+                "text": "To wina twoja.",
+                "singer": "Jontek",
+                "translation": "This is your fault."
+            },
+            {
+                "start": 155.24,
+                "end": 161.8,
+                "text": "Oj, Halino, oj, jedyna",
+                "singer": "Jontek",
+                "translation": "Oh, Halina, oh, my only one,"
+            },
+            {
+                "start": 162.18,
+                "end": 166.71,
+                "text": "Dziewczyno moja!",
+                "singer": "Jontek",
+                "translation": "My girl!"
+            },
+            {
+                "start": 167.47,
+                "end": 173.87,
+                "text": "Moja Halko ty jedyna",
+                "singer": "Jontek",
+                "translation": "My Halka, you are the only one,"
+            },
+            {
+                "start": 174.07,
+                "end": 183.78,
+                "text": "Ty dziewczyna moja.",
+                "singer": "Jontek",
+                "translation": "You are my girl."
+            }
+        ]
     }
 ]
