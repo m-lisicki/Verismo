@@ -36,7 +36,7 @@ struct PlaybackView: View {
                     NowPlayingView()
                 }
                 Spacer()
-                LyricView()
+                LyricView(subtitlesLanguage: recording.subtitlesLanguage)
                 Spacer()
                 
                 if isPortraitMode {
@@ -74,11 +74,6 @@ struct PlaybackView: View {
                 }
                 .presentationBackground(.thinMaterial)
                 .presentationDetents([.medium, .large])
-                .onAppear {
-                    Task {
-                        await viewModel.prepareSupportedLanguages(originalLanguage: recording.subtitlesLanguage)
-                    }
-                }
         }
     }
 }
@@ -180,7 +175,7 @@ struct NowPlayingView: View {
     let formattedTime: (TimeInterval) -> String = { String(format: "%02d:%02d", Int($0) / 60, Int($0) % 60) }
 }
 
-@preconcurrency import Translation
+import Translation
 
 struct LyricView: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -188,7 +183,13 @@ struct LyricView: View {
     @State var configuration: TranslationSession.Configuration?
     @State var targetText = ""
     
+    @State var checkLanguageAvailabilityTask: Task<Void, Never>?
+    @State var previousTargetLanguage: Locale.Language?
+
+    
     @AppStorage("lyricsFontSize") var lyricsFontSize: Double = 48.0
+    
+    let subtitlesLanguage: String
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -200,56 +201,88 @@ struct LyricView: View {
 #endif
                 .padding(.top)
             
-            Text(viewModel.currentLyric)
+                Text(viewModel.currentLyric)
 #if os(macOS)
-                .font(.system(size: lyricsFontSize))
+                    .font(.system(size: lyricsFontSize))
 #else
-                .font(.largeTitle)
+                    .font(.largeTitle)
 #endif
-                .italic()
-                .fontDesign(.serif)
-                .padding()
-            Text(targetText)
+                    .italic()
+                    .fontDesign(.serif)
+                    .padding()
+            
+            if !viewModel.subtitlesLanguageInterference {
+                Text(targetText)
+                    .translationTask(configuration) { session in
+                        Task { @MainActor in
+                            let response = try? await session.translate(viewModel.currentTranslation)
+                            targetText = response?.targetText ?? viewModel.currentTranslation
+                        }
+                    }
 #if os(macOS)
-                .font(.system(size: lyricsFontSize - 13))
+                    .font(.system(size: lyricsFontSize - 13))
 #else
-                .font(.body)
+                    .font(.body)
 #endif
-                .padding()
-                .background(Color.gray.opacity(0.3))
-                .cornerRadius(7)
-                .opacity(viewModel.currentTranslation.isEmpty ? 0 : 1)
-                .translationTask(configuration) { session in
-                    let response = try? await session.translate(viewModel.currentTranslation)
-                    targetText = response?.targetText ?? viewModel.currentTranslation
-                }
+                    .padding()
+                    .background(Color.gray.opacity(0.3))
+                    .opacity(viewModel.currentTranslation.isEmpty ? 0 : 1)
+                    .cornerRadius(7)
+            }
         }
         .padding()
         .onChange(of: viewModel.currentTranslation) {
-            if viewModel.translationPossible && !viewModel.tempSneezeTranslation && !viewModel.currentTranslation.isEmpty {
-                triggerTranslation()
-            } else {
-                targetText = viewModel.currentTranslation
-            }
+            tryTranslation()
+        }
+        .onChange(of: viewModel.translationPossible) {
+            tryTranslation()
+        }
+        .onChange(of: viewModel.tempSneezeTranslation) {
+            tryTranslation()
         }
         // If user changes targetLanguage verify if we can proceed (pair is compatible)
         .onChange(of: viewModel.targetLanguage) {
             viewModel.translationPossible = false
-            configuration?.invalidate()
-            configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en", region: "GB"), target: viewModel.targetLanguage)
-            Task {
+            
+            checkInterference()
+
+            checkLanguageAvailabilityTask?.cancel()
+            checkLanguageAvailabilityTask = Task {
                 await viewModel.checkLanguageAvailability()
             }
+        }
+        .onAppear {
+            checkInterference()
+        }
+        .onDisappear {
+            checkLanguageAvailabilityTask?.cancel()
+        }
+    }
+    
+    func tryTranslation() {
+        if viewModel.translationPossible && !viewModel.tempSneezeTranslation && !viewModel.subtitlesLanguageInterference && !viewModel.currentTranslation.isEmpty {
+            triggerTranslation()
+        } else {
+            targetText = viewModel.currentTranslation
+        }
+    }
+    
+    func checkInterference() {
+        if subtitlesLanguage == "\(viewModel.targetLanguage.languageCode ?? "")-\(viewModel.targetLanguage.region ?? "")" {
+            viewModel.subtitlesLanguageInterference = true
+        } else {
+            viewModel.subtitlesLanguageInterference = false
         }
     }
     
     func triggerTranslation() {
-        guard configuration == nil else {
+        guard configuration == nil || viewModel.targetLanguage != previousTargetLanguage else {
             configuration?.invalidate()
             return
         }
-        configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en",region: "GB"),
-                                                         target: viewModel.targetLanguage)
+        
+        previousTargetLanguage = viewModel.targetLanguage
+        configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: viewModel.targetLanguage)
     }
 }
 

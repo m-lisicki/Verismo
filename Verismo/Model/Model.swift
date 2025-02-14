@@ -52,6 +52,7 @@ struct Recording: Identifiable, Decodable {
     let imageName: String
     let license: String
     let originalAttribution: String?
+    let url: String
     let lyrics: [Lyric]
 }
 

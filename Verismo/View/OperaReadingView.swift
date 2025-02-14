@@ -6,32 +6,106 @@
 //
 
 import SwiftUI
+@preconcurrency import Translation
 
 struct InformationSection: View {
+    @EnvironmentObject var viewModel: ViewModel
+    @State var configuration: TranslationSession.Configuration?
+    
     let title: String
     let content: String
+    @State var previousTargetLanguage: Locale.Language?
+    
+    @State var targetTitle: String?
+    @State var targetContent: String?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                Text(title)
+                Text(targetTitle ?? title)
                     .font(.title3)
                     .fontWeight(.semibold)
                     .fontDesign(.serif)
+                    .translationTask(configuration) { session in
+                        let response = try? await session.translate(title)
+                        targetTitle = response?.targetText
+                        
+                    }
                 Spacer()
             }
             Divider()
-            Text(content)
+            Text(targetContent ?? content)
                 .font(.body)
                 .padding(.top, 5)
+                .translationTask(configuration) { session in
+                    let response = try? await session.translate(content)
+                    targetContent = response?.targetText
+                }
         }
         .accessibilityElement(children: .combine)
         .padding()
         .background()
         .cornerRadius(7)
         .padding(.vertical, 5)
+        .onChange(of: viewModel.translationPossible) { _, newValue in
+            targetTitle = nil
+            targetContent = nil
+            
+            if newValue {
+                triggerTranslation()
+            }
+        }
+        .onAppear {
+            if viewModel.translationPossible {
+                triggerTranslation()
+            }
+        }
+    }
+    
+    
+    func triggerTranslation() {
+        guard configuration == nil || viewModel.targetLanguage != previousTargetLanguage else {
+            configuration?.invalidate()
+            return
+        }
+        
+        previousTargetLanguage = viewModel.targetLanguage
+        configuration = TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: viewModel.targetLanguage)
     }
 }
+
+struct LanguagePickerForText : View {
+    @EnvironmentObject var viewModel: ViewModel
+    
+    var body: some View {
+#if os(macOS)
+        LanguagePicker(availableLanguages: viewModel.availableLanguages, targetLanguage: $viewModel.targetLanguage)
+#else
+        Menu(content: {
+            Picker("Select Language:", selection: $viewModel.targetLanguage) {
+                ForEach(viewModel.availableLanguages, id: \.locale) { language in
+                    Text(language.localizedName()).tag(language.locale)
+                }
+            }
+        },
+             label: { Label ("Select Language:", systemImage: "translate")}
+        )
+        .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: viewModel.targetLanguage)) { session in
+                try? await session.prepareTranslation()
+        }
+#endif
+    }
+}
+
+#Preview {
+    @Previewable @StateObject var model = ViewModel()
+    
+    NavigationStack {
+        ComposerReadingView(chosenComposer: .puccini)
+            .environmentObject(model)
+    }
+}
+
 
 struct OperaReadingView: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -49,6 +123,7 @@ struct OperaReadingView: View {
 #endif
     }
     
+    @State var shouldTranslate = false
     static let dateFormatter: () -> DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -124,6 +199,11 @@ struct OperaReadingView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem {
+                LanguagePickerForText()
+            }
+        }
 #if os(iOS)
         .navigationTitle(chosenOpera.title)
         .navigationBarTitleDisplayMode(.large)
@@ -195,9 +275,3 @@ struct AriaScrollView : View {
     }
 }
 
-
-#Preview {
-    @Previewable @StateObject var model = ViewModel()
-    OperaReadingView(chosenComposer: .puccini, chosenOpera: operas[0])
-        .environmentObject(model)
-}

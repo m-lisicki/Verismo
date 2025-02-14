@@ -39,7 +39,6 @@ struct WelcomeView: View {
                     Label("Acknowledgments", systemImage: "info.circle")
                         .labelStyle(.titleAndIcon)
                 }
-                //.padding(5)
                 .buttonStyle(.bordered)
                 .background(.ultraThinMaterial)
                 .cornerRadius(5)
@@ -55,6 +54,11 @@ struct WelcomeView: View {
             .fontWeight(.light)
             .font(.subheadline)
 #endif
+        }
+        .onAppear {
+            Task {
+                await viewModel.prepareSupportedLanguages()
+            }
         }
         .navigationTitle("Home")
 #if os(iOS)
@@ -92,7 +96,7 @@ struct WelcomeButton<Destination: View>: View {
                         .symbolRenderingMode(.hierarchical)
                 }
                 
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.headline)
                     .fontWeight(.light)
             }

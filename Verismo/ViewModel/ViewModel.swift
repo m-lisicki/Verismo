@@ -19,44 +19,62 @@ final class ViewModel: NSObject, ObservableObject {
 #if os(iOS)
         configureAudioSession()
 #endif
-        self.volume = UserDefaults.standard.double(forKey: "volume") // Load initial volume value from UserDefaults
+        self.volume = (UserDefaults.standard.object(forKey: "volume") as? Double) ?? 1.0 // Load initial volume value from UserDefaults
     }
     
     //MARK: - Translator
     
     @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
-    @Published var availableLanguages: [AvailableLanguage] = []
+    var availableLanguages: [AvailableLanguage] = []
     var tempSneezeTranslation = false
-    var translationPossible = false
+    @Published var translationPossible = false
+    
+    var subtitlesLanguageInterference = false
     
     @MainActor
-    func prepareSupportedLanguages(originalLanguage: String) async {
+    func prepareSupportedLanguages() async {
         let supportedLanguages = await LanguageAvailability().supportedLanguages
         availableLanguages = supportedLanguages.map {
             AvailableLanguage(locale: $0)
         }
         .filter { language in
             let shortName = language.shortName()
-            logger.info("\(shortName)")
-            return shortName != originalLanguage && shortName != "en-US"
+            return shortName != "en-US"
         }
         .sorted()
     }
     
+    let maxLanguageCheckRetries = 5
+
     @MainActor
     func checkLanguageAvailability() async {
-        let status = await LanguageAvailability().status(from: Locale.Language(languageCode: "en", region: "GB"), to: targetLanguage)
-        switch status {
-        case .installed:
-            logger.info("Translation possible")
-            translationPossible = true
-        case .supported:
-            // Wait before rechecking avaibility. Model can be downloaded in the background
-            try? await Task.sleep(for: .seconds(15), tolerance: .seconds(5))
-            logger.info("Rechecking avaibility of translation")
-            await checkLanguageAvailability()
-        default:
-            logger.info("Translation not supported")
+        var retryCount = 0
+        
+        while retryCount < maxLanguageCheckRetries {
+            let status = await LanguageAvailability().status(
+                from: Locale.Language(languageCode: "en", region: "GB"),
+                to: targetLanguage
+            )
+            
+            switch status {
+            case .installed:
+                logger.info("Translation installed: translation is possible.")
+                translationPossible = true
+                return
+            case .supported:
+                logger.info("Translation is supported but not installed, retrying (\(retryCount))...")
+                // Wait before rechecking availability. The model might be downloading in the background.
+                try? await Task.sleep(for: .seconds(30))
+                retryCount += 1
+            default:
+                logger.info("Translation not supported")
+                translationPossible = false
+                return
+            }
+        }
+        if retryCount == maxLanguageCheckRetries {
+            logger.warning("Reached maximum retries for awaiting translation availability.")
+            translationPossible = false
         }
     }
     
@@ -84,7 +102,7 @@ final class ViewModel: NSObject, ObservableObject {
     
     @Published var currentLyric: String = ""
     var currentSinger: String = ""
-    var currentTranslation: String = "..."
+    var currentTranslation: String = ""
     
     func loadLibrettoDatabase() {
         guard let url = Bundle.main.url(forResource: "recordingsDatabase", withExtension: "json") else {
@@ -117,7 +135,10 @@ final class ViewModel: NSObject, ObservableObject {
             return
         }
         
-        logger.info("Audio URL: \(self.selectedRecording!.audioPath)")
+        if let audioPath = selectedRecording?.audioPath {
+            logger.info("Playing audio for: \(audioPath)")
+        }
+        
         prepareAudioPlayer(with: url)
     }
     
@@ -188,7 +209,7 @@ final class ViewModel: NSObject, ObservableObject {
         if let player = self.audioPlayer {
             self.playbackProgress = player.currentTime
         }
-        timerCancellable = Timer.publish(every: 0.5, on: .main, in: .common)
+        timerCancellable = Timer.publish(every: 0.25, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -225,7 +246,7 @@ final class ViewModel: NSObject, ObservableObject {
         if let lyric = lyrics.first(where: { $0.start <= time && $0.end > time }) {
             currentLyric = lyric.text
             currentSinger = lyric.singer
-            currentTranslation = lyric.translation ?? ""
+            currentTranslation = subtitlesLanguageInterference ? "" : (lyric.translation ?? "")
         } else if !currentLyric.isEmpty || !currentSinger.isEmpty || !currentTranslation.isEmpty {
             currentLyric = ""
             currentSinger = ""

@@ -124,9 +124,9 @@ struct OperaRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("Recording of aria: \(arias[AriaID(rawValue: recording.ariaID)!.rawValue].title) sung by: \(recording.singer), recorded in: \(recording.year), translation source libretto language: \(recording.subtitlesLanguage)")
+        .accessibilityLabel("Recording of aria: \(arias[AriaID(rawValue: recording.ariaID)!.rawValue].title) sung by: \(recording.singer), conducted by: \(recording.conductor), recorded in: \(recording.year), license: \(recording.license)")
         .sheet(isPresented: $showingLicenseDetail) {
-            LicenseDetailView(license: recording.originalAttribution!)
+            LicenseDetailView(license: recording.originalAttribution!, url: recording.url)
                 .toolbar {
 #if os(macOS)
                     ToolbarItem(placement: .confirmationAction) {

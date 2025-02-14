@@ -1,5 +1,5 @@
 //
-//  ComposerInfoView.swift
+//  ComposerReadingView.swift
 //  Verismo
 //
 //  Created by Michał Lisicki on 17/01/2025.
@@ -21,6 +21,8 @@ struct ComposerReadingView: View {
 #endif
     }
     
+    @State var checkLanguageAvailabilityTask: Task<Void, Never>?
+        
     var body: some View {
         let composerData = composers[chosenComposer.rawValue]
         
@@ -66,6 +68,23 @@ struct ComposerReadingView: View {
                     }
                 }
             }
+            .onChange(of: viewModel.targetLanguage) {
+                viewModel.translationPossible = false
+                
+                checkLanguageAvailabilityTask?.cancel()
+                
+                checkLanguageAvailabilityTask = Task {
+                    await viewModel.checkLanguageAvailability()
+                }
+            }
+            .onDisappear {
+                checkLanguageAvailabilityTask?.cancel()
+            }
+            .toolbar {
+                ToolbarItem {
+                    LanguagePickerForText()
+                }
+            }
 #if os(iOS)
             .navigationTitle("\(composerData.firstname) \(composerData.surname)")
             .navigationBarTitleDisplayMode(.large)
@@ -81,7 +100,7 @@ struct ComposerInformationSection: View {
     
     var body: some View {
         
-        VStack() {
+        VStack {
 #if os(macOS)
             Text(composerData.surname)
                 .fadingText()
@@ -96,7 +115,7 @@ struct ComposerInformationSection: View {
                 .shadow(radius: 5)
                 .padding(.bottom, 4)
             
-            VStack() {
+            VStack {
                 Text(composerData.lifespan)
                     .accessibilityLabel("Lifespan: \(composerData.lifespan)")
                 Text(composerData.birthPlace)
@@ -134,11 +153,11 @@ struct HorizontalButton: View {
                 Image(systemName: image)
                     .font(.title3)
                     .symbolRenderingMode(.hierarchical)
-                Text(text)
+                Text(LocalizedStringKey(text))
                     .font(.headline)
             }
             .accessibilityElement(children: .combine)
-            .accessibilityLabel(text)
+            .accessibilityLabel(LocalizedStringKey(text))
             .fontWeight(.light)
             .frame(maxHeight: .infinity)
             .padding()
@@ -161,11 +180,11 @@ struct HorizontalButtonViewPlayback: View {
                 Image(systemName: image)
                     .font(.title3)
                     .symbolRenderingMode(.hierarchical)
-                Text(text)
+                Text(LocalizedStringKey(text))
                     .font(.headline)
             }
             .accessibilityElement(children: .combine)
-            .accessibilityLabel(text)
+            .accessibilityLabel(LocalizedStringKey(text))
             .fontWeight(.light)
             .padding()
         }

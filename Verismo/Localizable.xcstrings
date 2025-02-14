@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "%@ %@" : {
       "shouldTranslate" : false
     },
@@ -213,12 +210,22 @@
         }
       }
     },
-    "Learn more about Europeana:" : {
+    "I would like to acknowledge the Europeana initiative for collecting and providing access to Europe's cultural heritage. Their efforts have made it possible to include a rich collection of recordings and photographs in this app." : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dowiedz się więcej o Europeanie:"
+            "value" : "Chciałbym podziękować inicjatywie Europeana za gromadzenie i udostępnianie europejskiego dziedzictwa kulturowego. Ich wysiłki umożliwiły włączenie bogatej kolekcji nagrań oraz zdjęć do tej aplikacji."
+          }
+        }
+      }
+    },
+    "Learn more:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dowiedz się więcej:"
           }
         }
       }
@@ -293,6 +300,15 @@
         }
       }
     },
+    "Media URL" : {
+
+    },
+    "Nabucco (Giuseppe Verdi) by Gerd Weiss - State Archives of Baden-Württemberg, Germany - CC BY." : {
+      "shouldTranslate" : false
+    },
+    "Nabucco Image" : {
+
+    },
     "Now Playing:" : {
       "localizations" : {
         "pl" : {
@@ -363,12 +379,12 @@
         }
       }
     },
-    "Photo Credits" : {
+    "Photographs Credits" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uznanie autorstwa zdjęć"
+            "value" : "Uznanie autorstwa fotografii"
           }
         }
       }
@@ -433,18 +449,28 @@
         }
       }
     },
-    "Recording of aria: %@ sung by: %@, recorded in: %@, translation source libretto language: %@" : {
+    "Recording of aria: %@ sung by: %@, conducted by: %@, recorded in: %@, license: %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Recording of aria: %1$@ sung by: %2$@, recorded in: %3$@, translation source libretto language: %4$@"
+            "value" : "Recording of aria: %1$@ sung by: %2$@, conducted by: %3$@, recorded in: %4$@, license: %5$@"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nagranie arii: %1$@ śpiewanej przez: %2$@, nagrane w: %3$@, język źródłowy tłumaczenia libretta: %4$@"
+            "value" : "Nagranie arii: %1$@ śpiewanej przez: %2$@, dyrygowane przez: %3$@, nagrane w: %4$@, licencja: %5$@"
+          }
+        }
+      }
+    },
+    "Select Language:" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz język:"
           }
         }
       }
@@ -499,12 +525,12 @@
         }
       }
     },
-    "Visit europeana.eu" : {
+    "visit europeana.eu" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odwiedź europeana.eu"
+            "value" : "odwiedź europeana.eu"
           }
         }
       }
@@ -525,16 +551,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Głośność: %lld%%"
-          }
-        }
-      }
-    },
-    "We would like to acknowledge the Europeana initiative for collecting and providing access to Europe's cultural heritage. Their efforts have made it possible to include a rich collection of recordings and photographs in this app." : {
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chcielibyśmy podziękować inicjatywie Europeana za gromadzenie i udostępnianie europejskiego dziedzictwa kulturowego. Ich wysiłki umożliwiły włączenie bogatej kolekcji nagrań oraz zdjęć do tej aplikacji."
           }
         }
       }

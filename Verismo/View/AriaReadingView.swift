@@ -21,6 +21,7 @@ struct AriaReadingView: View {
 #endif
     }
     
+    
     var body: some View {
         ZStack {
             BackgroundGradient()
@@ -54,7 +55,7 @@ struct AriaReadingView: View {
                 }
             } else {
                 HStack {
-                    VStack() {
+                    VStack {
 #if os(macOS)
                         Text(aria.title)
                             .fadingText()
@@ -102,6 +103,11 @@ struct AriaReadingView: View {
                     .padding(.vertical)
 #endif
                 }
+            }
+        }
+        .toolbar {
+            ToolbarItem {
+                LanguagePickerForText()
             }
         }
 #if os(iOS)

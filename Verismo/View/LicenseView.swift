@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LicenseDetailView: View {
     let license: String
+    let url: String
     
     var body: some View {
         Form {
@@ -17,6 +18,7 @@ struct LicenseDetailView: View {
                     .font(.headline)
                     .fontDesign(.serif)
                 Text(license)
+                Link("Media URL", destination: URL(string: url)!)
             }
             .padding()
         }
@@ -42,13 +44,13 @@ struct AcknowledgmentsView: View {
                             Spacer()
                         }
                         Divider()
-                        Text("We would like to acknowledge the Europeana initiative for collecting and providing access to Europe's cultural heritage. Their efforts have made it possible to include a rich collection of recordings and photographs in this app.")
+                        Text("I would like to acknowledge the Europeana initiative for collecting and providing access to Europe's cultural heritage. Their efforts have made it possible to include a rich collection of recordings and photographs in this app.")
                             .font(.body)
                             .padding(.vertical, 5)
                         HStack {
-                            Text("Learn more about Europeana:")
+                            Text("Learn more:")
                                 .font(.headline)
-                            Link("Visit europeana.eu", destination: URL(string: "https://www.europeana.eu")!)
+                            Link("visit europeana.eu", destination: URL(string: "https://www.europeana.eu")!)
                         }
                     }
                     .accessibilityElement(children: .combine)
@@ -59,19 +61,25 @@ struct AcknowledgmentsView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         HStack {
-                            Text("Photo Credits")
+                            Text("Photographs Credits")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .fontDesign(.serif)
                             Spacer()
                         }
                         Divider()
-                        VStack {
+                        VStack(alignment: .leading, spacing: 10) {
+                            VStack(alignment: .leading) {
+                                Text("Nabucco (Giuseppe Verdi) by Gerd Weiss - State Archives of Baden-Württemberg, Germany - CC BY.")
+                                Link("Nabucco Image",
+                                     destination: URL(string: "https://www.europeana.eu/pl/item/542/item_YUXTERCKB7HGKAR7LV2TA5L4DXOUNDCJ")!)
+                            }
+                            Divider()
                             Text("All uncredited photos are in the public domain.")
+                                .fontWeight(.medium)
                         }
                         .font(.body)
                         .padding(.top, 5)
-                        
                     }
                     .accessibilityElement(children: .combine)
                     .padding()
@@ -81,6 +89,9 @@ struct AcknowledgmentsView: View {
                 }
             }
             .padding()
+            #if os(macOS)
+            .padding(.horizontal)
+            #endif
         }
     }
 }

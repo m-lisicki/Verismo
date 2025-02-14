@@ -61,14 +61,7 @@ struct PlaybackSettingsView: View {
                         .accessibilityLabel("Lyrics font size")
                         .accessibilityValue("\(Int(lyricsFontSize)) points")
                     HStack {
-                        Picker("Select Subtitles Language:", selection: $viewModel.targetLanguage) {
-                            ForEach(viewModel.availableLanguages, id: \.locale) { language in
-                                Text(language.localizedName()).tag(language.locale)
-                            }
-                        }
-                        .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: viewModel.targetLanguage)) { session in
-                            try? await session.prepareTranslation()
-                        }
+                        LanguagePicker(availableLanguages: viewModel.availableLanguages, targetLanguage: $viewModel.targetLanguage)
                         
                         if !viewModel.translationPossible && viewModel.targetLanguage != Locale.Language(languageCode: "en", script: nil, region: "GB") {
                             Image(systemName: "slowmo")
@@ -86,18 +79,21 @@ struct PlaybackSettingsView: View {
         .navigationTitle("Playback Preferences")
     }
 }
+
 struct LanguagePicker: View {
     let availableLanguages: [AvailableLanguage]
     @Binding var targetLanguage: Locale.Language
     
     var body: some View {
-        Picker("Select Subtitles Language:", selection: $targetLanguage) {
-            ForEach(availableLanguages, id: \.locale) { language in
-                Text(language.localizedName()).tag(language.locale)
+        HStack {
+            Picker("Select Subtitles Language:", selection: $targetLanguage) {
+                ForEach(availableLanguages, id: \.locale) { language in
+                    Text(language.localizedName()).tag(language.locale)
+                }
             }
-        }
-        .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: targetLanguage)) { session in
-            try? await session.prepareTranslation()
+            .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: targetLanguage)) { session in
+                try? await session.prepareTranslation()
+            }
         }
     }
 }
