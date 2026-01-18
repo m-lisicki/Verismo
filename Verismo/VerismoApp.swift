@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct VerismoApp: App {
+  @State var mainViewModel = ViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          NavigationStack {
+            WelcomeView()
+          }
+          .toolbarBackground(.thinMaterial)
+              .environment(mainViewModel)
 #if os(macOS)
                 .frame(minWidth: 800, minHeight: 535)
 #endif

@@ -1,5 +1,5 @@
 //
-//  PickAndLoadView.swift
+//  PickOperaView.swift
 //  Verismo
 //
 //  Created by Michał Lisicki on 26/12/2024.
@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct PickOperaView: View {
-    @EnvironmentObject var viewModel: ViewModel
-    
-    var chosenOpera: OperaID?
-    var chosenRecording: Recording?
+  @Environment(ViewModel.self) var viewModel
+
+  let chosenOpera: OperaID?
+  let chosenRecording: Recording?
+  
+  init(chosenOpera: OperaID? = nil, chosenRecording: Recording? = nil) {
+    self.chosenOpera = chosenOpera
+    self.chosenRecording = chosenRecording
+  }
     
     var filteredRecordings: [Recording] {
         if let chosenOpera = self.chosenOpera {
@@ -24,9 +29,7 @@ struct PickOperaView: View {
     }
     
     var body: some View {
-        ZStack {
-            BackgroundGradient()
-            VStack {
+      ZStackBackgroundGradient {
                 List(filteredRecordings) { recording in
                     NavigationLink(destination: PlaybackView(recording: recording)) {
                         OperaRow(recording: recording)
@@ -40,7 +43,6 @@ struct PickOperaView: View {
                 .background(.thinMaterial)
 #endif
                 .cornerRadius(8)
-            }
             .navigationTitle("Editions List")
 #if os(iOS)
             .navigationBarTitleDisplayMode(.large)
@@ -55,10 +57,9 @@ struct PickOperaView: View {
     }
 }
 
-struct OperaRow: View {
+private struct OperaRow: View {
     let recording: Recording
     @State var showingLicenseDetail = false
-    
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -83,25 +84,27 @@ struct OperaRow: View {
                     .fontDesign(.serif)
 #if os(macOS)
                 VStack {
-                    HStack {
-                        Text("Opera: \(operas[OperaID(rawValue: arias[AriaID(rawValue: recording.ariaID)!.rawValue].operaID.rawValue)!.rawValue].title)")
-                        Spacer()
-                        Text("Year: \(recording.year)")
-                    }
-                    HStack {
-                        Text("Performer: \(recording.singer)")
-                        Spacer()
-                        Text("Conductor: \(recording.conductor)")
-                    }
-                    HStack {
-                        Text("Orchestra: \(recording.orchestra)")
-                        Spacer()
-                    }
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        LicenseButtonView(recording: recording, showingLicenseDetail: $showingLicenseDetail)
-                    }
+                  TwoHSpaced {
+                    Text(operas[OperaID(rawValue: arias[AriaID(rawValue: recording.ariaID)!.rawValue].operaID.rawValue)!.rawValue].title).labeled("Opera")
+                  } trailing: {
+                    Text(recording.year).labeled("Year")
+                  }
+                  TwoHSpaced {
+                    Text(recording.singer).labeled("Performer")
+                  } trailing: {
+                    Text(recording.conductor).labeled("Conductor")
+                  }
+                  TwoHSpaced {
+                    Text(recording.orchestra).labeled("Orchestra")
+                  } trailing: {
+                    EmptyView()
+                  }
+                  Spacer()
+                  TwoHSpaced {
+                    EmptyView()
+                  } trailing: {
+                    LicenseButtonView(recording: recording, showingLicenseDetail: $showingLicenseDetail)
+                  }
                 }
                 .foregroundStyle(.secondary)
                 .font(.caption)
@@ -142,7 +145,7 @@ struct OperaRow: View {
     }
 }
 
-struct LicenseButtonView: View {
+private struct LicenseButtonView: View {
     let recording: Recording
     @Binding var showingLicenseDetail: Bool
     
@@ -162,9 +165,9 @@ struct LicenseButtonView: View {
 
 
 #Preview {
-    @Previewable @StateObject var model = ViewModel()
+  @Previewable @State var viewModel = ViewModel()
     NavigationStack {
         PickOperaView()
-            .environmentObject(model)
+            .environment(viewModel)
     }
 }

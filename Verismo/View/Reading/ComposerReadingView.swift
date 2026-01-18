@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ComposerReadingView: View {
-    @EnvironmentObject var viewModel: ViewModel
+  @Environment(ViewModel.self) var viewModel
     let chosenComposer: ComposerID
     
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -26,8 +26,7 @@ struct ComposerReadingView: View {
     var body: some View {
         let composerData = composers[chosenComposer.rawValue]
         
-        ZStack {
-            BackgroundGradient()
+      ZStackBackgroundGradient {
             VStack(spacing: 20) {
                 if isPortraitMode {
                     ScrollView {
@@ -95,7 +94,7 @@ struct ComposerReadingView: View {
     }
 }
 
-struct ComposerInformationSection: View {
+private struct ComposerInformationSection: View {
     let composerData: Composer
     
     var body: some View {
@@ -127,7 +126,7 @@ struct ComposerInformationSection: View {
     }
 }
 
-struct HorizontalButtonView: View {
+private struct HorizontalButtonView: View {
     let chosenComposer: ComposerID
     
     var body: some View {
@@ -141,60 +140,7 @@ struct HorizontalButtonView: View {
     }
 }
 
-struct HorizontalButton: View {
-    let text: String
-    let image: String
-    let listenMode: Bool
-    let chosenComposer: ComposerID
-    
-    var body: some View {
-        NavigationLink(destination: OperasView(listenMode: listenMode, chosenComposer: chosenComposer)){
-            HStack(spacing: 13) {
-                Image(systemName: image)
-                    .font(.title3)
-                    .symbolRenderingMode(.hierarchical)
-                Text(LocalizedStringKey(text))
-                    .font(.headline)
-            }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(LocalizedStringKey(text))
-            .fontWeight(.light)
-            .frame(maxHeight: .infinity)
-            .padding()
-            .accessibilityLabel(text)
-        }
-        .background(.ultraThickMaterial)
-        .cornerRadius(5)
-        .buttonStyle(.borderless)
-    }
-}
-
-struct HorizontalButtonViewPlayback: View {
-    let text: String
-    let image: String
-    let recording: Recording
-    
-    var body: some View {
-        NavigationLink(destination: PickOperaView(chosenRecording: recording)){
-            HStack(spacing: 13) {
-                Image(systemName: image)
-                    .font(.title3)
-                    .symbolRenderingMode(.hierarchical)
-                Text(LocalizedStringKey(text))
-                    .font(.headline)
-            }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(LocalizedStringKey(text))
-            .fontWeight(.light)
-            .padding()
-        }
-        .background(.ultraThickMaterial)
-        .cornerRadius(5)
-        .buttonStyle(.borderless)
-    }
-}
-
 #Preview {
-    @Previewable @StateObject var viewModel = ViewModel()
-    ComposerReadingView(chosenComposer: .puccini).environmentObject(viewModel)
+    @Previewable @State var viewModel = ViewModel()
+    ComposerReadingView(chosenComposer: .puccini).environment(viewModel)
 }

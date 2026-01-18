@@ -17,6 +17,9 @@
         }
       }
     },
+    "%@: " : {
+
+    },
     "%lld minutes, %lld seconds" : {
       "localizations" : {
         "pl" : {
@@ -117,6 +120,9 @@
         }
       }
     },
+    "Close" : {
+
+    },
     "Composer" : {
       "localizations" : {
         "pl" : {
@@ -136,6 +142,9 @@
           }
         }
       }
+    },
+    "Conductor" : {
+
     },
     "Conductor: %@" : {
       "localizations" : {
@@ -349,6 +358,9 @@
         }
       }
     },
+    "Orchestra" : {
+
+    },
     "Orchestra: %@" : {
       "localizations" : {
         "pl" : {
@@ -369,7 +381,11 @@
         }
       }
     },
+    "Performer" : {
+
+    },
     "Performer: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pl" : {
           "stringUnit" : {
@@ -564,6 +580,9 @@
           }
         }
       }
+    },
+    "Year" : {
+
     },
     "Year: %@" : {
       "localizations" : {

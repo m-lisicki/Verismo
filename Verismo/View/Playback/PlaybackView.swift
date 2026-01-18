@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlaybackView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @Environment(ViewModel.self) var viewModel
     let recording: Recording
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -27,10 +27,8 @@ struct PlaybackView: View {
     
     @State var showingPlaybackSettings = false
     
-    
     var body: some View {
-        ZStack {
-            BackgroundGradient()
+        ZStackBackgroundGradient {
             VStack {
                 if isPortraitMode {
                     NowPlayingView()
@@ -79,7 +77,7 @@ struct PlaybackView: View {
 }
 
 struct PlaybackControlView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @Environment(ViewModel.self) var viewModel: ViewModel
     @State var isStopActive = false
     
     var body: some View {
@@ -124,12 +122,13 @@ struct PlaybackControlView: View {
 import AVFoundation
 
 struct NowPlayingView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @Environment(ViewModel.self) var viewModel: ViewModel
     @Environment(\.accessibilityReduceMotion) var reducedMotion
     
     @AppStorage("timerTransition") var timerTransition = true
     
     var body: some View {
+      @Bindable var viewModel = viewModel
         VStack(spacing: 20) {
             HStack {
                 VStack(alignment: .leading) {
@@ -155,6 +154,11 @@ struct NowPlayingView: View {
                 .accessibilityLabel("Playback progress")
                 .accessibilityValue("\(Int(viewModel.playbackProgress) / 60) minutes, \(Int(viewModel.playbackProgress) % 60) seconds")
         }
+        .onChange(of: viewModel.playbackProgress) { oldValue, newValue in
+          if viewModel.tempSneezeTranslation {
+            viewModel.updateLyric(for: newValue)
+          }
+        }
     }
     
     func handleSliderEditingChanged(editingStarted: Bool) {
@@ -178,12 +182,11 @@ struct NowPlayingView: View {
 import Translation
 
 struct LyricView: View {
-    @EnvironmentObject var viewModel: ViewModel
-    
+  @Environment(ViewModel.self) var viewModel: ViewModel
+
     @State var configuration: TranslationSession.Configuration?
     @State var targetText = ""
     
-    @State var checkLanguageAvailabilityTask: Task<Void, Never>?
     @State var previousTargetLanguage: Locale.Language?
 
     
@@ -195,7 +198,7 @@ struct LyricView: View {
         VStack(alignment: .center, spacing: 10) {
             Text(viewModel.currentSinger)
 #if os(macOS)
-                .font(.system(size: lyricsFontSize - 15))
+            .font(.system(size: lyricsFontSize - 15))
 #else
                 .font(.title2)
 #endif
@@ -240,22 +243,11 @@ struct LyricView: View {
         .onChange(of: viewModel.tempSneezeTranslation) {
             tryTranslation()
         }
-        // If user changes targetLanguage verify if we can proceed (pair is compatible)
-        .onChange(of: viewModel.targetLanguage) {
-            viewModel.translationPossible = false
-            
-            checkInterference()
-
-            checkLanguageAvailabilityTask?.cancel()
-            checkLanguageAvailabilityTask = Task {
-                await viewModel.checkLanguageAvailability()
-            }
-        }
-        .onAppear {
-            checkInterference()
-        }
-        .onDisappear {
-            checkLanguageAvailabilityTask?.cancel()
+      // If user changes targetLanguage verify if we can proceed (pair is compatible)
+        .task(id: viewModel.targetLanguage) {
+          viewModel.translationPossible = false
+          checkInterference()
+          await viewModel.checkLanguageAvailability()
         }
     }
     
@@ -287,8 +279,8 @@ struct LyricView: View {
 }
 
 #Preview {
-    @Previewable @StateObject var model = ViewModel()
+  @Previewable @State var viewModel = ViewModel()
     NavigationStack {
-        PlaybackView(recording: model.recordings[0]).environmentObject(model)
+        PlaybackView(recording: viewModel.recordings[0]).environment(viewModel)
     }
 }

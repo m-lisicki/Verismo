@@ -12,8 +12,7 @@ struct OperasView: View {
     let chosenComposer: ComposerID
     
     var body: some View {
-        ZStack {
-            BackgroundGradient()
+      ZStackBackgroundGradient {
             VStack(spacing: 70) {
                 ComposerOperasView(
                     listenMode: listenMode,
@@ -29,7 +28,7 @@ struct OperasView: View {
     }
 }
 
-struct ComposerOperasView: View {
+private struct ComposerOperasView: View {
     let listenMode: Bool
     let chosenComposer: ComposerID
     
@@ -41,7 +40,7 @@ struct ComposerOperasView: View {
     }
 }
 
-struct OperaGridView: View {
+private struct OperaGridView: View {
     let listenMode: Bool
     let chosenComposer: ComposerID
     @Namespace var transitionNamespace
@@ -75,9 +74,7 @@ struct OperaGridView: View {
     }
 }
 
-
-
-struct OperaFrame: View {
+private struct OperaFrame: View {
     let title: String
     let year: Date
     
@@ -85,7 +82,7 @@ struct OperaFrame: View {
     @State var opacity = 0.0
     @Namespace var transitionNamespace
     
-    let dateFormatter = {
+    private let dateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
         return formatter

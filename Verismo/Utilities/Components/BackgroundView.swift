@@ -1,30 +1,27 @@
 //
-//  ContentView.swift
+//  BackgroundView+Modifier.swift
 //  Verismo
 //
-//  Created by Michał Lisicki on 25/12/2024.
+//  Created by Michał Lisicki on 18/01/2026.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var viewModel = ViewModel()
-    
-    var body: some View {
-        ZStack {
-            NavigationStack {
-                ZStack {
-                    BackgroundGradient()
-                    WelcomeView()
-                }
-            }
-            .environmentObject(viewModel)
-        }
-        .toolbarBackground(.thinMaterial)
+struct ZStackBackgroundGradient<T: View>: View {
+  let view: T
+  
+  init(@ViewBuilder view: () -> T) {
+    self.view = view()
+  }
+  var body: some View {
+    ZStack {
+      BackgroundGradient()
+      view
     }
+  }
 }
 
-struct BackgroundGradient: View {
+private struct BackgroundGradient: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.accessibilityReduceMotion) var reducedMotion
     @State var isAnimating = true
@@ -58,34 +55,4 @@ struct BackgroundGradient: View {
         }
         .ignoresSafeArea()
     }
-}
-
-struct FadingText: ViewModifier {
-    @State var opacity: Double = 0.0
-    
-    func body(content: Content) -> some View {
-        content
-            .font(.title)
-            .fontDesign(.serif)
-            .italic()
-            .opacity(opacity)
-            .onAppear {
-                withAnimation(.easeInOut(duration: 1.5)) {
-                    opacity = 1.0
-                }
-            }
-    }
-}
-
-
-extension View {
-    func fadingText() -> some View {
-        modifier(FadingText())
-    }
-}
-
-#Preview {
-    @Previewable @StateObject var model = ViewModel()
-    ContentView()
-        .environmentObject(model)
 }

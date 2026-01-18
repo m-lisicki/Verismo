@@ -46,8 +46,7 @@ struct ComposersMapView: View {
             .navigationBarTitleDisplayMode(.inline)
 #endif
         } else {
-            ZStack {
-                BackgroundGradient()
+          ZStackBackgroundGradient {
                 List(composers) { composer in
                     NavigationLink(destination: ComposerReadingView(chosenComposer: composer.composerID)) {
                         Text("\(composer.firstname) \(composer.surname)")

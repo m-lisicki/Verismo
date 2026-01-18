@@ -6,12 +6,13 @@
 //
 
 import AVFAudio.AVAudioPlayer
-import Combine
 @preconcurrency import Translation
 import OSLog
 let logger = Logger()
 
-final class ViewModel: NSObject, ObservableObject {
+@MainActor
+@Observable
+final class ViewModel: NSObject {
     
     override init() {
         super.init()
@@ -19,34 +20,31 @@ final class ViewModel: NSObject, ObservableObject {
 #if os(iOS)
         configureAudioSession()
 #endif
-        self.volume = (UserDefaults.standard.object(forKey: "volume") as? Double) ?? 1.0 // Load initial volume value from UserDefaults
+        self.volume = (UserDefaults.standard.object(forKey: "volume") as? Float) ?? 1.0 // Load initial volume value from UserDefaults
     }
     
     //MARK: - Translator
     
-    @Published var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
+    var targetLanguage = Locale.Language(languageCode: "en", script: nil, region: "GB")
     var availableLanguages: [AvailableLanguage] = []
     var tempSneezeTranslation = false
-    @Published var translationPossible = false
+    var translationPossible = false
     
     var subtitlesLanguageInterference = false
     
-    @MainActor
     func prepareSupportedLanguages() async {
         let supportedLanguages = await LanguageAvailability().supportedLanguages
-        availableLanguages = supportedLanguages.map {
+        availableLanguages = supportedLanguages.lazy.map {
             AvailableLanguage(locale: $0)
         }
         .filter { language in
-            let shortName = language.shortName()
-            return shortName != "en-US"
+            return language.shortName != "en-US"
         }
         .sorted()
     }
     
     let maxLanguageCheckRetries = 5
 
-    @MainActor
     func checkLanguageAvailability() async {
         var retryCount = 0
         
@@ -82,25 +80,24 @@ final class ViewModel: NSObject, ObservableObject {
     
     func resetWhileLeavingPlayback() {
         reset()
-        cancelLyricsUpdator()
         audioPlayer = nil
     }
     
     //MARK: - User Defaults
-    @Published var volume: Double = 1.0 {
+    var volume: Float = 1.0 {
         didSet {
             UserDefaults.standard.set(volume, forKey: "volume")
             if let player = audioPlayer {
-                player.volume = Float(volume)
+                player.volume = volume
             }
         }
     }
     
     //MARK: - Opera Database Operations
-    @Published var selectedRecording: Recording?
+    var selectedRecording: Recording?
     var recordings: [Recording] = []
     
-    @Published var currentLyric: String = ""
+    var currentLyric: String = ""
     var currentSinger: String = ""
     var currentTranslation: String = ""
     
@@ -145,7 +142,7 @@ final class ViewModel: NSObject, ObservableObject {
     //MARK: - Audio Player
     var audioPlayer: AVAudioPlayer?
     
-    @Published var playbackProgress: Double = 0.0
+    var playbackProgress: Double = 0.0
     var totalTime: TimeInterval = 0.0
     
     func prepareAudioPlayer(with url: URL) {
@@ -153,9 +150,8 @@ final class ViewModel: NSObject, ObservableObject {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
-            audioPlayer?.volume = Float(volume) //to ackowledge UserDefaults
+            audioPlayer?.volume = volume //to ackowledge UserDefaults
             totalTime = audioPlayer?.duration ?? 0.0
-            setupLyricsUpdator()
             play()
         } catch {
             logger.error("Failed to prepare audio player: \(error)")
@@ -165,7 +161,7 @@ final class ViewModel: NSObject, ObservableObject {
     }
     
     //MARK: - Playback Controls
-    @Published var isPlaying: Bool = false
+    var isPlaying: Bool = false
     
     // Toggle action
     func togglePlayback() {
@@ -203,42 +199,26 @@ final class ViewModel: NSObject, ObservableObject {
     
     //MARK: - Timer (playback)
     
-    var timerCancellable: AnyCancellable?
+    let timerClockService = ClockService()
     
     func startTimer() {
         if let player = self.audioPlayer {
             self.playbackProgress = player.currentTime
         }
-        timerCancellable = Timer.publish(every: 0.25, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-                
-                if let player = self.audioPlayer {
-                    self.playbackProgress = player.currentTime
-                }
-                
-            }
+      
+      timerClockService.start(interval: 0.1) {
+        if let player = self.audioPlayer {
+            self.playbackProgress = player.currentTime
+            self.updateLyric(for: self.playbackProgress)
+        }
+      }
     }
     
     func stopTimer() {
-        timerCancellable?.cancel()
-        timerCancellable = nil
+      timerClockService.cancel()
     }
     
     //MARK: - Lyrics Updates
-    var lyricsCancellable: AnyCancellable?
-    func setupLyricsUpdator() {
-        lyricsCancellable = $playbackProgress
-            .sink { [weak self] time in
-                self?.updateLyric(for: time)
-            }
-    }
-    
-    func cancelLyricsUpdator() {
-        lyricsCancellable?.cancel()
-        lyricsCancellable = nil
-    }
     
     func updateLyric(for time: TimeInterval) {
         guard let lyrics = selectedRecording?.lyrics else { return }

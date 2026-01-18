@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct AriaReadingView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @Environment(ViewModel.self) var viewModel
     let aria: Aria
     
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -21,10 +21,8 @@ struct AriaReadingView: View {
 #endif
     }
     
-    
     var body: some View {
-        ZStack {
-            BackgroundGradient()
+      ZStackBackgroundGradient {
             if isPortraitMode {
                 ScrollView {
                     VStack(spacing: 10) {
@@ -42,6 +40,7 @@ struct AriaReadingView: View {
                     }
                     .padding()
                 }
+                .scrollBounceBehavior(.basedOnSize)
                 .safeAreaInset(edge: .bottom) {
                     if let index = aria.recordingID {
                         VStack {
@@ -85,7 +84,9 @@ struct AriaReadingView: View {
                     ScrollView {
                         InformationSection(title: "Context", content: aria.background)
                             .padding()
-                    }.safeAreaInset(edge: .bottom) {
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
+                    .safeAreaInset(edge: .bottom) {
                         VStack {
                             if let index = aria.recordingID {
                                 VStack {
@@ -121,9 +122,9 @@ struct AriaReadingView: View {
 
 
 #Preview {
-    @Previewable @StateObject var viewModel = ViewModel()
+    @Previewable @State var viewModel = ViewModel()
     NavigationStack {
         
-        AriaReadingView(aria: arias[1]).environmentObject(viewModel)
+        AriaReadingView(aria: arias[1]).environment(viewModel)
     }
 }
