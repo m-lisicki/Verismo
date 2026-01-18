@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Translation
 
 struct LanguagePickerForText : View {
   @Environment(ViewModel.self) var viewModel: ViewModel
@@ -18,14 +19,16 @@ struct LanguagePickerForText : View {
         Menu(content: {
             Picker("Select Language:", selection: $viewModel.targetLanguage) {
                 ForEach(viewModel.availableLanguages, id: \.locale) { language in
-                    Text(language.localizedName()).tag(language.locale)
+                    Text(language.localizedName).tag(language.locale)
                 }
             }
         },
              label: { Label ("Select Language:", systemImage: "translate")}
         )
         .translationTask(TranslationSession.Configuration(source: Locale.Language(languageCode: "en", script: nil, region: "GB"), target: viewModel.targetLanguage)) { session in
-                try? await session.prepareTranslation()
+          Task { @MainActor in
+          try? await session.prepareTranslation()
+        }
         }
 #endif
     }
